@@ -15,7 +15,7 @@ export const featuredProjects = [
       "Manages 10,000+ employees · Sub-200ms queries via indexed PostgreSQL · 13+ RSpec model tests · Production-ready architecture",
     tags: ["Rails 7", "Ruby", "Next.js 16", "TypeScript", "PostgreSQL", "TanStack Query", "Recharts", "RSpec"],
     github: "https://github.com/Pranshu-jain/salary-management",
-    demo: "https://github.com/Pranshu-jain/salary-management",
+    demo: "https://salary-management-ui-lake.vercel.app",
     color: "#7c3aed",
     accentColor: "rgba(124,58,237,0.08)",
     featured: true,
