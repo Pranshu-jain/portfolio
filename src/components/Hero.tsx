@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { ArrowRight, Mail, Zap } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
+import { siteConfig } from "@/lib/config";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
@@ -137,7 +138,7 @@ export default function Hero() {
                 },
                 {
                   icon: LinkedinIcon,
-                  href: "https://linkedin.com/in/pranshu",
+                  href: siteConfig.linkedin,
                   label: "LinkedIn",
                 },
                 {

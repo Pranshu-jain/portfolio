@@ -145,7 +145,7 @@ export default function ContactSection() {
                 {[
                   { icon: Mail,         label: "Email",    href: `mailto:${siteConfig.email}`, value: siteConfig.email },
                   { icon: GithubIcon,  label: "GitHub",   href: `https://github.com/${siteConfig.github}`, value: `@${siteConfig.github}` },
-                  { icon: LinkedinIcon, label: "LinkedIn", href: siteConfig.linkedin, value: "/in/pranshu" },
+                  { icon: LinkedinIcon, label: "LinkedIn", href: siteConfig.linkedin, value: "/in/pranshu-jain-2a492114a" },
                 ].map(({ icon: Icon, label, href, value }) => (
                   <a
                     key={label}
