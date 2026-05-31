@@ -36,7 +36,7 @@ export const featuredProjects = [
       "Complete cart-to-checkout flow · Stripe payment processing · JWT auth with bcrypt · Zero external CMS dependencies",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "SQLite", "Stripe", "JWT", "bcryptjs", "Sharp"],
     github: "https://github.com/Pranshu-jain/ecommerce-platform",
-    demo: "https://github.com/Pranshu-jain/ecommerce-platform",
+    demo: "https://ecommerce-platform-phi-five.vercel.app",
     color: "#00d4ff",
     accentColor: "rgba(0,212,255,0.08)",
     featured: true,
