@@ -47,7 +47,7 @@ function ProjectModal({
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.92, opacity: 0, y: 20 }}
         transition={{ type: "spring", damping: 28, stiffness: 300 }}
-        className="relative w-full max-w-2xl bg-[#0f0f0f] rounded-3xl border border-[rgba(255,255,255,0.08)] overflow-hidden"
+        className="relative w-full max-w-2xl bg-[#0f0f0f] rounded-3xl border border-[rgba(255,255,255,0.08)] overflow-hidden max-h-[90dvh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top accent line */}
@@ -139,14 +139,16 @@ function ProjectModal({
             >
               <GithubIcon size={14} /> Source Code
             </a>
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full btn-gradient text-sm text-white font-medium shine"
-            >
-              <ExternalLink size={14} /> Live Demo
-            </a>
+            {project.demo !== project.github && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full btn-gradient text-sm text-white font-medium shine"
+              >
+                <ExternalLink size={14} /> Live Demo
+              </a>
+            )}
           </div>
         </div>
       </motion.div>
@@ -268,15 +270,16 @@ export default function ProjectsSection() {
         </p>
       </motion.div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* Grid — horizontal swipe on mobile, grid on md+ */}
+      <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-none -mx-6 px-6 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3">
         {featuredProjects.map((project, i) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            index={i}
-            onClick={() => setSelected(project)}
-          />
+          <div key={project.id} className="snap-start shrink-0 w-[80vw] sm:w-[60vw] md:w-auto">
+            <ProjectCard
+              project={project}
+              index={i}
+              onClick={() => setSelected(project)}
+            />
+          </div>
         ))}
       </div>
 
