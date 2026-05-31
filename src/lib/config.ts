@@ -7,7 +7,7 @@ export const siteConfig = {
   github: "Pranshu-jain",
   email: "jpranshu36@gmail.com",
   twitter: "https://twitter.com/pranshu_builds",
-  linkedin: "https://linkedin.com/in/pranshu-jain",
+  linkedin: "https://www.linkedin.com/in/pranshu-jain-2a492114a/",
   calendly: "https://calendly.com/jpranshu36",
 
   stats: [
