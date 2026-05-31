@@ -1,15 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Zap, Bot, TrendingUp, Workflow } from "lucide-react";
-import Link from "next/link";
-import { siteConfig } from "@/lib/config";
+import { ArrowRight, CheckCircle2, Zap, Bot, Wrench, PlusCircle } from "lucide-react";
 
 const services = [
-  { icon: Zap, title: "MVP in Days", desc: "Full-stack product at startup speed", color: "#00d4ff" },
-  { icon: Bot, title: "AI Integration", desc: "LLMs, agents, automation built-in", color: "#7c3aed" },
-  { icon: TrendingUp, title: "Scale Ready", desc: "Architecture that grows with you", color: "#22c55e" },
-  { icon: Workflow, title: "Automation", desc: "Save 10+ hours/week on manual work", color: "#ff6b35" },
+  { icon: Zap,        title: "New Websites & Apps",      desc: "Full-stack MVP at startup speed",         color: "#00d4ff" },
+  { icon: Bot,        title: "AI Integration",            desc: "LLMs, agents, automation built-in",       color: "#7c3aed" },
+  { icon: Wrench,     title: "Existing Site Improvement", desc: "Redesign, speed, UX & conversions",       color: "#22c55e" },
+  { icon: PlusCircle, title: "Feature Addition",          desc: "Ship new features to your live product",  color: "#ff6b35" },
 ];
 
 export default function BuildWithMe() {
@@ -39,25 +37,22 @@ export default function BuildWithMe() {
             </div>
 
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 leading-tight">
-              Have an idea?
+              New build or existing site —
               <br />
-              <span className="gradient-text-warm">I&apos;ll build it fast.</span>
+              <span className="gradient-text-warm">I&apos;ve got you covered.</span>
             </h2>
 
             <p className="text-[#475569] text-lg leading-relaxed mb-8 max-w-lg">
-              Stop waiting months for an MVP. Using AI-augmented development, I
-              ship production-ready products{" "}
-              <span className="text-white font-medium">3× faster</span> than
-              traditional development — without sacrificing quality or
-              scalability.
+              Whether you&apos;re starting from scratch or need to improve what you already have — I build new products, redesign and optimize existing sites, add features, and integrate AI.{" "}
+              <span className="text-white font-medium">3× faster</span> than traditional development.
             </p>
 
             <div className="flex flex-col gap-3 mb-10">
               {[
-                "MVP shipped in 1–2 weeks",
-                "AI integrations built-in from day one",
-                "Production-ready, scalable architecture",
-                "Ongoing support and rapid iteration",
+                "New websites & apps shipped in 1–2 weeks",
+                "Existing site audits, redesigns & speed fixes",
+                "Feature additions & AI integrations",
+                "Ongoing maintenance & support",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3">
                   <CheckCircle2
@@ -70,18 +65,18 @@ export default function BuildWithMe() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/build-with-me"
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("open-chat"))}
                 className="flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-white font-semibold shine"
               >
-                Start a Project <ArrowRight size={16} />
-              </Link>
-              <a
-                href={`mailto:${siteConfig.email}`}
+                Start a Conversation <ArrowRight size={16} />
+              </button>
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("open-chat"))}
                 className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(0,212,255,0.2)] transition-all duration-300"
               >
-                Send a Message
-              </a>
+                Let&apos;s Talk
+              </button>
             </div>
           </motion.div>
 

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
-import { ArrowRight, CheckCircle2, Zap, Clock, Shield, Star } from "lucide-react";
+import ChatTrigger from "@/components/ChatTrigger";
 import { siteConfig } from "@/lib/config";
-import Link from "next/link";
+import { ArrowRight, CheckCircle2, Zap, Clock, Shield, Star, Wrench, PlusCircle, RefreshCw } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Build With Me — Pranshu",
@@ -60,24 +60,29 @@ export default function BuildWithMePage() {
       <div className="pt-28 max-w-7xl mx-auto px-6">
         {/* Hero */}
         <div className="text-center max-w-3xl mx-auto mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(124,58,237,0.08)] text-[#7c3aed] border border-[rgba(124,58,237,0.12)] mb-6">
-            For Founders & Startups
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(124,58,237,0.08)] text-[#7c3aed] border border-[rgba(124,58,237,0.12)]">
+              New Websites & Apps
+            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(0,212,255,0.08)] text-[#00d4ff] border border-[rgba(0,212,255,0.12)]">
+              Existing Site Improvement
+            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(255,107,53,0.08)] text-[#ff6b35] border border-[rgba(255,107,53,0.12)]">
+              Feature Addition & AI
+            </div>
           </div>
           <h1 className="text-5xl sm:text-7xl font-black text-white mb-6 leading-tight">
-            Let&apos;s build your
+            Whatever you need —
             <br />
-            <span className="gradient-text">next big thing.</span>
+            <span className="gradient-text">I&apos;ll build it fast.</span>
           </h1>
           <p className="text-[#475569] text-xl leading-relaxed mb-8">
-            I partner with founders to turn startup ideas into shipped, scalable products
-            — using AI-augmented development to move 3× faster than traditional teams.
+            New website, existing site that needs improvement, features to add, or AI to integrate —
+            I work 3× faster using AI-augmented development without sacrificing quality.
           </p>
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full btn-gradient text-white font-semibold text-lg shine"
-          >
+          <ChatTrigger className="inline-flex items-center gap-2 px-10 py-4 rounded-full btn-gradient text-white font-semibold text-lg shine">
             Start a Conversation <ArrowRight size={18} />
-          </a>
+          </ChatTrigger>
         </div>
 
         {/* Why me */}
@@ -147,19 +152,70 @@ export default function BuildWithMePage() {
           </div>
         </div>
 
+        {/* Website services section */}
+        <div className="mb-24">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
+              Already have a website? <span className="gradient-text">I can help.</span>
+            </h2>
+            <p className="text-[#475569] text-lg max-w-xl mx-auto">
+              You don&apos;t need to build from scratch to work with me. I improve, fix, and extend what you already have.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              {
+                icon: Wrench,
+                title: "Site Audit & Revamp",
+                color: "#22c55e",
+                desc: "Full audit of your existing website — performance, SEO, UX, and conversion issues — followed by targeted improvements.",
+                points: ["Performance & Core Web Vitals", "UX & design refresh", "SEO improvements", "Conversion optimization"],
+              },
+              {
+                icon: PlusCircle,
+                title: "Feature Addition",
+                color: "#00d4ff",
+                desc: "Need a new feature on your existing product? I analyze your codebase and ship the feature fast.",
+                points: ["Codebase analysis first", "Clean integration", "No breaking changes", "Tested and deployed"],
+              },
+              {
+                icon: RefreshCw,
+                title: "Maintenance & Support",
+                color: "#ff6b35",
+                desc: "Ongoing technical partner for your live site. Bug fixes, updates, monitoring, and rapid response.",
+                points: ["Bug fixes & patches", "Dependency updates", "Performance monitoring", "Priority response time"],
+              },
+            ].map((item) => (
+              <div key={item.title} className="p-7 rounded-2xl card-border flex flex-col gap-4">
+                <item.icon size={22} style={{ color: item.color }} />
+                <div>
+                  <h3 className="font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-[#475569] text-sm leading-relaxed">{item.desc}</p>
+                </div>
+                <div className="flex flex-col gap-2 flex-1">
+                  {item.points.map((p) => (
+                    <div key={p} className="flex items-start gap-2">
+                      <CheckCircle2 size={13} className="mt-0.5 shrink-0" style={{ color: item.color }} />
+                      <span className="text-[#64748b] text-xs">{p}</span>
+                    </div>
+                  ))}
+                </div>
+                <ChatTrigger className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(255,255,255,0.15)] transition-all w-full">
+                  Discuss This <ArrowRight size={13} />
+                </ChatTrigger>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Final CTA */}
         <div className="text-center pb-16">
           <p className="text-[#475569] text-lg mb-6">
             Not sure which option fits? Let&apos;s just talk.
           </p>
-          <a
-            href={siteConfig.calendly}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(0,212,255,0.2)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.05)] transition-all font-semibold"
-          >
-            Book a Free 30-Min Call <ArrowRight size={16} />
-          </a>
+          <ChatTrigger className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(0,212,255,0.2)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.05)] transition-all font-semibold">
+            Start a Conversation <ArrowRight size={16} />
+          </ChatTrigger>
         </div>
       </div>
       <Footer />

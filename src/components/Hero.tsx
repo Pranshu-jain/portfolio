@@ -109,12 +109,12 @@ export default function Hero() {
             >
               <Zap size={16} /> View My Work
             </Link>
-            <Link
-              href="/build-with-me"
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent("open-chat"))}
               className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(255,255,255,0.1)] text-white font-semibold text-[15px] hover:border-[rgba(0,212,255,0.25)] hover:bg-white/[0.03] transition-all duration-300"
             >
-              Build With Me <ArrowRight size={15} />
-            </Link>
+              Let&apos;s Talk <ArrowRight size={15} />
+            </button>
           </motion.div>
 
           {/* Social links */}
