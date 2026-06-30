@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Footer from "@/components/Footer";
-import { ArrowRight, Clock, Tag } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import { blogPosts } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -30,7 +31,10 @@ export default function BlogPage() {
         </div>
 
         {/* Featured post */}
-        <div className="p-8 rounded-3xl gradient-border mb-8 relative overflow-hidden group cursor-pointer">
+        <Link
+          href={`/blog/${featured.slug}`}
+          className="block p-8 rounded-3xl gradient-border mb-8 relative overflow-hidden group cursor-pointer"
+        >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,212,255,0.04),transparent_60%)] pointer-events-none" />
           <div className="relative">
             <div className="flex items-center gap-4 mb-5">
@@ -61,14 +65,15 @@ export default function BlogPage() {
               </span>
             </div>
           </div>
-        </div>
+        </Link>
 
         {/* Other posts */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-24">
           {rest.map((post) => (
-            <div
+            <Link
               key={post.slug}
-              className="p-6 rounded-2xl card-border group cursor-pointer"
+              href={`/blog/${post.slug}`}
+              className="block p-6 rounded-2xl card-border group cursor-pointer"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex items-center gap-1.5 text-[#334155] text-xs">
@@ -92,7 +97,7 @@ export default function BlogPage() {
                 </div>
                 <ArrowRight size={13} className="text-[#334155] group-hover:text-[#00d4ff] transition-colors" />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
