@@ -354,6 +354,8 @@ export default function ChatWidget() {
                           className="flex-1 px-3.5 py-2.5 rounded-xl text-sm bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.25)] transition-colors"
                         />
                         <button
+                          type="button"
+                          aria-label="Send message"
                           onClick={sendMessage}
                           disabled={!input.trim() || loading}
                           className="w-9 h-9 rounded-xl btn-gradient flex items-center justify-center shrink-0 disabled:opacity-40 transition-opacity"

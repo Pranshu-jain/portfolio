@@ -84,7 +84,23 @@ export const allProjects = [
   },
 ];
 
-export const blogPosts = [
+export type BlogBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; text: string }
+  | { type: "list"; items: string[] };
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  tags: string[];
+  featured: boolean;
+  content: BlogBlock[];
+};
+
+export const blogPosts: BlogPost[] = [
   {
     slug: "ship-mvp-days-not-months",
     title: "How I Ship MVPs in Days Using AI",
@@ -94,6 +110,54 @@ export const blogPosts = [
     readTime: "5 min",
     tags: ["AI", "Productivity", "Startup"],
     featured: true,
+    content: [
+      {
+        type: "paragraph",
+        text: "Most teams treat an MVP like a small version of the real product. That's the trap. An MVP is a question — \"will anyone care about this?\" — and the only job of the build is to get you to the answer as fast as possible. With AI as a multiplier at every layer, I get there in days, not months.",
+      },
+      {
+        type: "paragraph",
+        text: "Here's the actual workflow I run, start to deployed product.",
+      },
+      { type: "heading", text: "1. Compress the idea into one sentence" },
+      {
+        type: "paragraph",
+        text: "Before any code, I force the idea down to a single sentence: who it's for, what it does, and the one outcome it creates. If I can't write that sentence, the product isn't ready to build — it's ready to think about. This is the cheapest place to cut scope, so I cut hard here.",
+      },
+      { type: "heading", text: "2. Spec with AI, not in my head" },
+      {
+        type: "paragraph",
+        text: "I use AI to turn that sentence into a tight spec: the core user flow, the data model, and the three screens that matter. The point isn't a perfect document — it's to surface the decisions I'd otherwise discover halfway through building, when they're expensive to change.",
+      },
+      {
+        type: "list",
+        items: [
+          "One primary user flow, written as steps a real person takes",
+          "A data model with just the tables the flow needs — nothing speculative",
+          "The smallest set of screens that lets someone complete the flow",
+        ],
+      },
+      { type: "heading", text: "3. Scaffold the boring 80%" },
+      {
+        type: "paragraph",
+        text: "Auth, CRUD, forms, validation, API routes, the layout shell — this is solved-problem work, and AI writes it faster than I can type. I let it generate the scaffolding, then I review every line. AI is a fast junior engineer: brilliant at volume, needs supervision on judgment.",
+      },
+      { type: "heading", text: "4. Spend my time on the 20% that's actually the product" },
+      {
+        type: "paragraph",
+        text: "The differentiated part — the thing the MVP exists to test — is where I go slow and hands-on. That's the logic no tutorial covers and no model has seen. Saving days on the boring 80% is what buys me the focus to get this part right.",
+      },
+      { type: "heading", text: "5. Ship to a real URL on day one" },
+      {
+        type: "paragraph",
+        text: "I deploy before the product is \"done.\" A live URL changes how you think — it turns abstract debate into concrete feedback. Push to Vercel, wire up the database, and every commit after that is a real, shareable build. Nothing reveals a bad assumption faster than putting it in front of someone.",
+      },
+      { type: "heading", text: "The mindset that makes it work" },
+      {
+        type: "paragraph",
+        text: "Speed isn't about cutting corners — it's about cutting scope. AI lets me build the complete version of a small idea instead of a half-built version of a big one. Ship the question, get the answer, then decide what to build for real.",
+      },
+    ],
   },
   {
     slug: "rails-nextjs-decoupled-architecture",
@@ -104,6 +168,49 @@ export const blogPosts = [
     readTime: "7 min",
     tags: ["Rails", "Next.js", "Architecture"],
     featured: true,
+    content: [
+      {
+        type: "paragraph",
+        text: "I've built products as full-stack Rails monoliths, as all-in-one Next.js apps, and as a decoupled Rails API with a Next.js frontend. For most of the products I ship, the decoupled stack wins — and not for the reasons people usually give.",
+      },
+      { type: "heading", text: "Each tool does what it's actually good at" },
+      {
+        type: "paragraph",
+        text: "Rails is still the fastest way I know to model a domain, enforce business rules, and get a real database schema with migrations, validations, and tests. Next.js is the best frontend experience I've used: server components, file-based routing, image optimization, and a deploy story that's hard to beat. Forcing one to do the other's job is where projects get slow.",
+      },
+      {
+        type: "list",
+        items: [
+          "Rails owns the data, the business logic, and the rules that must never be bypassed",
+          "Next.js owns the rendering, the routing, and the experience the user actually touches",
+          "A clean JSON contract is the only thing between them",
+        ],
+      },
+      { type: "heading", text: "The contract is the architecture" },
+      {
+        type: "paragraph",
+        text: "The whole pattern lives or dies on the API contract. Rails exposes a versioned JSON API. The frontend treats it like any third-party service — typed responses, explicit error handling, no reaching into internals. Get this boundary right and the two sides can evolve independently. Get it wrong and you've just built a distributed monolith with extra network calls.",
+      },
+      { type: "heading", text: "Why decoupling earns its keep" },
+      {
+        type: "paragraph",
+        text: "The real payoff shows up after the first version ships. The frontend can be redesigned end to end without touching business logic. The backend can change how data is stored without breaking a single screen. You can put a mobile app or a second client on the same API for free. And each side deploys on its own schedule.",
+      },
+      {
+        type: "paragraph",
+        text: "On the salary management platform I built this way, the Rails API handled 10,000+ employee records with indexed sub-200ms queries while the Next.js frontend rendered five analytical dashboards — and I could tune either side in isolation without fear of breaking the other.",
+      },
+      { type: "heading", text: "The honest tradeoffs" },
+      {
+        type: "paragraph",
+        text: "This isn't free. You run two codebases, two deploys, and you handle CORS and auth across a boundary. For a tiny CRUD app, a Rails monolith or a single Next.js app is the right call — don't add a network hop you don't need. The decoupled stack pays off when the product has real domain logic on one side and a rich, evolving interface on the other.",
+      },
+      { type: "heading", text: "When I reach for it" },
+      {
+        type: "paragraph",
+        text: "If the product has meaningful business rules, more than one kind of client on the horizon, or a UI that will be iterated on hard, I start decoupled. The clean separation is the thing that lets me — or a team — keep moving fast a year in, which is exactly when most architectures start to fight back.",
+      },
+    ],
   },
   {
     slug: "startup-tech-stack-2025",
@@ -114,5 +221,46 @@ export const blogPosts = [
     readTime: "6 min",
     tags: ["Startup", "Tech Stack", "Next.js"],
     featured: false,
+    content: [
+      {
+        type: "paragraph",
+        text: "The best startup stack is the one that lets you move fast today without writing checks your future self has to cash. After shipping a lot of products, I've converged on a default stack I reach for unless a project gives me a strong reason not to. Boring, proven, and fast — in that order.",
+      },
+      { type: "heading", text: "Frontend: Next.js + TypeScript + Tailwind" },
+      {
+        type: "paragraph",
+        text: "Next.js is my default frontend. Server components, file-based routing, and first-class deploys mean I spend time on the product, not the plumbing. TypeScript catches the class of bugs that otherwise show up in production, and Tailwind lets me build a consistent design without a separate CSS architecture to maintain.",
+      },
+      { type: "heading", text: "Backend: Rails or Next API routes" },
+      {
+        type: "paragraph",
+        text: "If the product has real domain logic, I reach for a Rails API — nothing models a business domain faster. If it's lighter, Next.js API routes keep everything in one codebase. The decision rule is simple: how much business logic lives on the server? A lot means Rails. A little means Next.",
+      },
+      { type: "heading", text: "Database: PostgreSQL" },
+      {
+        type: "paragraph",
+        text: "PostgreSQL, almost always. It scales further than you think, the tooling is excellent, and you won't outgrow it before you find product-market fit. For small self-contained apps, SQLite is a genuinely good answer — I shipped a full Stripe-powered e-commerce platform on SQLite with zero external services.",
+      },
+      { type: "heading", text: "The supporting cast" },
+      {
+        type: "list",
+        items: [
+          "Stripe for payments — never build your own billing",
+          "Resend for transactional email — clean API, no legacy baggage",
+          "Vercel for frontend hosting and Railway for backend services",
+          "An AI layer (LLMs, agents, automation) wired in wherever it removes real work",
+        ],
+      },
+      { type: "heading", text: "What I deliberately avoid" },
+      {
+        type: "paragraph",
+        text: "Microservices before you have a product. A custom auth system when a proven library exists. A bespoke component framework. The newest tool that's still finding its bugs. Premature optimization of any kind. Each of these feels productive and is actually debt — complexity you pay interest on every sprint.",
+      },
+      { type: "heading", text: "The principle underneath the list" },
+      {
+        type: "paragraph",
+        text: "Pick tools that are boring enough to be reliable and modern enough to be fast. Spend your novelty budget on the product, not the stack. The stack is supposed to disappear so you can focus on the only thing that matters — shipping something people want.",
+      },
+    ],
   },
 ];
