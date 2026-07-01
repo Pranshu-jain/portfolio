@@ -16,6 +16,17 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Environment variables
+
+Copy `.env.example` to `.env.local` and fill it in (see that file for every key).
+Set the same keys in Vercel for production.
+
+- **`/admin` (Google sign-in, Auth.js):** `AUTH_SECRET`, `AUTH_GOOGLE_ID`,
+  `AUTH_GOOGLE_SECRET`, optional `ADMIN_EMAIL` (defaults to the owner). Google OAuth
+  redirect URI: `<origin>/api/auth/callback/google`.
+- **`/admin` funnel tracker:** `DATABASE_URL` (Vercel → Storage → Neon Postgres).
+- **Site features:** `GEMINI_API_KEY` (chat), `RESEND_API_KEY` (contact form).
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
