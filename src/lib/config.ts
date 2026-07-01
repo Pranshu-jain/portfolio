@@ -50,4 +50,27 @@ export const siteConfig = {
     { href: "/blog", label: "Blog" },
     { href: "/build-with-me", label: "Build With Me" },
   ],
+
+  // Used by the /admin demand panel to flag which in-demand skills overlap
+  // with what Pranshu already offers (lowercased match against RemoteOK tags).
+  skills: [
+    "react",
+    "next",
+    "nextjs",
+    "typescript",
+    "javascript",
+    "node",
+    "nodejs",
+    "rails",
+    "ruby",
+    "python",
+    "django",
+    "postgres",
+    "postgresql",
+    "sql",
+    "ai",
+    "llm",
+    "tailwind",
+    "stripe",
+  ],
 };
