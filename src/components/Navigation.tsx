@@ -22,6 +22,9 @@ export default function Navigation() {
     setMobileOpen(false);
   }, [pathname]);
 
+  // Marketing nav is irrelevant on the private /admin dashboard.
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <>
       <motion.nav

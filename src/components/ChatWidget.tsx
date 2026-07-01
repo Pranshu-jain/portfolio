@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, ArrowRight, Loader2, Bot, CheckCircle2 } from "lucide-react";
 
@@ -59,6 +60,7 @@ export default function ChatWidget() {
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -156,6 +158,9 @@ export default function ChatWidget() {
 
   const updateForm = (key: keyof FormData, val: string) =>
     setForm((p) => ({ ...p, [key]: val }));
+
+  // No sales chat on the private /admin dashboard.
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <>
