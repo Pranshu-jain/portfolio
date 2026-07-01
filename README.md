@@ -27,6 +27,29 @@ Set the same keys in Vercel for production.
 - **`/admin` funnel tracker:** `DATABASE_URL` (Vercel → Storage → Neon Postgres).
 - **Site features:** `GEMINI_API_KEY` (chat), `RESEND_API_KEY` (contact form).
 
+### /admin deployment checklist
+
+The admin dashboard deploys with the site, but stays locked (fails closed) until
+these are set in **Vercel → Settings → Environment Variables**:
+
+- [ ] `AUTH_SECRET` — random string. Generate: `openssl rand -base64 33`
+- [ ] `AUTH_GOOGLE_ID` — Google OAuth client ID
+- [ ] `AUTH_GOOGLE_SECRET` — Google OAuth client secret
+- [ ] `ADMIN_EMAIL` — optional; only if the allowed email differs from the default
+- [ ] `DATABASE_URL` — provisioned by Vercel → Storage → Neon Postgres
+- [ ] Redeploy after setting the above
+
+Google OAuth setup (console.cloud.google.com → Credentials → OAuth client ID →
+Web application):
+
+- [ ] Consent screen: External, add your email as a Test user
+- [ ] Authorized redirect URIs (must match exactly):
+  - `https://<your-domain>/api/auth/callback/google`
+  - `http://localhost:3000/api/auth/callback/google`
+
+Only `ADMIN_EMAIL` (default: the owner's Google account) can sign in; every other
+account is rejected at the `signIn` callback in `src/auth.ts`.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
