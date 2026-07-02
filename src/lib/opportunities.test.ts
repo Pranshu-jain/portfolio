@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { matchOpportunities } from "./opportunities";
+import { matchOpportunities, isDevRole } from "./opportunities";
 
 const LEGAL = { legal: "notice" };
 function job(
@@ -11,44 +11,94 @@ function job(
   return { position, company: "Acme", tags, url, ...extra };
 }
 
-describe("matchOpportunities", () => {
-  it("skips the legal-notice element and non-jobs", () => {
-    const res = matchOpportunities([LEGAL, 5, null, job("Dev", ["react"], "https://x/1")]);
-    expect(res).toHaveLength(1);
-    expect(res[0].title).toBe("Dev");
+describe("isDevRole", () => {
+  it("true for engineering titles", () => {
+    expect(isDevRole("Senior Backend Engineer")).toBe(true);
+    expect(isDevRole("Full-Stack Developer")).toBe(true);
   });
+  it("false for non-dev / denylisted titles", () => {
+    expect(isDevRole("Delivery Driver")).toBe(false);
+    expect(isDevRole("Product Manager")).toBe(false);
+    expect(isDevRole("Sales Development Rep")).toBe(false); // sales denylisted
+  });
+});
 
-  it("keeps only jobs matching the user's skills", () => {
+describe("matchOpportunities — tightness", () => {
+  it("skips the legal-notice element and non-jobs", () => {
     const res = matchOpportunities(
-      [
-        job("A", ["react", "node"], "https://x/a"),
-        job("B", ["php"], "https://x/b"),
-      ],
+      [LEGAL, 5, null, job("Backend Engineer", ["react"], "https://x/1")],
       ["react"],
     );
-    expect(res.map((o) => o.title)).toEqual(["A"]);
-    expect(res[0].matched).toContain("react");
+    expect(res).toHaveLength(1);
+    expect(res[0].title).toBe("Backend Engineer");
   });
 
-  it("ranks by number of matched skills, then recency", () => {
+  it("drops a denylisted title even when a skill tag matches", () => {
+    // the exact false positive we're fixing: delivery driver tagged 'ruby'
+    const res = matchOpportunities(
+      [job("Delivery Driver Bristol", ["ruby"], "https://x/d")],
+      ["ruby"],
+    );
+    expect(res).toHaveLength(0);
+  });
+
+  it("keeps a dev-titled job with a single skill match", () => {
+    const res = matchOpportunities(
+      [job("React Developer", ["react", "aws"], "https://x/r")],
+      ["react"],
+    );
+    expect(res.map((o) => o.title)).toEqual(["React Developer"]);
+    expect(res[0].matched).toEqual(["react"]);
+  });
+
+  it("drops a non-dev title with only ONE skill match", () => {
+    const res = matchOpportunities(
+      [job("Business Operations Associate", ["python", "excel"], "https://x/b")],
+      ["python"],
+    );
+    expect(res).toHaveLength(0);
+  });
+
+  it("keeps a non-dev title when it matches TWO+ skills", () => {
+    const res = matchOpportunities(
+      [job("Growth Marketer", ["python", "node", "seo"], "https://x/g")],
+      ["python", "node"],
+    );
+    expect(res).toHaveLength(1);
+    expect(res[0].matched.sort()).toEqual(["node", "python"]);
+  });
+
+  it("drops sales titles that contain 'development' (not engineering)", () => {
+    const res = matchOpportunities(
+      [job("Business Development Representative", ["ruby"], "https://x/bdr")],
+      ["ruby"],
+    );
+    expect(res).toHaveLength(0);
+  });
+
+  it("ranks dev-titled + more-matched first", () => {
     const res = matchOpportunities(
       [
-        job("One", ["react"], "https://x/1", { date: "2024-01-01" }),
-        job("Two", ["react", "typescript"], "https://x/2", { date: "2024-01-02" }),
+        job("Data Analyst", ["python", "sql"], "https://x/a", { date: "2024-02-01" }),
+        job("Software Engineer", ["python"], "https://x/e", { date: "2024-01-01" }),
       ],
-      ["react", "typescript"],
+      ["python", "sql"],
     );
-    expect(res[0].title).toBe("Two"); // 2 matches beats 1
+    // engineer: score = 1 match + 2 dev bonus = 3; analyst: 2 matches + 0 = 2
+    expect(res[0].title).toBe("Software Engineer");
   });
 
-  it("drops jobs with no apply URL (can't apply)", () => {
-    const res = matchOpportunities([job("NoUrl", ["react"], undefined)], ["react"]);
+  it("drops jobs with no apply URL", () => {
+    const res = matchOpportunities(
+      [job("Backend Engineer", ["react"], undefined)],
+      ["react"],
+    );
     expect(res).toHaveLength(0);
   });
 
   it("prefers apply_url over url", () => {
     const res = matchOpportunities(
-      [job("A", ["react"], "https://x/list", { apply_url: "https://x/apply" })],
+      [job("Backend Engineer", ["react"], "https://x/list", { apply_url: "https://x/apply" })],
       ["react"],
     );
     expect(res[0].url).toBe("https://x/apply");
@@ -57,23 +107,24 @@ describe("matchOpportunities", () => {
   it("formats rate range and treats 0 salary as absent", () => {
     const res = matchOpportunities(
       [
-        job("Paid", ["react"], "https://x/p", { salary_min: 100000, salary_max: 150000 }),
-        job("Zero", ["react"], "https://x/z", { salary_min: 0, salary_max: 0 }),
+        job("Backend Engineer", ["react"], "https://x/p", { salary_min: 100000, salary_max: 150000 }),
+        job("Frontend Engineer", ["react"], "https://x/z", { salary_min: 0, salary_max: 0 }),
       ],
       ["react"],
     );
-    const paid = res.find((o) => o.title === "Paid");
-    const zero = res.find((o) => o.title === "Zero");
-    expect(paid?.rate).toBe("$100,000–$150,000");
-    expect(zero?.rate).toBeNull();
+    expect(res.find((o) => o.title === "Backend Engineer")?.rate).toBe("$100,000–$150,000");
+    expect(res.find((o) => o.title === "Frontend Engineer")?.rate).toBeNull();
   });
 
-  it("with no skills, returns recent jobs (no match filter)", () => {
+  it("with no skills, returns only dev-titled roles", () => {
     const res = matchOpportunities(
-      [job("A", ["x"], "https://x/a"), job("B", ["y"], "https://x/b")],
+      [
+        job("Senior Engineer", ["x"], "https://x/a"),
+        job("Marketing Lead", ["y"], "https://x/b"),
+      ],
       [],
     );
-    expect(res).toHaveLength(2);
+    expect(res.map((o) => o.title)).toEqual(["Senior Engineer"]);
   });
 
   it("empty / malformed input yields [], never throws", () => {
@@ -84,7 +135,7 @@ describe("matchOpportunities", () => {
 
   it("respects the limit", () => {
     const jobs = Array.from({ length: 30 }, (_, i) =>
-      job("J" + i, ["react"], "https://x/" + i),
+      job("Engineer " + i, ["react"], "https://x/" + i),
     );
     expect(matchOpportunities(jobs, ["react"], 10)).toHaveLength(10);
   });

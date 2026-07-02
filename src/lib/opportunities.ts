@@ -38,10 +38,27 @@ interface RemoteOKJobFull extends RemoteOKJob {
   apply_url?: string;
 }
 
+// Title looks like an actual engineering role. Match "developer" (not bare
+// "develop", which also hits "business development").
+const DEV_TITLE =
+  /\b(developer|engineer|programmer|full[\s-]?stack|back[\s-]?end|front[\s-]?end|software|architect|sre|dev[\s-]?ops|data\s?eng|ml\s?eng|ai\s?eng)/i;
+// Obviously non-engineering roles that RemoteOK sometimes tags with a stray tech tag.
+const DENY_TITLE =
+  /\b(driver|delivery|sales|recruit|business development|representative|account manager|customer support|support agent|nurse|teacher|barista|warehouse|virtual assistant|social media|content writer|copywriter)\b/i;
+
+export function isDevRole(title: string): boolean {
+  return DEV_TITLE.test(title) && !DENY_TITLE.test(title);
+}
+
 /**
- * Return opportunities whose tags overlap the user's skills, ranked by number
- * of matched skills then recency. If `skills` is empty, returns recent jobs
- * unranked-by-match. Tolerant of the legal-notice element and malformed rows.
+ * Return relevant engineering opportunities matched to the user's skills.
+ *
+ * Tightness rule (kills false positives like "Delivery Driver [ruby]"):
+ *   - Never keep a denylisted non-dev title.
+ *   - Dev-looking title  → keep if it matches ≥1 skill.
+ *   - Other title        → keep only if it matches ≥2 skills.
+ * With no skills provided, only dev-titled roles are returned.
+ * Ranked by (dev-title bonus + matched count), then recency.
  */
 export function matchOpportunities(
   raw: unknown,
@@ -55,27 +72,36 @@ export function matchOpportunities(
   for (const entry of entries) {
     if (!isJob(entry)) continue;
     const job = entry as RemoteOKJobFull;
+    const title = job.position!.trim();
+    if (DENY_TITLE.test(title)) continue; // clearly not an engineering gig
+
     const tags = Array.isArray(job.tags)
       ? job.tags.filter((t): t is string => typeof t === "string")
       : [];
     const matched = mine.size
       ? [...new Set(tags.map(normalize))].filter((t) => mine.has(t))
       : [];
-    // When the user has skills, only keep jobs that match at least one.
-    if (mine.size && matched.length === 0) continue;
+    const devTitle = DEV_TITLE.test(title);
+
+    // Relevance gate.
+    if (mine.size) {
+      if (!(devTitle ? matched.length >= 1 : matched.length >= 2)) continue;
+    } else if (!devTitle) {
+      continue; // no skills given → only surface dev-titled roles
+    }
 
     const url = job.apply_url || job.url;
     if (typeof url !== "string" || !url) continue; // no way to apply → skip
 
     mapped.push({
-      title: job.position!.trim(),
+      title,
       company: (job.company ?? "").trim() || "Unknown",
       url,
       tags,
       matched,
       rate: rateLabel(job),
       date: typeof job.date === "string" ? job.date : null,
-      _score: matched.length,
+      _score: matched.length + (devTitle ? 2 : 0),
     });
   }
 
