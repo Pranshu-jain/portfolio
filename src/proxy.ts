@@ -42,5 +42,12 @@ export function proxy(req: NextRequest, event: NextFetchEvent) {
 export const config = {
   // Protect the dashboard pages AND their data APIs. /api/chat and
   // /api/send-summary stay public (used by the public site).
-  matcher: ["/admin", "/admin/:path*", "/api/funnel", "/api/funnel/:path*", "/api/demand"],
+  matcher: [
+    "/admin",
+    "/admin/:path*",
+    "/api/funnel",
+    "/api/funnel/:path*",
+    "/api/demand",
+    "/api/opportunities",
+  ],
 };
