@@ -1,5 +1,65 @@
 import { describe, it, expect } from "vitest";
-import { matchOpportunities, isDevRole } from "./opportunities";
+import {
+  matchOpportunities,
+  isDevRole,
+  filterCandidates,
+  formatSalaryRange,
+  type Candidate,
+} from "./opportunities";
+
+function cand(over: Partial<Candidate> = {}): Candidate {
+  return {
+    title: "Backend Engineer",
+    company: "Acme",
+    url: "https://x/" + Math.random().toString(36).slice(2),
+    tags: ["react"],
+    rate: null,
+    date: null,
+    source: "RemoteOK",
+    ...over,
+  };
+}
+
+describe("formatSalaryRange", () => {
+  it("formats a range, single value, and treats <=0 as absent", () => {
+    expect(formatSalaryRange(100000, 150000)).toBe("$100,000–$150,000");
+    expect(formatSalaryRange(90000, 0)).toBe("$90,000");
+    expect(formatSalaryRange(0, 0)).toBeNull();
+    expect(formatSalaryRange(null, null)).toBeNull();
+  });
+});
+
+describe("filterCandidates — multi-source", () => {
+  it("de-duplicates by URL across sources (keeps one)", () => {
+    const res = filterCandidates(
+      [
+        cand({ url: "https://dup", source: "RemoteOK", tags: ["react"] }),
+        cand({ url: "https://dup", source: "Remotive", tags: ["react", "node"] }),
+      ],
+      ["react", "node"],
+    );
+    expect(res).toHaveLength(1);
+  });
+
+  it("preserves the source field on results", () => {
+    const res = filterCandidates(
+      [cand({ source: "Remotive", tags: ["python"], title: "Data Engineer" })],
+      ["python"],
+    );
+    expect(res[0].source).toBe("Remotive");
+  });
+
+  it("applies the same relevance rule regardless of source", () => {
+    const res = filterCandidates(
+      [
+        cand({ title: "Delivery Driver", source: "Remotive", tags: ["react"] }),
+        cand({ title: "Senior Engineer", source: "Remotive", tags: ["react"] }),
+      ],
+      ["react"],
+    );
+    expect(res.map((o) => o.title)).toEqual(["Senior Engineer"]);
+  });
+});
 
 const LEGAL = { legal: "notice" };
 function job(
