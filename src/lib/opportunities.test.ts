@@ -49,6 +49,30 @@ describe("filterCandidates — multi-source", () => {
     expect(res[0].source).toBe("Remotive");
   });
 
+  it("deprioritizes Remotive below RemoteOK on equal match score", () => {
+    const res = filterCandidates(
+      [
+        cand({ url: "https://x/rt", source: "Remotive", title: "Backend Engineer", tags: ["react"] }),
+        cand({ url: "https://x/ro", source: "RemoteOK", title: "Backend Engineer", tags: ["react"] }),
+      ],
+      ["react"],
+    );
+    // same score (1 match + dev bonus) → RemoteOK ranks first
+    expect(res.map((o) => o.source)).toEqual(["RemoteOK", "Remotive"]);
+  });
+
+  it("ranks ALL RemoteOK above ALL Remotive, even a lower-match RemoteOK gig", () => {
+    const res = filterCandidates(
+      [
+        cand({ url: "https://x/ro", source: "RemoteOK", title: "Engineer", tags: ["react"] }),
+        cand({ url: "https://x/rt", source: "Remotive", title: "Engineer", tags: ["react", "node"] }),
+      ],
+      ["react", "node"],
+    );
+    // hard ordering: RemoteOK first despite Remotive's stronger match
+    expect(res.map((o) => o.source)).toEqual(["RemoteOK", "Remotive"]);
+  });
+
   it("applies the same relevance rule regardless of source", () => {
     const res = filterCandidates(
       [
