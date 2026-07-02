@@ -48,6 +48,15 @@ export function isDevRole(title: string): boolean {
   return DEV_TITLE.test(title) && !DENY_TITLE.test(title);
 }
 
+// Source preference (primary sort key). Higher = shown first. RemoteOK's apply
+// links resolve directly; Remotive's sit behind Cloudflare (fine for humans,
+// unverifiable for bots), so ALL RemoteOK results rank above ALL Remotive ones,
+// regardless of match strength. Unknown sources sort last.
+const SOURCE_RANK: Record<string, number> = { RemoteOK: 2, Remotive: 1 };
+function sourceRank(source: string): number {
+  return SOURCE_RANK[source] ?? 0;
+}
+
 interface RemoteOKJobFull extends RemoteOKJob {
   url?: string;
   apply_url?: string;
@@ -116,7 +125,10 @@ export function filterCandidates(
   }
 
   scored.sort(
-    (a, b) => b._score - a._score || (b.date ?? "").localeCompare(a.date ?? ""),
+    (a, b) =>
+      sourceRank(b.source) - sourceRank(a.source) ||
+      b._score - a._score ||
+      (b.date ?? "").localeCompare(a.date ?? ""),
   );
   return scored.slice(0, limit).map(({ _score, ...o }) => o);
 }
