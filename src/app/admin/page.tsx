@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { auth, signOut } from "@/auth";
 import FunnelTable from "@/components/admin/FunnelTable";
+import OpportunitiesPanel from "@/components/admin/OpportunitiesPanel";
 import DemandPanel from "@/components/admin/DemandPanel";
 
 export const metadata: Metadata = {
@@ -52,6 +53,7 @@ export default async function AdminPage() {
 
       <div className="space-y-6">
         <FunnelTable />
+        <OpportunitiesPanel />
         <DemandPanel />
       </div>
     </div>
