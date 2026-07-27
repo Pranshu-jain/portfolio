@@ -16,7 +16,7 @@ export default function BuildWithMe() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 0% 40%, rgba(0,212,255,0.04) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 100% 85%, rgba(124,58,237,0.06) 0%, transparent 60%)",
+            "radial-gradient(ellipse 60% 50% at 0% 40%, rgba(14,165,233,0.04) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 100% 85%, rgba(124,58,237,0.06) 0%, transparent 60%)",
         }}
       />
 
@@ -59,7 +59,7 @@ export default function BuildWithMe() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.35 }}
-                    className="absolute -top-px left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-b-lg mono text-[9px] font-bold uppercase tracking-[2px] bg-[#7c3aed] text-white"
+                    className="absolute -top-px left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-b-lg mono text-[9px] font-bold uppercase tracking-[2px] bg-[#7c3aed] text-[#0f172a]"
                   >
                     Most engagements
                   </motion.div>
@@ -73,17 +73,17 @@ export default function BuildWithMe() {
                     >
                       {engagement.name}
                     </span>
-                    <span className="mono text-[10px] text-[#334155]">
+                    <span className="mono text-[10px] text-[#94a3b8]">
                       {engagement.duration}
                     </span>
                   </div>
-                  <p className="text-white font-bold text-lg leading-snug mb-2">
+                  <p className="text-[#0f172a] font-bold text-lg leading-snug mb-2">
                     {engagement.desc}
                   </p>
-                  <p className="text-[#475569] text-xs">{engagement.best}</p>
+                  <p className="text-[#64748b] text-xs">{engagement.best}</p>
                 </div>
 
-                <div className="relative h-px bg-[rgba(255,255,255,0.05)]" />
+                <div className="relative h-px bg-[rgba(15,23,42,0.06)]" />
 
                 <div className="relative flex flex-col gap-2.5 flex-1">
                   {engagement.features.map((feature, fi) => (
@@ -100,7 +100,7 @@ export default function BuildWithMe() {
                         className="mt-0.5 shrink-0"
                         style={{ color: engagement.color }}
                       />
-                      <span className="text-[#64748b] text-xs leading-relaxed">
+                      <span className="text-[#475569] text-xs leading-relaxed">
                         {feature}
                       </span>
                     </motion.div>
@@ -111,8 +111,8 @@ export default function BuildWithMe() {
                   onClick={openChat}
                   className={`relative flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all ${
                     engagement.highlight
-                      ? "btn-gradient text-white shine"
-                      : "border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(255,255,255,0.15)]"
+                      ? "btn-gradient text-[#0f172a] shine"
+                      : "border border-[rgba(15,23,42,0.10)] text-[#475569] hover:text-[#0f172a] hover:border-[rgba(15,23,42,0.18)]"
                   }`}
                 >
                   Scope this <ArrowRight size={14} />
@@ -124,13 +124,13 @@ export default function BuildWithMe() {
 
         {/* Closing CTA */}
         <Reveal delay={0.15}>
-          <div className="relative rounded-3xl glass border border-[rgba(255,255,255,0.06)] p-8 sm:p-10 text-center overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,212,255,0.05),transparent_70%)] pointer-events-none" />
+          <div className="relative rounded-3xl glass border border-[rgba(15,23,42,0.08)] p-8 sm:p-10 text-center overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(14,165,233,0.05),transparent_70%)] pointer-events-none" />
             <div className="relative">
-              <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
+              <h3 className="text-2xl sm:text-3xl font-black text-[#0f172a] mb-3">
                 Not sure which one fits?
               </h3>
-              <p className="text-[#64748b] mb-7 max-w-lg mx-auto">
+              <p className="text-[#475569] mb-7 max-w-lg mx-auto">
                 That&apos;s usually a sign the problem is still fuzzy — which is
                 exactly the case forward deployment exists for. One call and
                 we&apos;ll know.
@@ -138,7 +138,7 @@ export default function BuildWithMe() {
               <Magnetic className="inline-block">
                 <button
                   onClick={openChat}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-white font-semibold shine"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-[#0f172a] font-semibold shine"
                 >
                   Scope an Engagement <ArrowRight size={16} />
                 </button>

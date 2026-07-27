@@ -10,7 +10,7 @@ import Reveal from "./Reveal";
  */
 export default function SectionHeading({
   eyebrow,
-  accent = "#00d4ff",
+  accent = "#0284c7",
   title,
   description,
   align = "left",
@@ -49,7 +49,7 @@ export default function SectionHeading({
       </Reveal>
 
       <Reveal delay={0.08}>
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5 leading-[1.05] tracking-tight">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0f172a] mb-5 leading-[1.05] tracking-tight">
           {title}
         </h2>
       </Reveal>
@@ -57,7 +57,7 @@ export default function SectionHeading({
       {description && (
         <Reveal delay={0.16}>
           <p
-            className={`text-[#64748b] text-lg leading-relaxed ${
+            className={`text-[#475569] text-lg leading-relaxed ${
               centered ? "max-w-2xl mx-auto" : "max-w-xl"
             }`}
           >

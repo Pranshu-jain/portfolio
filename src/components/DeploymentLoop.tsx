@@ -35,8 +35,8 @@ function PhaseRow({ phase, index }: { phase: LoopPhase; index: number }) {
         <motion.span
           className="relative block w-3.5 h-3.5 rounded-full border-2"
           animate={{
-            background: inView ? phase.color : "#050505",
-            borderColor: inView ? phase.color : "#1e293b",
+            background: inView ? phase.color : "#fafaff",
+            borderColor: inView ? phase.color : "#cbd5e1",
             scale: inView ? 1.15 : 1,
           }}
           transition={{ duration: 0.4, ease: EASE }}
@@ -55,16 +55,16 @@ function PhaseRow({ phase, index }: { phase: LoopPhase; index: number }) {
           >
             {phase.window}
           </span>
-          <span className="mono text-[10px] text-[#293548] tabular-nums">
+          <span className="mono text-[10px] text-[#cbd5e1] tabular-nums">
             {String(index + 1).padStart(2, "0")} / {String(deploymentLoop.length).padStart(2, "0")}
           </span>
         </div>
 
-        <h3 className="text-2xl sm:text-3xl font-black text-white mb-3 tracking-tight">
+        <h3 className="text-2xl sm:text-3xl font-black text-[#0f172a] mb-3 tracking-tight">
           {phase.title}
         </h3>
 
-        <p className="text-[#64748b] leading-relaxed max-w-2xl mb-5">
+        <p className="text-[#475569] leading-relaxed max-w-2xl mb-5">
           {phase.description}
         </p>
 
@@ -77,7 +77,7 @@ function PhaseRow({ phase, index }: { phase: LoopPhase; index: number }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, duration: 0.4 }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] text-[#64748b] bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)]"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] text-[#475569] bg-[rgba(15,23,42,0.03)] border border-[rgba(15,23,42,0.06)]"
             >
               <span
                 className="w-1 h-1 rounded-full shrink-0"
@@ -113,7 +113,7 @@ export default function DeploymentLoop() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 45% 55% at 0% 30%, rgba(0,212,255,0.04) 0%, transparent 60%), radial-gradient(ellipse 45% 45% at 100% 75%, rgba(99,102,241,0.05) 0%, transparent 60%)",
+            "radial-gradient(ellipse 45% 55% at 0% 30%, rgba(14,165,233,0.04) 0%, transparent 60%), radial-gradient(ellipse 45% 45% at 100% 75%, rgba(99,102,241,0.05) 0%, transparent 60%)",
         }}
       />
 
@@ -134,7 +134,7 @@ export default function DeploymentLoop() {
         <div ref={containerRef} className="relative">
           {/* Spine track */}
           <div
-            className="absolute left-[22px] sm:left-[38px] top-2 bottom-2 w-px bg-[rgba(255,255,255,0.06)]"
+            className="absolute left-[22px] sm:left-[38px] top-2 bottom-2 w-px bg-[rgba(15,23,42,0.08)]"
             aria-hidden="true"
           />
 
@@ -145,7 +145,7 @@ export default function DeploymentLoop() {
             style={{
               scaleY: reduced ? 1 : fill,
               background:
-                "linear-gradient(180deg, #00d4ff 0%, #7c3aed 45%, #ff6b35 75%, #6366f1 100%)",
+                "linear-gradient(180deg, #0284c7 0%, #7c3aed 45%, #f97316 75%, #6366f1 100%)",
             }}
           />
 
@@ -166,7 +166,7 @@ export default function DeploymentLoop() {
 
         {/* Loop-back note — the "loop" in deployment loop */}
         <Reveal delay={0.1}>
-          <div className="mt-4 ml-16 sm:ml-24 flex items-center gap-3 text-[#334155]">
+          <div className="mt-4 ml-16 sm:ml-24 flex items-center gap-3 text-[#94a3b8]">
             <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[rgba(99,102,241,0.4)] to-transparent" />
             <span className="mono text-[10px] uppercase tracking-[2px]">
               ↺ then it runs again, faster

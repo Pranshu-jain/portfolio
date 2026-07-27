@@ -30,14 +30,14 @@ export default function AboutPage() {
         {/* Hero */}
         <div className="max-w-3xl mb-24">
           <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(0,212,255,0.08)] text-[#00d4ff] border border-[rgba(0,212,255,0.12)] mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00d4ff]" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(14,165,233,0.08)] text-[#0284c7] border border-[rgba(14,165,233,0.12)] mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7]" />
               About
             </div>
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1 className="text-5xl sm:text-7xl font-black text-white mb-8 leading-[1.02] tracking-tight">
+            <h1 className="text-5xl sm:text-7xl font-black text-[#0f172a] mb-8 leading-[1.02] tracking-tight">
               I&apos;m Pranshu.
               <br />
               <span className="gradient-text">I deploy forward.</span>
@@ -45,7 +45,7 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.12}>
-            <p className="text-[#94a3b8] text-xl leading-relaxed mb-6">
+            <p className="text-[#475569] text-xl leading-relaxed mb-6">
               Most engineering roles start after someone else has already done
               the hard part — deciding what to build. Forward deployment starts
               before that. I land inside the customer&apos;s environment, watch
@@ -55,7 +55,7 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.18}>
-            <p className="text-[#64748b] text-xl leading-relaxed mb-6">
+            <p className="text-[#475569] text-xl leading-relaxed mb-6">
               Then I build. In their stack, against their APIs, under their
               conventions — a thin end-to-end slice live on real data inside the
               first week, hardened into something load-bearing over the next
@@ -64,7 +64,7 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.24}>
-            <p className="text-[#64748b] text-xl leading-relaxed mb-10">
+            <p className="text-[#475569] text-xl leading-relaxed mb-10">
               And I stay until it&apos;s used. Shipped is not the finish line —
               adopted is. The engagement ends when the customer&apos;s team can
               operate and extend it without me, and the metric we agreed on has
@@ -76,13 +76,13 @@ export default function AboutPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/build-with-me"
-                className="flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-white font-semibold shine"
+                className="flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-[#0f172a] font-semibold shine"
               >
                 Deploy Me <ArrowRight size={16} />
               </Link>
               <Link
                 href="/#deployments"
-                className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(0,212,255,0.2)] transition-all"
+                className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(15,23,42,0.10)] text-[#475569] hover:text-[#0f172a] hover:border-[rgba(14,165,233,0.2)] transition-all"
               >
                 See Deployments
               </Link>
@@ -93,14 +93,14 @@ export default function AboutPage() {
         {/* Dimension summary */}
         <div className="mb-24">
           <Reveal>
-            <h2 className="text-2xl font-black text-white mb-2">
+            <h2 className="text-2xl font-black text-[#0f172a] mb-2">
               Graded on eight axes
             </h2>
-            <p className="text-[#475569] mb-8 max-w-xl">
+            <p className="text-[#64748b] mb-8 max-w-xl">
               The full breakdown, with evidence for each, lives{" "}
               <Link
                 href="/#dimensions"
-                className="text-[#00d4ff] hover:underline"
+                className="text-[#0284c7] hover:underline"
               >
                 on the home page
               </Link>
@@ -122,7 +122,7 @@ export default function AboutPage() {
                   </div>
                   {/* Relative emphasis, deliberately unlabelled — a
                       self-assessed number would read as false precision. */}
-                  <div className="h-1 rounded-full bg-[rgba(255,255,255,0.05)] overflow-hidden mb-4">
+                  <div className="h-1 rounded-full bg-[rgba(15,23,42,0.06)] overflow-hidden mb-4">
                     <div
                       className="h-full rounded-full"
                       style={{
@@ -131,10 +131,10 @@ export default function AboutPage() {
                       }}
                     />
                   </div>
-                  <div className="text-sm font-bold text-white mb-1">
+                  <div className="text-sm font-bold text-[#0f172a] mb-1">
                     {d.label}
                   </div>
-                  <div className="text-xs text-[#475569]">{d.short}</div>
+                  <div className="text-xs text-[#64748b]">{d.short}</div>
                 </div>
               </Reveal>
             ))}
@@ -144,7 +144,7 @@ export default function AboutPage() {
         {/* Toolkit */}
         <div className="mb-24">
           <Reveal>
-            <h2 className="text-2xl font-black text-white mb-8">
+            <h2 className="text-2xl font-black text-[#0f172a] mb-8">
               What I bring on deployment
             </h2>
           </Reveal>
@@ -153,8 +153,8 @@ export default function AboutPage() {
               <Reveal key={c.label} delay={i * 0.05}>
                 <div className="p-5 rounded-2xl card-border flex flex-col gap-2 h-full">
                   <div className="text-2xl">{c.emoji}</div>
-                  <div className="text-sm font-bold text-white">{c.label}</div>
-                  <div className="text-xs text-[#475569]">{c.sub}</div>
+                  <div className="text-sm font-bold text-[#0f172a]">{c.label}</div>
+                  <div className="text-xs text-[#64748b]">{c.sub}</div>
                 </div>
               </Reveal>
             ))}

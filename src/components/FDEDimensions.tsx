@@ -61,13 +61,13 @@ function Radar({
         >
           <defs>
             <radialGradient id="radar-fill" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#00d4ff" stopOpacity="0.30" />
+              <stop offset="0%" stopColor="#0284c7" stopOpacity="0.30" />
               <stop offset="60%" stopColor="#7c3aed" stopOpacity="0.18" />
               <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.06" />
             </radialGradient>
             <linearGradient id="sweep-fade" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#00d4ff" stopOpacity="0.22" />
-              <stop offset="100%" stopColor="#00d4ff" stopOpacity="0" />
+              <stop offset="0%" stopColor="#0284c7" stopOpacity="0.22" />
+              <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -77,7 +77,7 @@ function Radar({
               key={ratio}
               points={polygonPoints(Array(total).fill(RADIUS * ratio))}
               fill="none"
-              stroke="rgba(255,255,255,0.07)"
+              stroke="rgba(15,23,42,0.09)"
               strokeWidth="1"
               initial={{ opacity: 0, scale: 0.6 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -100,7 +100,7 @@ function Radar({
                 y1={CENTER}
                 x2={x}
                 y2={y}
-                stroke={i === activeIndex ? `${d.color}66` : "rgba(255,255,255,0.06)"}
+                stroke={i === activeIndex ? `${d.color}66` : "rgba(15,23,42,0.08)"}
                 strokeWidth={i === activeIndex ? 1.5 : 1}
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={inView ? { pathLength: 1, opacity: 1 } : {}}
@@ -137,7 +137,7 @@ function Radar({
             <polygon
               points={dataPoints}
               fill="url(#radar-fill)"
-              stroke="#00d4ff"
+              stroke="#0284c7"
               strokeWidth="1.75"
               strokeLinejoin="round"
             />
@@ -164,7 +164,7 @@ function Radar({
                   cx={x}
                   cy={y}
                   r={isActive ? 5.5 : 3.5}
-                  fill={isActive ? d.color : "#050505"}
+                  fill={isActive ? d.color : "#fafaff"}
                   stroke={d.color}
                   strokeWidth="2"
                   initial={{ opacity: 0, scale: 0 }}
@@ -210,7 +210,7 @@ function Radar({
               style={{
                 left: `${(x / SIZE) * 100}%`,
                 top: `${(y / SIZE) * 100}%`,
-                color: isActive ? d.color : "#475569",
+                color: isActive ? d.color : "#64748b",
               }}
             >
               {d.axis}
@@ -233,7 +233,7 @@ function Radar({
             >
               {String(activeIndex + 1).padStart(2, "0")}
             </div>
-            <div className="mono text-[8px] uppercase tracking-[2px] text-[#334155] mt-1">
+            <div className="mono text-[8px] uppercase tracking-[2px] text-[#94a3b8] mt-1">
               of {String(dimensions.length).padStart(2, "0")}
             </div>
           </div>
@@ -253,14 +253,14 @@ export default function FDEDimensions() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 55% 50% at 20% 40%, rgba(0,212,255,0.04) 0%, transparent 65%), radial-gradient(ellipse 45% 45% at 85% 70%, rgba(124,58,237,0.05) 0%, transparent 60%)",
+            "radial-gradient(ellipse 55% 50% at 20% 40%, rgba(14,165,233,0.04) 0%, transparent 65%), radial-gradient(ellipse 45% 45% at 85% 70%, rgba(124,58,237,0.05) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative max-w-7xl mx-auto px-6">
         <SectionHeading
           eyebrow="The Eight Dimensions"
-          accent="#00d4ff"
+          accent="#0284c7"
           title={
             <>
               The role is graded on{" "}
@@ -278,7 +278,7 @@ export default function FDEDimensions() {
 
           {/* Detail panel */}
           <Reveal direction="left" delay={0.1}>
-            <div className="relative rounded-3xl glass border border-[rgba(255,255,255,0.06)] p-7 sm:p-9 min-h-[400px] flex flex-col overflow-hidden">
+            <div className="relative rounded-3xl glass border border-[rgba(15,23,42,0.08)] p-7 sm:p-9 min-h-[400px] flex flex-col overflow-hidden">
               <motion.div
                 className="absolute inset-x-0 top-0 h-px"
                 animate={{
@@ -303,11 +303,11 @@ export default function FDEDimensions() {
                     >
                       {String(activeIndex + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="text-2xl font-black text-white">
+                    <h3 className="text-2xl font-black text-[#0f172a]">
                       {active.label}
                     </h3>
                   </div>
-                  <p className="mono text-[10px] uppercase tracking-wider text-[#475569] mb-6">
+                  <p className="mono text-[10px] uppercase tracking-wider text-[#64748b] mb-6">
                     {active.short}
                   </p>
 
@@ -324,12 +324,12 @@ export default function FDEDimensions() {
                     }}
                   />
 
-                  <p className="text-[#94a3b8] text-[15px] leading-relaxed mb-7">
+                  <p className="text-[#475569] text-[15px] leading-relaxed mb-7">
                     {active.detail}
                   </p>
 
                   <div className="mt-auto flex flex-col gap-3">
-                    <div className="mono text-[10px] uppercase tracking-widest text-[#334155]">
+                    <div className="mono text-[10px] uppercase tracking-widest text-[#94a3b8]">
                       Evidence
                     </div>
                     {active.evidence.map((item, i) => (
@@ -345,7 +345,7 @@ export default function FDEDimensions() {
                           className="shrink-0 mt-[3px]"
                           style={{ color: active.color }}
                         />
-                        <span className="text-[13px] text-[#64748b] leading-relaxed">
+                        <span className="text-[13px] text-[#475569] leading-relaxed">
                           {item}
                         </span>
                       </motion.div>
@@ -370,9 +370,9 @@ export default function FDEDimensions() {
                   aria-pressed={isActive}
                   className="px-3.5 py-2 rounded-full text-[11px] font-semibold transition-all duration-200 border"
                   style={{
-                    background: isActive ? `${d.color}18` : "rgba(255,255,255,0.02)",
-                    borderColor: isActive ? `${d.color}44` : "rgba(255,255,255,0.05)",
-                    color: isActive ? d.color : "#475569",
+                    background: isActive ? `${d.color}18` : "rgba(15,23,42,0.03)",
+                    borderColor: isActive ? `${d.color}44` : "rgba(15,23,42,0.06)",
+                    color: isActive ? d.color : "#64748b",
                   }}
                 >
                   {d.label}

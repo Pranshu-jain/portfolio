@@ -88,12 +88,12 @@ export default function OpportunitiesPanel() {
   return (
     <section className="p-6 rounded-2xl card-border">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-lg font-bold text-white">Opportunities</h2>
+        <h2 className="text-lg font-bold text-[#0f172a]">Opportunities</h2>
         <button
           onClick={() => load(enabled)}
           disabled={loading}
           aria-label="Refresh opportunities"
-          className="text-[#475569] hover:text-[#00d4ff] transition-colors disabled:opacity-40"
+          className="text-[#64748b] hover:text-[#0284c7] transition-colors disabled:opacity-40"
         >
           <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
         </button>
@@ -111,8 +111,8 @@ export default function OpportunitiesPanel() {
               className={
                 "px-2.5 py-1 rounded-md text-[12px] border transition-colors " +
                 (on
-                  ? "bg-[rgba(0,212,255,0.1)] text-[#00d4ff] border-[rgba(0,212,255,0.25)]"
-                  : "bg-transparent text-[#475569] border-[rgba(255,255,255,0.08)]")
+                  ? "bg-[rgba(14,165,233,0.1)] text-[#0284c7] border-[rgba(14,165,233,0.25)]"
+                  : "bg-transparent text-[#64748b] border-[rgba(15,23,42,0.10)]")
               }
               aria-pressed={on}
             >
@@ -125,10 +125,10 @@ export default function OpportunitiesPanel() {
         })}
       </div>
 
-      {loading && <p className="text-[#475569] text-sm">Loading opportunities…</p>}
+      {loading && <p className="text-[#64748b] text-sm">Loading opportunities…</p>}
 
       {!loading && enabled.size === 0 && (
-        <p className="text-[#475569] text-sm">Select a source above to see openings.</p>
+        <p className="text-[#64748b] text-sm">Select a source above to see openings.</p>
       )}
 
       {!loading && enabled.size > 0 && data && !data.ok && (
@@ -138,7 +138,7 @@ export default function OpportunitiesPanel() {
       )}
 
       {!loading && data && data.ok && opps.length === 0 && (
-        <p className="text-[#475569] text-sm">
+        <p className="text-[#64748b] text-sm">
           No matching openings from the selected sources. Try another source or refresh later.
         </p>
       )}
@@ -148,15 +148,15 @@ export default function OpportunitiesPanel() {
           {opps.map((o) => (
             <div
               key={o.url}
-              className="p-4 rounded-xl border border-[rgba(255,255,255,0.06)] hover:border-[rgba(0,212,255,0.2)] transition-colors"
+              className="p-4 rounded-xl border border-[rgba(15,23,42,0.08)] hover:border-[rgba(14,165,233,0.2)] transition-colors"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <div className="text-white font-medium truncate">{o.title}</div>
-                  <div className="text-[#475569] text-sm">
+                  <div className="text-[#0f172a] font-medium truncate">{o.title}</div>
+                  <div className="text-[#64748b] text-sm">
                     {o.company}
                     {o.rate ? ` · ${o.rate}` : ""}
-                    <span className="ml-2 text-[11px] text-[#334155]">{o.source}</span>
+                    <span className="ml-2 text-[11px] text-[#94a3b8]">{o.source}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
@@ -164,14 +164,14 @@ export default function OpportunitiesPanel() {
                     href={o.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-[#00d4ff] hover:underline"
+                    className="inline-flex items-center gap-1 text-xs text-[#0284c7] hover:underline"
                   >
                     Apply <ExternalLink size={12} />
                   </a>
                   <button
                     onClick={() => logToFunnel(o)}
                     disabled={!!logged[o.url]}
-                    className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white disabled:opacity-60"
+                    className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md border border-[rgba(15,23,42,0.10)] text-[#475569] hover:text-[#0f172a] disabled:opacity-60"
                   >
                     {logged[o.url] === "done" ? (
                       <>
@@ -193,8 +193,8 @@ export default function OpportunitiesPanel() {
                       className={
                         "px-2 py-0.5 rounded text-[11px] " +
                         (o.matched.includes(t)
-                          ? "bg-[rgba(0,212,255,0.1)] text-[#00d4ff]"
-                          : "bg-[rgba(255,255,255,0.03)] text-[#475569]")
+                          ? "bg-[rgba(14,165,233,0.1)] text-[#0284c7]"
+                          : "bg-[rgba(15,23,42,0.04)] text-[#64748b]")
                       }
                     >
                       {t}
@@ -204,7 +204,7 @@ export default function OpportunitiesPanel() {
               )}
             </div>
           ))}
-          <p className="text-[11px] text-[#334155]">
+          <p className="text-[11px] text-[#94a3b8]">
             Cyan = matches your skills. Applying opens the real listing; "Log" adds it to
             your funnel.
             {data?.sources

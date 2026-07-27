@@ -7,9 +7,9 @@ import SectionHeading from "@/components/motion/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 
 const TONE: Record<string, string> = {
-  ok: "#22c55e",
-  info: "#00d4ff",
-  warn: "#f59e0b",
+  ok: "#10b981",
+  info: "#0284c7",
+  warn: "#d97706",
 };
 
 const CHAR_MS = 16;
@@ -90,26 +90,26 @@ function Terminal() {
   return (
     <div
       ref={ref}
-      className="relative rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.07)] bg-[#080809] shadow-[0_24px_80px_rgba(0,0,0,0.5)]"
+      className="relative rounded-2xl overflow-hidden border border-[rgba(15,23,42,0.09)] bg-[#ffffff] shadow-[0_24px_80px_rgba(0,0,0,0.5)]"
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/40 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0284c7]/40 to-transparent" />
 
       {/* Title bar */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.015)]">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[rgba(15,23,42,0.06)] bg-[rgba(255,255,255,0.015)]">
         <div className="flex gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
         </div>
-        <span className="mono text-[10px] text-[#475569] ml-2 truncate">
+        <span className="mono text-[10px] text-[#64748b] ml-2 truncate">
           ~/deployments/iterable — field log
         </span>
         <span className="ml-auto flex items-center gap-1.5 shrink-0">
           <span
             className="w-1.5 h-1.5 rounded-full"
-            style={{ background: shownDone ? "#22c55e" : "#f59e0b" }}
+            style={{ background: shownDone ? "#10b981" : "#d97706" }}
           />
-          <span className="mono text-[9px] text-[#475569]">
+          <span className="mono text-[9px] text-[#64748b]">
             {shownDone ? "COMPLETE" : "RUNNING"}
           </span>
         </span>
@@ -124,7 +124,7 @@ function Terminal() {
           <div key={`${line.cmd}-${i}`} className="mb-3">
             <div className="flex gap-2">
               <span className="text-[#7c3aed] shrink-0">❯</span>
-              <span className="text-[#cbd5e1] break-all">{line.cmd}</span>
+              <span className="text-[#334155] break-all">{line.cmd}</span>
             </div>
             {line.out && (
               <motion.div
@@ -144,7 +144,7 @@ function Terminal() {
         {!shownDone && (
           <div className="flex gap-2">
             <span className="text-[#7c3aed] shrink-0">❯</span>
-            <span className="text-[#cbd5e1] caret break-all">{typing}</span>
+            <span className="text-[#334155] caret break-all">{typing}</span>
           </div>
         )}
 
@@ -152,7 +152,7 @@ function Terminal() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex gap-2 text-[#334155]"
+            className="flex gap-2 text-[#94a3b8]"
           >
             <span className="text-[#7c3aed] shrink-0">❯</span>
             <span className="caret" />
@@ -179,7 +179,7 @@ export default function FieldLog() {
           <div>
             <SectionHeading
               eyebrow="Field Log"
-              accent="#22c55e"
+              accent="#10b981"
               title={
                 <>
                   What it looks like{" "}
@@ -193,16 +193,16 @@ export default function FieldLog() {
             <Reveal delay={0.2}>
               <div className="grid grid-cols-2 gap-3 max-w-md">
                 {[
-                  { k: "Campaign triggers", v: "behaviour-driven", c: "#22c55e" },
-                  { k: "Event sync", v: "real-time", c: "#00d4ff" },
+                  { k: "Campaign triggers", v: "behaviour-driven", c: "#10b981" },
+                  { k: "Event sync", v: "real-time", c: "#0284c7" },
                   { k: "App behaviour changed", v: "none", c: "#7c3aed" },
-                  { k: "Pattern reuse", v: "later vendors", c: "#ff6b35" },
+                  { k: "Pattern reuse", v: "later vendors", c: "#f97316" },
                 ].map((item) => (
                   <div
                     key={item.k}
                     className="p-4 rounded-xl card-border"
                   >
-                    <div className="mono text-[9px] uppercase tracking-wider text-[#334155] mb-1.5">
+                    <div className="mono text-[9px] uppercase tracking-wider text-[#94a3b8] mb-1.5">
                       {item.k}
                     </div>
                     <div

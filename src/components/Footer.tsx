@@ -5,17 +5,17 @@ import { siteConfig } from "@/lib/config";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.04)] pt-12 pb-8 mt-8">
+    <footer className="border-t border-[rgba(15,23,42,0.05)] pt-12 pb-8 mt-8">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
           {/* Brand */}
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg btn-gradient flex items-center justify-center text-white font-black text-sm shine">
+            <div className="w-8 h-8 rounded-lg btn-gradient flex items-center justify-center text-[#0f172a] font-black text-sm shine">
               P
             </div>
             <div>
-              <div className="text-sm font-bold text-white">Pranshu</div>
-              <div className="mono text-[9px] uppercase tracking-[1.5px] text-[#334155]">
+              <div className="text-sm font-bold text-[#0f172a]">Pranshu</div>
+              <div className="mono text-[9px] uppercase tracking-[1.5px] text-[#94a3b8]">
                 Forward Deployed Engineer
               </div>
             </div>
@@ -34,7 +34,7 @@ export default function Footer() {
               <Link
                 key={label}
                 href={href}
-                className="text-xs text-[#334155] hover:text-white transition-colors"
+                className="text-xs text-[#94a3b8] hover:text-[#0f172a] transition-colors"
               >
                 {label}
               </Link>
@@ -54,7 +54,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="w-9 h-9 rounded-full glass flex items-center justify-center text-[#334155] hover:text-[#00d4ff] hover:border-[rgba(0,212,255,0.2)] transition-all"
+                className="w-9 h-9 rounded-full glass flex items-center justify-center text-[#94a3b8] hover:text-[#0284c7] hover:border-[rgba(14,165,233,0.2)] transition-all"
               >
                 <Icon size={14} />
               </a>
@@ -62,11 +62,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[rgba(255,255,255,0.03)] pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-[11px] text-[#1e293b]">
+        <div className="border-t border-[rgba(15,23,42,0.04)] pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
+          <p className="text-[11px] text-[#cbd5e1]">
             © {new Date().getFullYear()} Pranshu — Built with Next.js, Tailwind CSS & framer-motion
           </p>
-          <p className="text-[11px] text-[#1e293b]">
+          <p className="text-[11px] text-[#cbd5e1]">
             jpranshu36@gmail.com
           </p>
         </div>
