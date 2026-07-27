@@ -1,54 +1,95 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { Quote } from "lucide-react";
 import { doctrine } from "@/lib/fde";
 import SectionHeading from "@/components/motion/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 
 /**
- * Operating doctrine. Six independent rules — not a sequence, so they
- * carry no numbers. They're set as a list of statements because that's
- * what they are.
+ * Operating doctrine. Six rules that decide what I do when the engagement gets
+ * ambiguous — which, on a forward deployment, is most days.
  */
 export default function Philosophy() {
   return (
-    <section id="doctrine" data-sheet="Operating doctrine" className="sheet">
-      <div className="page">
+    <section id="doctrine" className="py-28 relative overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 50% at 100% 0%, rgba(0,212,255,0.04) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 0% 100%, rgba(124,58,237,0.05) 0%, transparent 60%)",
+        }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-6">
         <SectionHeading
-          number="08"
-          name="Operating doctrine"
-          field="General notes"
+          eyebrow="Operating Doctrine"
+          accent="#22c55e"
           title={
             <>
-              What I fall back on when the brief{" "}
-              <span className="text-blue">runs out</span>.
+              The rules I fall back on{" "}
+              <span className="gradient-text">when it gets fuzzy</span>
             </>
           }
-          description="Nobody deploys an engineer forward for a well-specified problem. These are the defaults that decide what happens next."
-          className="mb-9"
+          description="Nobody hires a forward deployed engineer for a well-specified problem. These are the defaults that decide what I do when the brief runs out."
+          className="mb-14"
         />
 
-        <Reveal>
-          <div className="callout mb-10 max-w-[62ch]">
-            <span className="tag">The premise</span>
-            <p className="display-sm text-[clamp(1.05rem,1.9vw,1.45rem)] leading-snug m-0">
-              The customer&rsquo;s hardest problem is never the one written in
-              the brief. It&rsquo;s the one everybody has quietly stopped
-              mentioning because they assume it can&rsquo;t be fixed.
+        {/* Anchor quote */}
+        <Reveal delay={0.1}>
+          <div className="relative p-8 sm:p-12 rounded-3xl glass border border-[rgba(255,255,255,0.05)] mb-14 overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(0,212,255,0.05)_0%,transparent_70%)] pointer-events-none" />
+            <motion.div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/40 to-transparent"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.1, ease: [0.25, 0.4, 0.25, 1] }}
+            />
+
+            <Quote size={34} className="text-[#00d4ff] mb-6 opacity-40" aria-hidden="true" />
+            <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-6">
+              The customer&apos;s hardest problem is never the one written in
+              the brief. It&apos;s the one everybody has quietly stopped
+              mentioning because they assume it can&apos;t be fixed.
+            </p>
+            <p className="mono text-[11px] uppercase tracking-wider text-[#334155]">
+              — what forward deployment is actually for
             </p>
           </div>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 gap-x-[clamp(24px,4vw,56px)] gap-y-0">
+        {/* Doctrine grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {doctrine.map((rule, i) => (
-            <Reveal key={rule.title} delay={i * 0.05}>
-              <div className="border-t border-graphite py-6">
-                <h3 className="display-sm text-[16px] mb-2.5 leading-snug">
+            <Reveal key={rule.n} delay={i * 0.07} className="h-full">
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 320, damping: 22 }}
+                className="relative h-full p-7 rounded-2xl card-border overflow-hidden group"
+              >
+                {/* Number watermark */}
+                <span className="absolute top-3 right-5 text-7xl font-black opacity-[0.03] text-white select-none group-hover:opacity-[0.07] transition-opacity duration-500">
+                  {rule.n}
+                </span>
+
+                {/* Accent rule that extends on hover */}
+                <motion.div
+                  className="h-1 rounded-full mb-5"
+                  style={{ background: rule.color }}
+                  initial={{ width: 28 }}
+                  whileHover={{ width: 52 }}
+                  transition={{ duration: 0.3 }}
+                />
+
+                <h3 className="text-lg font-bold text-white mb-3 leading-snug relative">
                   {rule.title}
                 </h3>
-                <p className="text-[13px] leading-relaxed text-soft m-0">
+                <p className="text-[#64748b] text-sm leading-relaxed relative">
                   {rule.desc}
                 </p>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>
