@@ -1,92 +1,108 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import Reveal from "@/components/motion/Reveal";
+import { ArrowRight, Clock } from "lucide-react";
 import { blogPosts } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Field notes — Pranshu",
+  title: "Field Notes — Pranshu",
   description:
     "Notes from deployments: architecture decisions, integration patterns, and what actually holds up in production.",
 };
 
 export default function BlogPage() {
+  const [featured, ...rest] = blogPosts;
+
   return (
     <>
-      <section
-        data-sheet="Field notes"
-        className="sheet pt-[clamp(96px,15vh,150px)]"
-      >
-        <div className="page">
-          <Reveal>
-            <div className="sheet-label">
-              <span className="num">N</span>
-              <span>Field notes</span>
-              <span className="rule" />
-              <span className="hidden sm:block">
-                {blogPosts.length} entries
+      <div className="pt-28 max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <div className="max-w-2xl mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(0,212,255,0.08)] text-[#00d4ff] border border-[rgba(0,212,255,0.1)] mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00d4ff]" />
+            Field Notes
+          </div>
+          <h1 className="text-5xl sm:text-6xl font-black text-white mb-5 leading-tight">
+            What I learned{" "}
+            <span className="gradient-text">on deployment.</span>
+          </h1>
+          <p className="text-[#64748b] text-lg">
+            Architecture decisions, integration patterns, and the tradeoffs that
+            only show up once something is running in production.
+          </p>
+        </div>
+
+        {/* Featured post */}
+        <Link
+          href={`/blog/${featured.slug}`}
+          className="block p-8 rounded-3xl gradient-border mb-8 relative overflow-hidden group cursor-pointer"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,212,255,0.04),transparent_60%)] pointer-events-none" />
+          <div className="relative">
+            <div className="flex items-center gap-4 mb-5">
+              <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-[rgba(0,212,255,0.1)] text-[#00d4ff] uppercase tracking-wider">
+                Featured
+              </span>
+              <div className="flex items-center gap-1.5 text-[#334155] text-xs">
+                <Clock size={11} /> {featured.readTime} read
+              </div>
+              <div className="text-[#334155] text-xs">{featured.date}</div>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-white mb-4 group-hover:gradient-text transition-all">
+              {featured.title}
+            </h2>
+            <p className="text-[#475569] leading-relaxed mb-6 max-w-2xl">
+              {featured.excerpt}
+            </p>
+            <div className="flex items-center gap-4">
+              <div className="flex gap-2">
+                {featured.tags.map((tag) => (
+                  <span key={tag} className="px-2 py-1 rounded-md text-[11px] bg-[rgba(255,255,255,0.04)] text-[#475569]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <span className="ml-auto flex items-center gap-1.5 text-sm text-[#00d4ff] font-medium">
+                Read More <ArrowRight size={13} />
               </span>
             </div>
-          </Reveal>
-
-          <Reveal delay={0.05}>
-            <h1 className="display h1 mb-6 max-w-[18ch]">
-              What I learned on{" "}
-              <span className="text-blue">deployment</span>.
-            </h1>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <p className="text-[15px] leading-relaxed text-soft max-w-[56ch] mb-10">
-              Architecture decisions, integration patterns, and the tradeoffs
-              that only show up once something is running in production.
-            </p>
-          </Reveal>
-
-          <div className="border-t border-graphite">
-            {blogPosts.map((post, i) => (
-              <Reveal key={post.slug} delay={i * 0.06}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group grid md:grid-cols-[52px_minmax(0,1fr)_auto] gap-x-[clamp(16px,3vw,36px)] gap-y-3 py-7 border-b border-graphite hover:bg-blue/[0.05] transition-colors"
-                >
-                  <div className="font-mono text-[11.5px] text-blue font-semibold pt-1">
-                    N-{String(i + 1).padStart(2, "0")}
-                  </div>
-
-                  <div>
-                    <h2 className="display-sm text-[19px] mb-2.5 group-hover:text-blue transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="text-[13.5px] leading-relaxed text-soft m-0 mb-3.5 max-w-[62ch]">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="font-mono text-[10px] px-2 py-0.5 border text-soft"
-                          style={{ borderColor: "var(--line)" }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mono !text-[9px] !tracking-[0.11em] md:text-right md:pt-1 whitespace-nowrap">
-                    {post.date}
-                    <span className="block mt-1 text-faint">
-                      {post.readTime} read
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
           </div>
-        </div>
-      </section>
+        </Link>
 
+        {/* Other posts */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-24">
+          {rest.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="block p-6 rounded-2xl card-border group cursor-pointer"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-1.5 text-[#334155] text-xs">
+                  <Clock size={10} /> {post.readTime}
+                </div>
+                <div className="text-[#334155] text-xs">{post.date}</div>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#00d4ff] transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-[#475569] text-sm leading-relaxed mb-5 line-clamp-2">
+                {post.excerpt}
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex gap-2">
+                  {post.tags.slice(0, 2).map((tag) => (
+                    <span key={tag} className="px-2 py-1 rounded-md text-[10px] bg-[rgba(255,255,255,0.03)] text-[#334155]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <ArrowRight size={13} className="text-[#334155] group-hover:text-[#00d4ff] transition-colors" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
       <Footer />
     </>
   );

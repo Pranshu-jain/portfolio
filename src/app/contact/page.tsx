@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <div className="pt-[clamp(64px,9vh,100px)]">
+      <div className="pt-20">
         <ContactSection />
       </div>
       <Footer />

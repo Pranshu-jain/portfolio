@@ -1,42 +1,20 @@
 import type { Metadata } from "next";
-import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
-import SheetFrame from "@/components/SheetFrame";
-import TitleBlock from "@/components/TitleBlock";
+import CustomCursor from "@/components/CustomCursor";
 import ChatWidget from "@/components/ChatWidget";
 
-/**
- * Archivo carries the width axis, so display type can be set expanded —
- * it reads machined rather than editorial, which is the note the whole
- * site plays. Plex was drawn for an engineering company and brings a
- * true mono sibling, which matters when half the page is annotation.
- */
-const display = Archivo({
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Pranshu — Forward Deployed Engineer",
   description:
-    "Forward Deployed Engineer. I work inside the constraint: your systems, your data, and the rules that can't move. Deployed and adopted, not demoed.",
+    "Forward Deployed Engineer. I embed with your team, turn an ambiguous problem into a deployed system running on your real data, and stay until it's adopted.",
   keywords: [
     "forward deployed engineer",
     "FDE",
@@ -49,18 +27,20 @@ export const metadata: Metadata = {
     "Rails API",
     "customer-facing engineer",
   ],
-  authors: [{ name: "Pranshu", url: "https://github.com/Pranshu-jain" }],
+  authors: [
+    { name: "Pranshu", url: "https://github.com/Pranshu-jain" },
+  ],
   openGraph: {
     title: "Pranshu — Forward Deployed Engineer",
     description:
-      "I work inside the constraint: your systems, your data, and the rules that can't move.",
+      "I deploy into your stack and ship until the metric moves. Ambiguous problem → live system on your real data.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Pranshu — Forward Deployed Engineer",
-    description: "I work inside the constraint.",
+    description: "I deploy into your stack and ship until the metric moves.",
   },
   robots: { index: true, follow: true },
 };
@@ -71,15 +51,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
-    >
-      <body className="antialiased">
-        <SheetFrame />
+    <html lang="en" className={`${inter.variable} h-full`}>
+      <body className="h-full bg-[#050505] text-[#f8fafc] antialiased overflow-x-hidden">
+        <div className="noise-overlay" aria-hidden="true" />
+        <CustomCursor />
         <Navigation />
         <main>{children}</main>
-        <TitleBlock />
         <ChatWidget />
       </body>
     </html>

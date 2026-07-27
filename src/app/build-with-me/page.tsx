@@ -4,199 +4,236 @@ import ChatTrigger from "@/components/ChatTrigger";
 import Reveal from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/config";
 import { engagements, deploymentLoop } from "@/lib/fde";
+import { ArrowRight, CheckCircle2, Crosshair, Gauge, Layers, Users } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Deploy me — Pranshu, Forward Deployed Engineer",
+  title: "Deploy Me — Pranshu, Forward Deployed Engineer",
   description:
     "Engagement models for forward deployment: a two-week strike, a multi-month embed, or ongoing systems and AI integration. Same loop, different depth.",
 };
 
-const terms = [
+const whyFDE = [
   {
+    icon: Crosshair,
     title: "You get the discovery too",
     desc: "I don't need a finished spec. Turning the fuzzy version into a buildable one is the first phase of the work, not a prerequisite for it.",
   },
   {
+    icon: Layers,
     title: "Deployed in your stack",
     desc: "Your repo, your conventions, your deploy pipeline. Not a sandbox demo your team has to rebuild before it counts.",
   },
   {
+    icon: Gauge,
     title: "Measured, not asserted",
-    desc: "We agree on one number before I build, and the instrumentation ships in the same commit as the feature.",
+    desc: "We agree on one number before I build, and instrumentation ships in the same commit as the feature.",
   },
   {
+    icon: Users,
     title: "Your team owns it after",
-    desc: "Documentation and a walkthrough are deliverables. The engagement succeeds when you stop needing me.",
+    desc: "Documentation and a walkthrough are deliverables. The engagement succeeds when you don't need me anymore.",
   },
 ];
 
 export default function BuildWithMePage() {
   return (
     <>
-      <section
-        data-sheet="Scope of work"
-        className="sheet pt-[clamp(96px,15vh,150px)]"
-      >
-        <div className="page">
+      <div className="pt-28 max-w-7xl mx-auto px-6">
+        {/* Hero */}
+        <div className="text-center max-w-3xl mx-auto mb-24">
           <Reveal>
-            <div className="sheet-label">
-              <span className="num">A</span>
-              <span>Scope of work</span>
-              <span className="rule" />
-              <span className="hidden sm:block">Three shapes</span>
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              {engagements.map((eng) => (
+                <span
+                  key={eng.id}
+                  className="mono inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-wider"
+                  style={{
+                    background: `${eng.color}14`,
+                    color: eng.color,
+                    border: `1px solid ${eng.color}26`,
+                  }}
+                >
+                  {eng.name} · {eng.duration}
+                </span>
+              ))}
             </div>
           </Reveal>
 
-          <div className="max-w-[58ch]">
-            <Reveal delay={0.05}>
-              <h1 className="display h1 mb-6">
-                Hand me the fuzzy problem.
-                <br />
-                I&rsquo;ll deploy the{" "}
-                <span className="text-blue">answer</span>.
-              </h1>
-            </Reveal>
+          <Reveal delay={0.08}>
+            <h1 className="text-5xl sm:text-7xl font-black text-white mb-6 leading-[1.02] tracking-tight">
+              Hand me the fuzzy problem —
+              <br />
+              <span className="gradient-text">I&apos;ll deploy the answer.</span>
+            </h1>
+          </Reveal>
 
-            <Reveal delay={0.1}>
-              <p className="text-[clamp(1rem,1.35vw,1.12rem)] leading-[1.62] text-graphite mb-8">
-                Forward deployment means I take the problem before it&rsquo;s
-                been specified, build inside your environment, and stay attached
-                until your team has adopted what I shipped.
-              </p>
-            </Reveal>
+          <Reveal delay={0.14}>
+            <p className="text-[#64748b] text-xl leading-relaxed mb-8">
+              Forward deployment means I take the problem before it&apos;s been
+              specified, build inside your environment, and stay attached until
+              your team has adopted what I shipped.
+            </p>
+          </Reveal>
 
-            <Reveal delay={0.15}>
-              <ChatTrigger className="btn btn-solid">
-                Scope an engagement
-              </ChatTrigger>
-            </Reveal>
-          </div>
+          <Reveal delay={0.2}>
+            <ChatTrigger className="inline-flex items-center gap-2 px-10 py-4 rounded-full btn-gradient text-white font-semibold text-lg shine">
+              Scope an Engagement <ArrowRight size={18} />
+            </ChatTrigger>
+          </Reveal>
         </div>
-      </section>
 
-      <section data-sheet="Terms" className="sheet">
-        <div className="page">
-          <Reveal>
-            <div className="sheet-label">
-              <span className="num">B</span>
-              <span>Terms</span>
-              <span className="rule" />
-              <span className="hidden sm:block">How this works</span>
-            </div>
-          </Reveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-graphite">
-            {terms.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.05}>
-                <div className="h-full border-r border-b border-graphite p-5">
-                  <h3 className="display-sm text-[14px] mb-2.5">{item.title}</h3>
-                  <p className="text-[12.5px] leading-relaxed text-soft m-0">
-                    {item.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+        {/* Why an FDE, not a contractor */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
+          {whyFDE.map((item, i) => (
+            <Reveal key={item.title} delay={i * 0.07}>
+              <div className="p-6 rounded-2xl card-border h-full">
+                <item.icon size={22} className="text-[#00d4ff] mb-4" />
+                <h3 className="font-bold text-white text-sm mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-[#475569] text-xs leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </div>
-      </section>
 
-      <section data-sheet="Engagement models" className="sheet">
-        <div className="page">
+        {/* Engagement models */}
+        <div className="mb-24">
           <Reveal>
-            <div className="sheet-label">
-              <span className="num">C</span>
-              <span>Engagement models</span>
-              <span className="rule" />
-              <span className="hidden sm:block">Same loop, different depth</span>
-            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-3">
+              Three ways to <span className="gradient-text">deploy me</span>
+            </h2>
+            <p className="text-[#475569] text-center mb-12 max-w-xl mx-auto">
+              Same loop in all three. The difference is how much ambiguity
+              you&apos;re handing over and how long I stay attached.
+            </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 border-t border-l border-graphite">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {engagements.map((eng, i) => (
-              <Reveal key={eng.id} delay={i * 0.07} className="h-full">
-                <div className="h-full border-r border-b border-graphite p-6 flex flex-col">
-                  <div className="flex items-baseline justify-between gap-3 mb-3">
-                    <span className="font-mono text-[10.5px] tracking-[0.14em] uppercase text-blue font-semibold">
-                      {eng.name}
-                    </span>
-                    <span className="mono !text-[9px]">{eng.duration}</span>
+              <Reveal key={eng.id} delay={i * 0.09}>
+                <div
+                  className={`relative h-full p-7 rounded-2xl flex flex-col gap-5 ${
+                    eng.highlight ? "gradient-border" : "card-border"
+                  }`}
+                >
+                  {eng.highlight && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full mono text-[10px] font-bold bg-[#7c3aed] text-white uppercase tracking-wider">
+                      Most engagements
+                    </div>
+                  )}
+
+                  <div>
+                    <div className="flex items-baseline justify-between gap-3 mb-2">
+                      <span
+                        className="mono text-[11px] font-bold uppercase tracking-widest"
+                        style={{ color: eng.color }}
+                      >
+                        {eng.name}
+                      </span>
+                      <span className="mono text-[10px] text-[#334155]">
+                        {eng.duration}
+                      </span>
+                    </div>
+                    <div className="text-lg font-bold text-white mb-2 leading-snug">
+                      {eng.desc}
+                    </div>
+                    <div className="text-[#475569] text-xs">{eng.best}</div>
                   </div>
 
-                  <h3 className="display-sm text-[16px] mb-2.5 leading-snug">
-                    {eng.desc}
-                  </h3>
-                  <p className="text-[12.5px] text-soft m-0 mb-5">{eng.best}</p>
+                  <div className="h-px bg-[rgba(255,255,255,0.05)]" />
 
-                  <ul className="list-none m-0 p-0 flex flex-col gap-2 flex-1">
+                  <div className="flex flex-col gap-2.5 flex-1">
                     {eng.features.map((f) => (
-                      <li
-                        key={f}
-                        className="relative pl-4 text-[12.5px] leading-relaxed text-graphite"
-                      >
-                        <span className="absolute left-0 top-[9px] w-[7px] h-px bg-blue" />
-                        {f}
-                      </li>
+                      <div key={f} className="flex items-start gap-2.5">
+                        <CheckCircle2
+                          size={13}
+                          className="mt-0.5 shrink-0"
+                          style={{ color: eng.color }}
+                        />
+                        <span className="text-[#64748b] text-xs leading-relaxed">
+                          {f}
+                        </span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
 
                   <a
                     href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(
                       `${eng.name} engagement — scoping`,
                     )}`}
-                    className={`btn btn-sm mt-6 justify-center ${
-                      eng.highlight ? "btn-solid" : ""
+                    className={`flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all ${
+                      eng.highlight
+                        ? "btn-gradient text-white shine"
+                        : "border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(255,255,255,0.15)]"
                     }`}
                   >
-                    Scope this
+                    Scope this <ArrowRight size={14} />
                   </a>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
-      </section>
 
-      <section data-sheet="Phase sequence" className="sheet">
-        <div className="page">
+        {/* What every engagement runs through */}
+        <div className="mb-24">
           <Reveal>
-            <div className="sheet-label">
-              <span className="num">D</span>
-              <span>Phase sequence</span>
-              <span className="rule" />
-              <span className="hidden sm:block">Windows compress, order doesn&rsquo;t</span>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
+                Every engagement runs{" "}
+                <span className="gradient-text">the same loop</span>
+              </h2>
+              <p className="text-[#475569] text-lg max-w-xl mx-auto">
+                Windows compress or stretch with the engagement. The order
+                doesn&apos;t change.
+              </p>
             </div>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 border-t border-l border-graphite">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {deploymentLoop.map((phase, i) => (
-              <Reveal key={phase.id} delay={i * 0.05}>
-                <div className="h-full border-r border-b border-graphite p-5">
-                  <div className="h-[3px] bg-blue mb-4" style={{ width: `${(i + 1) * 20}%` }} />
-                  <div className="font-mono text-[9.5px] tracking-[0.13em] uppercase text-blue font-semibold mb-2.5">
-                    {phase.window}
+              <Reveal key={phase.id} delay={i * 0.07}>
+                <div className="p-6 rounded-2xl card-border h-full flex flex-col">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{ background: phase.color }}
+                    />
+                    <span
+                      className="mono text-[10px] font-bold uppercase tracking-widest"
+                      style={{ color: phase.color }}
+                    >
+                      {phase.window}
+                    </span>
                   </div>
-                  <h3 className="display-sm text-[14px] mb-2">{phase.title}</h3>
-                  <p className="text-[12px] leading-relaxed text-soft m-0">
+                  <h3 className="font-bold text-white text-sm mb-2">
+                    {phase.title}
+                  </h3>
+                  <p className="text-[#475569] text-xs leading-relaxed">
                     {phase.description}
                   </p>
                 </div>
               </Reveal>
             ))}
           </div>
-
-          <Reveal delay={0.15}>
-            <div className="mt-10 max-w-[52ch]">
-              <p className="text-[15px] text-soft mb-5">
-                Still deciding which shape fits? That usually means the problem
-                is fuzzy — which is the case for forward deployment, not against
-                it.
-              </p>
-              <ChatTrigger className="btn">Start a conversation</ChatTrigger>
-            </div>
-          </Reveal>
         </div>
-      </section>
 
+        {/* Final CTA */}
+        <Reveal>
+          <div className="text-center pb-16">
+            <p className="text-[#64748b] text-lg mb-6">
+              Still deciding which shape fits? That usually means the problem is
+              fuzzy — which is the case for forward deployment, not against it.
+            </p>
+            <ChatTrigger className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(0,212,255,0.2)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.05)] transition-all font-semibold">
+              Start a Conversation <ArrowRight size={16} />
+            </ChatTrigger>
+          </div>
+        </Reveal>
+      </div>
       <Footer />
     </>
   );

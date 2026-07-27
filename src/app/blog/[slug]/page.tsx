@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/lib/projects";
 
@@ -16,7 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) return { title: "Note not found — Pranshu" };
+  if (!post) return { title: "Post not found — Pranshu" };
   return {
     title: `${post.title} — Pranshu`,
     description: post.excerpt,
@@ -34,108 +34,99 @@ export default async function BlogPostPage({
 
   if (!post) notFound();
 
-  const index = blogPosts.findIndex((p) => p.slug === slug);
-  const next = blogPosts[(index + 1) % blogPosts.length];
-
   return (
     <>
-      <section
-        data-sheet="Field note"
-        className="sheet pt-[clamp(96px,15vh,150px)]"
-      >
-        <div className="page">
-          <div className="max-w-[68ch]">
-            <Link
-              href="/blog"
-              className="mono !text-[9.5px] inline-flex items-center gap-2 hover:text-ink transition-colors mb-8"
+      <article className="pt-28 max-w-3xl mx-auto px-6">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-2 text-sm text-[#475569] hover:text-[#00d4ff] transition-colors mb-10"
+        >
+          <ArrowLeft size={14} /> Back to all posts
+        </Link>
+
+        {/* Meta */}
+        <div className="flex items-center gap-4 mb-5">
+          <div className="flex items-center gap-1.5 text-[#334155] text-xs">
+            <Clock size={11} /> {post.readTime} read
+          </div>
+          <div className="text-[#334155] text-xs">{post.date}</div>
+        </div>
+
+        {/* Title */}
+        <h1 className="text-4xl sm:text-5xl font-black text-white mb-6 leading-tight">
+          {post.title}
+        </h1>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-12">
+          {post.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-2.5 py-1 rounded-md text-[11px] bg-[rgba(0,212,255,0.08)] text-[#00d4ff] border border-[rgba(0,212,255,0.1)]"
             >
-              <ArrowLeft size={12} /> All field notes
-            </Link>
+              {tag}
+            </span>
+          ))}
+        </div>
 
-            <div className="sheet-label">
-              <span className="num">N-{String(index + 1).padStart(2, "0")}</span>
-              <span>Field note</span>
-              <span className="rule" />
-              <span className="hidden sm:block">
-                {post.date} · {post.readTime}
-              </span>
-            </div>
-
-            <h1 className="display text-[clamp(1.9rem,3.6vw,2.9rem)] mb-6">
-              {post.title}
-            </h1>
-
-            <p className="text-[clamp(1rem,1.3vw,1.1rem)] leading-[1.62] text-graphite border-l-2 border-blue pl-5 mb-10">
-              {post.excerpt}
-            </p>
-
-            <div className="flex flex-wrap gap-1.5 mb-10">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="font-mono text-[10px] px-2 py-1 border text-soft"
-                  style={{ borderColor: "var(--line)" }}
+        {/* Body */}
+        <div className="space-y-6 mb-16">
+          {post.content.map((block, i) => {
+            if (block.type === "heading") {
+              return (
+                <h2
+                  key={i}
+                  className="text-xl sm:text-2xl font-bold text-white pt-4"
                 >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="border-t border-graphite pt-9">
-              {post.content.map((block, i) => {
-                if (block.type === "heading") {
-                  return (
-                    <h2
-                      key={i}
-                      className="display-sm text-[19px] mt-9 mb-3.5 first:mt-0"
+                  {block.text}
+                </h2>
+              );
+            }
+            if (block.type === "list") {
+              return (
+                <ul key={i} className="space-y-2.5 pl-1">
+                  {block.items.map((item, j) => (
+                    <li
+                      key={j}
+                      className="flex gap-3 text-[#94a3b8] leading-relaxed"
                     >
-                      {block.text}
-                    </h2>
-                  );
-                }
-                if (block.type === "list") {
-                  return (
-                    <ul key={i} className="list-none m-0 p-0 my-5">
-                      {block.items.map((item) => (
-                        <li
-                          key={item}
-                          className="relative pl-5 py-1.5 text-[15px] leading-relaxed text-graphite"
-                        >
-                          <span className="absolute left-0 top-[15px] w-[9px] h-px bg-blue" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  );
-                }
-                return (
-                  <p
-                    key={i}
-                    className="text-[15px] leading-[1.75] text-graphite mb-5"
-                  >
-                    {block.text}
-                  </p>
-                );
-              })}
-            </div>
+                      <span className="text-[#00d4ff] mt-1.5 shrink-0">
+                        <ArrowRight size={13} />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              );
+            }
+            return (
+              <p key={i} className="text-[#94a3b8] text-lg leading-relaxed">
+                {block.text}
+              </p>
+            );
+          })}
+        </div>
 
-            {blogPosts.length > 1 && (
-              <div className="border-t border-graphite mt-12 pt-7">
-                <div className="mono !text-[9.5px] mb-3">Next note</div>
-                <Link href={`/blog/${next.slug}`} className="group block">
-                  <h3 className="display-sm text-[17px] group-hover:text-blue transition-colors mb-2">
-                    {next.title}
-                  </h3>
-                  <p className="text-[13.5px] text-soft m-0 max-w-[60ch]">
-                    {next.excerpt}
-                  </p>
-                </Link>
-              </div>
-            )}
+        {/* CTA */}
+        <div className="p-8 rounded-3xl gradient-border relative overflow-hidden mb-24">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,212,255,0.05),transparent_60%)] pointer-events-none" />
+          <div className="relative">
+            <h3 className="text-xl font-black text-white mb-2">
+              Have a project in mind?
+            </h3>
+            <p className="text-[#475569] mb-5">
+              I turn ideas into shipped products fast. Let&apos;s talk about
+              what you&apos;re building.
+            </p>
+            <Link
+              href="/build-with-me"
+              className="inline-flex items-center gap-2 text-sm text-[#00d4ff] font-medium hover:gap-3 transition-all"
+            >
+              Build With Me <ArrowRight size={14} />
+            </Link>
           </div>
         </div>
-      </section>
-
+      </article>
       <Footer />
     </>
   );

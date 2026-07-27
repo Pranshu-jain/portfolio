@@ -174,11 +174,11 @@ export default function ChatWidget() {
               exit={{ scale: 0, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 22 }}
               onClick={() => setOpen(true)}
-              className="relative w-14 h-14 btn-solid text-ink shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+              className="relative w-14 h-14 rounded-full btn-gradient text-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
               aria-label="Open chat"
             >
               <MessageCircle size={22} />
-              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#22c55e] border-2 border-stock" />
+              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-[#22c55e] rounded-full border-2 border-[#050505]" />
             </motion.button>
           )}
         </AnimatePresence>
@@ -191,29 +191,29 @@ export default function ChatWidget() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 12 }}
               transition={{ type: "spring", stiffness: 300, damping: 26 }}
-              className="absolute bottom-0 right-0 w-[360px] max-w-[calc(100vw-24px)] overflow-hidden shadow-2xl"
-              style={{ background: "var(--stock)", border: "1px solid var(--graphite)" }}
+              className="absolute bottom-0 right-0 w-[360px] max-w-[calc(100vw-24px)] rounded-2xl overflow-hidden shadow-2xl"
+              style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.07)" }}
             >
               {/* Header */}
               <div
                 className="flex items-center justify-between px-4 py-3.5"
-                style={{ background: "var(--stock-2)", borderBottom: "1px solid var(--graphite)" }}
+                style={{ background: "linear-gradient(135deg,rgba(124,58,237,0.25),rgba(0,212,255,0.12))", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 btn-solid flex items-center justify-center shrink-0">
-                    <Bot size={14} className="text-ink" />
+                  <div className="w-8 h-8 rounded-full btn-gradient flex items-center justify-center shrink-0">
+                    <Bot size={14} className="text-white" />
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-ink">Pranshu&apos;s Assistant</div>
+                    <div className="text-sm font-semibold text-white">Pranshu&apos;s Assistant</div>
                     <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 bg-[#22c55e]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
                       <span className="text-[10px] text-[#22c55e]">Online</span>
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={() => setOpen(false)}
-                  className="w-7 h-7 flex items-center justify-center text-soft hover:text-ink hover:bg-white/5 transition-colors"
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-[#475569] hover:text-white hover:bg-white/5 transition-colors"
                 >
                   <X size={14} />
                 </button>
@@ -228,18 +228,18 @@ export default function ChatWidget() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex-1 flex flex-col items-center justify-center gap-4 p-8 text-center"
                   >
-                    <div className="w-14 h-14 bg-[rgba(34,197,94,0.1)] flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-[rgba(34,197,94,0.1)] flex items-center justify-center">
                       <CheckCircle2 size={28} className="text-[#22c55e]" />
                     </div>
                     <div>
-                      <h3 className="text-ink font-bold text-base mb-1.5">Requirements sent!</h3>
-                      <p className="text-soft text-sm leading-relaxed">
+                      <h3 className="text-white font-bold text-base mb-1.5">Requirements sent!</h3>
+                      <p className="text-[#475569] text-sm leading-relaxed">
                         Pranshu will review and get back to you within 24 hours — usually much sooner.
                       </p>
                     </div>
                     <button
                       onClick={() => setOpen(false)}
-                      className="mt-2 px-5 py-2 text-xs font-semibold border border-graphite text-graphite hover:bg-graphite hover:text-stock transition-colors"
+                      className="mt-2 px-5 py-2 rounded-full text-xs font-semibold border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white transition-colors"
                     >
                       Close
                     </button>
@@ -257,10 +257,10 @@ export default function ChatWidget() {
                           className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                         >
                           <div
-                            className={`max-w-[82%] px-3.5 py-2.5 text-sm leading-relaxed ${
+                            className={`max-w-[82%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
                               m.role === "user"
-                                ? "bg-blue text-ink"
-                                : "bg-white/45 text-graphite"
+                                ? "bg-[#7c3aed] text-white rounded-br-sm"
+                                : "bg-[rgba(255,255,255,0.05)] text-[#cbd5e1] rounded-bl-sm"
                             }`}
                           >
                             {m.content}
@@ -270,11 +270,11 @@ export default function ChatWidget() {
 
                       {loading && (
                         <div className="flex justify-start">
-                          <div className="bg-white/45 px-4 py-3 flex gap-1.5 items-center">
+                          <div className="bg-[rgba(255,255,255,0.05)] px-4 py-3 rounded-2xl rounded-bl-sm flex gap-1.5 items-center">
                             {[0, 1, 2].map((i) => (
                               <motion.span
                                 key={i}
-                                className="w-1.5 h-1.5 bg-faint"
+                                className="w-1.5 h-1.5 rounded-full bg-[#475569]"
                                 animate={{ opacity: [0.3, 1, 0.3] }}
                                 transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
                               />
@@ -288,9 +288,9 @@ export default function ChatWidget() {
                         <motion.div
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="mt-1 p-4 border border-[rgba(124,58,237,0.25)] bg-[rgba(124,58,237,0.06)]"
+                          className="mt-1 p-4 rounded-xl border border-[rgba(124,58,237,0.25)] bg-[rgba(124,58,237,0.06)]"
                         >
-                          <p className="text-soft text-xs mb-3 leading-relaxed">
+                          <p className="text-[#94a3b8] text-xs mb-3 leading-relaxed">
                             Almost done! Share your contact so Pranshu can follow up.
                           </p>
                           <div className="flex flex-col gap-2">
@@ -299,26 +299,26 @@ export default function ChatWidget() {
                               placeholder="Your name"
                               value={captureName}
                               onChange={(e) => setCaptureName(e.target.value)}
-                              className="w-full px-3 py-2 text-xs bg-white/45 border border-[color:var(--line)] text-ink placeholder-faint focus:outline-none focus:border-blue transition-colors"
+                              className="w-full px-3 py-2 rounded-lg text-xs bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.07)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(124,58,237,0.4)] transition-colors"
                             />
                             <input
                               type="email"
                               placeholder="Your email"
                               value={captureEmail}
                               onChange={(e) => setCaptureEmail(e.target.value)}
-                              className="w-full px-3 py-2 text-xs bg-white/45 border border-[color:var(--line)] text-ink placeholder-faint focus:outline-none focus:border-blue transition-colors"
+                              className="w-full px-3 py-2 rounded-lg text-xs bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.07)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(124,58,237,0.4)] transition-colors"
                             />
                             <div className="flex gap-2 mt-1">
                               <button
                                 onClick={() => setCapturing(false)}
-                                className="flex-1 py-2 text-xs text-soft border border-[color:var(--line)] hover:text-ink transition-colors"
+                                className="flex-1 py-2 rounded-lg text-xs text-[#64748b] border border-[rgba(255,255,255,0.06)] hover:text-white transition-colors"
                               >
                                 Back
                               </button>
                               <button
                                 onClick={submitChat}
                                 disabled={submitting || !captureEmail}
-                                className="flex-1 py-2 text-xs font-semibold btn-solid text-ink disabled:opacity-50 flex items-center justify-center gap-1.5"
+                                className="flex-1 py-2 rounded-lg text-xs font-semibold btn-gradient text-white disabled:opacity-50 flex items-center justify-center gap-1.5"
                               >
                                 {submitting ? <Loader2 size={12} className="animate-spin" /> : null}
                                 Send to Pranshu
@@ -336,7 +336,7 @@ export default function ChatWidget() {
                       <div className="px-4 pb-2">
                         <button
                           onClick={() => setCapturing(true)}
-                          className="w-full py-2 text-xs font-semibold border border-blue text-blue hover:bg-blue/[0.06] transition-colors flex items-center justify-center gap-1.5"
+                          className="w-full py-2 rounded-xl text-xs font-semibold border border-[rgba(0,212,255,0.2)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.05)] transition-colors flex items-center justify-center gap-1.5"
                         >
                           <ArrowRight size={12} /> Submit my requirements to Pranshu
                         </button>
@@ -347,7 +347,7 @@ export default function ChatWidget() {
                     {!capturing && (
                       <div
                         className="px-3 py-3 flex gap-2 items-center"
-                        style={{ borderTop: "1px solid var(--graphite)" }}
+                        style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
                       >
                         <input
                           ref={inputRef}
@@ -356,16 +356,16 @@ export default function ChatWidget() {
                           onChange={(e) => setInput(e.target.value)}
                           onKeyDown={handleKeyDown}
                           placeholder="Type your message…"
-                          className="flex-1 px-3.5 py-2.5 text-sm bg-white/45 border border-[color:var(--line)] text-ink placeholder-faint focus:outline-none focus:border-blue transition-colors"
+                          className="flex-1 px-3.5 py-2.5 rounded-xl text-sm bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.25)] transition-colors"
                         />
                         <button
                           type="button"
                           aria-label="Send message"
                           onClick={sendMessage}
                           disabled={!input.trim() || loading}
-                          className="w-9 h-9 btn-solid flex items-center justify-center shrink-0 disabled:opacity-40 transition-opacity"
+                          className="w-9 h-9 rounded-xl btn-gradient flex items-center justify-center shrink-0 disabled:opacity-40 transition-opacity"
                         >
-                          <Send size={14} className="text-ink" />
+                          <Send size={14} className="text-white" />
                         </button>
                       </div>
                     )}
@@ -375,10 +375,10 @@ export default function ChatWidget() {
                   <div className="flex-1 overflow-y-auto px-4 py-4">
                     {step === 0 && (
                       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                        <p className="text-soft text-xs mb-4 leading-relaxed">
+                        <p className="text-[#94a3b8] text-xs mb-4 leading-relaxed">
                           The AI is temporarily at capacity. Tell me about your project and Pranshu will get back to you.
                         </p>
-                        <p className="text-ink text-sm font-semibold mb-3">What do you need?</p>
+                        <p className="text-white text-sm font-semibold mb-3">What do you need?</p>
                         <div className="grid grid-cols-2 gap-2">
                           {PROJECT_TYPES.map((t) => (
                             <button
@@ -387,11 +387,11 @@ export default function ChatWidget() {
                                 updateForm("projectType", t.id);
                                 setStep(1);
                               }}
-                              className="p-3 text-left border border-[color:var(--line)] hover:border-blue hover:bg-blue/[0.06] transition-all group"
+                              className="p-3 rounded-xl text-left border border-[rgba(255,255,255,0.06)] hover:border-[rgba(124,58,237,0.35)] hover:bg-[rgba(124,58,237,0.05)] transition-all group"
                             >
                               <div className="text-base mb-1">{t.emoji}</div>
-                              <div className="text-xs font-semibold text-ink leading-tight">{t.id}</div>
-                              <div className="text-[10px] text-soft mt-0.5">{t.desc}</div>
+                              <div className="text-xs font-semibold text-white leading-tight">{t.id}</div>
+                              <div className="text-[10px] text-[#475569] mt-0.5">{t.desc}</div>
                             </button>
                           ))}
                         </div>
@@ -401,24 +401,24 @@ export default function ChatWidget() {
                     {step === 1 && (
                       <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="flex flex-col gap-3 h-full">
                         <div>
-                          <p className="text-ink text-sm font-semibold mb-1">Describe your project</p>
-                          <p className="text-soft text-xs mb-3">What are you building or looking to improve?</p>
+                          <p className="text-white text-sm font-semibold mb-1">Describe your project</p>
+                          <p className="text-[#475569] text-xs mb-3">What are you building or looking to improve?</p>
                           <textarea
                             value={form.description}
                             onChange={(e) => updateForm("description", e.target.value)}
                             rows={5}
                             placeholder="e.g. I have an e-commerce site that loads slowly and I want to speed it up and redesign the checkout flow..."
-                            className="w-full px-3.5 py-3 text-xs bg-white/45 border border-[color:var(--line)] text-ink placeholder-faint focus:outline-none focus:border-blue transition-colors resize-none"
+                            className="w-full px-3.5 py-3 rounded-xl text-xs bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.25)] transition-colors resize-none"
                           />
                         </div>
                         <div className="flex gap-2 mt-auto">
-                          <button onClick={() => setStep(0)} className="flex-1 py-2.5 text-xs text-soft border border-[color:var(--line)] hover:text-ink transition-colors">
+                          <button onClick={() => setStep(0)} className="flex-1 py-2.5 rounded-xl text-xs text-[#64748b] border border-[rgba(255,255,255,0.06)] hover:text-white transition-colors">
                             Back
                           </button>
                           <button
                             onClick={() => setStep(2)}
                             disabled={!form.description.trim()}
-                            className="flex-1 py-2.5 text-xs font-semibold btn-solid text-ink disabled:opacity-40 flex items-center justify-center gap-1.5"
+                            className="flex-1 py-2.5 rounded-xl text-xs font-semibold btn-gradient text-white disabled:opacity-40 flex items-center justify-center gap-1.5"
                           >
                             Next <ArrowRight size={11} />
                           </button>
@@ -429,18 +429,18 @@ export default function ChatWidget() {
                     {step === 2 && (
                       <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="flex flex-col gap-3 h-full">
                         <div>
-                          <p className="text-ink text-sm font-semibold mb-3">Timeline & Budget</p>
+                          <p className="text-white text-sm font-semibold mb-3">Timeline & Budget</p>
                           <div className="flex flex-col gap-2 mb-3">
-                            <label className="text-[10px] text-soft uppercase tracking-widest">Timeline</label>
+                            <label className="text-[10px] text-[#475569] uppercase tracking-widest">Timeline</label>
                             <div className="grid grid-cols-2 gap-1.5">
                               {TIMELINES.map((t) => (
                                 <button
                                   key={t}
                                   onClick={() => updateForm("timeline", t)}
-                                  className={`py-2 px-2 text-[11px] border transition-all text-left ${
+                                  className={`py-2 px-2 rounded-lg text-[11px] border transition-all text-left ${
                                     form.timeline === t
-                                      ? "border-blue bg-blue/[0.08] text-ink"
-                                      : "border-[color:var(--line)] text-soft hover:border-graphite"
+                                      ? "border-[#7c3aed] bg-[rgba(124,58,237,0.12)] text-white"
+                                      : "border-[rgba(255,255,255,0.06)] text-[#64748b] hover:border-[rgba(255,255,255,0.12)]"
                                   }`}
                                 >
                                   {t}
@@ -449,16 +449,16 @@ export default function ChatWidget() {
                             </div>
                           </div>
                           <div className="flex flex-col gap-2">
-                            <label className="text-[10px] text-soft uppercase tracking-widest">Budget range</label>
+                            <label className="text-[10px] text-[#475569] uppercase tracking-widest">Budget range</label>
                             <div className="grid grid-cols-2 gap-1.5">
                               {BUDGETS.map((b) => (
                                 <button
                                   key={b}
                                   onClick={() => updateForm("budget", b)}
-                                  className={`py-2 px-2 text-[11px] border transition-all text-left ${
+                                  className={`py-2 px-2 rounded-lg text-[11px] border transition-all text-left ${
                                     form.budget === b
-                                      ? "border-blue bg-blue/[0.08] text-ink"
-                                      : "border-[color:var(--line)] text-soft hover:border-graphite"
+                                      ? "border-[#00d4ff] bg-[rgba(0,212,255,0.08)] text-white"
+                                      : "border-[rgba(255,255,255,0.06)] text-[#64748b] hover:border-[rgba(255,255,255,0.12)]"
                                   }`}
                                 >
                                   {b}
@@ -468,13 +468,13 @@ export default function ChatWidget() {
                           </div>
                         </div>
                         <div className="flex gap-2 mt-auto pt-2">
-                          <button onClick={() => setStep(1)} className="flex-1 py-2.5 text-xs text-soft border border-[color:var(--line)] hover:text-ink transition-colors">
+                          <button onClick={() => setStep(1)} className="flex-1 py-2.5 rounded-xl text-xs text-[#64748b] border border-[rgba(255,255,255,0.06)] hover:text-white transition-colors">
                             Back
                           </button>
                           <button
                             onClick={() => setStep(3)}
                             disabled={!form.timeline || !form.budget}
-                            className="flex-1 py-2.5 text-xs font-semibold btn-solid text-ink disabled:opacity-40 flex items-center justify-center gap-1.5"
+                            className="flex-1 py-2.5 rounded-xl text-xs font-semibold btn-gradient text-white disabled:opacity-40 flex items-center justify-center gap-1.5"
                           >
                             Next <ArrowRight size={11} />
                           </button>
@@ -485,33 +485,33 @@ export default function ChatWidget() {
                     {step === 3 && (
                       <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="flex flex-col gap-3 h-full">
                         <div>
-                          <p className="text-ink text-sm font-semibold mb-1">Your contact info</p>
-                          <p className="text-soft text-xs mb-3">Pranshu will reply within 24 hours.</p>
+                          <p className="text-white text-sm font-semibold mb-1">Your contact info</p>
+                          <p className="text-[#475569] text-xs mb-3">Pranshu will reply within 24 hours.</p>
                           <div className="flex flex-col gap-2.5">
                             <input
                               type="text"
                               placeholder="Your name"
                               value={form.name}
                               onChange={(e) => updateForm("name", e.target.value)}
-                              className="w-full px-3.5 py-2.5 text-xs bg-white/45 border border-[color:var(--line)] text-ink placeholder-faint focus:outline-none focus:border-blue transition-colors"
+                              className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.25)] transition-colors"
                             />
                             <input
                               type="email"
                               placeholder="Your email"
                               value={form.email}
                               onChange={(e) => updateForm("email", e.target.value)}
-                              className="w-full px-3.5 py-2.5 text-xs bg-white/45 border border-[color:var(--line)] text-ink placeholder-faint focus:outline-none focus:border-blue transition-colors"
+                              className="w-full px-3.5 py-2.5 rounded-xl text-xs bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.25)] transition-colors"
                             />
                           </div>
                         </div>
                         <div className="flex gap-2 mt-auto pt-2">
-                          <button onClick={() => setStep(2)} className="flex-1 py-2.5 text-xs text-soft border border-[color:var(--line)] hover:text-ink transition-colors">
+                          <button onClick={() => setStep(2)} className="flex-1 py-2.5 rounded-xl text-xs text-[#64748b] border border-[rgba(255,255,255,0.06)] hover:text-white transition-colors">
                             Back
                           </button>
                           <button
                             onClick={submitForm}
                             disabled={submitting || !form.name || !form.email}
-                            className="flex-1 py-2.5 text-xs font-semibold btn-solid text-ink disabled:opacity-40 flex items-center justify-center gap-1.5"
+                            className="flex-1 py-2.5 rounded-xl text-xs font-semibold btn-gradient text-white disabled:opacity-40 flex items-center justify-center gap-1.5"
                           >
                             {submitting ? <Loader2 size={12} className="animate-spin" /> : null}
                             Send to Pranshu
@@ -529,9 +529,9 @@ export default function ChatWidget() {
               {!done && (
                 <div
                   className="px-4 py-2 text-center"
-                  style={{ borderTop: "1px solid var(--line-soft)" }}
+                  style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}
                 >
-                  <span className="text-[10px] text-faint">Powered by Gemini · Built by Pranshu</span>
+                  <span className="text-[10px] text-[#1e293b]">Powered by Gemini · Built by Pranshu</span>
                 </div>
               )}
             </motion.div>
