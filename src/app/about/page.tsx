@@ -119,13 +119,9 @@ export default function AboutPage() {
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span
-                      className="mono text-[10px] tabular-nums font-bold"
-                      style={{ color: d.color }}
-                    >
-                      {d.score}
-                    </span>
                   </div>
+                  {/* Relative emphasis, deliberately unlabelled — a
+                      self-assessed number would read as false precision. */}
                   <div className="h-1 rounded-full bg-[rgba(255,255,255,0.05)] overflow-hidden mb-4">
                     <div
                       className="h-full rounded-full"

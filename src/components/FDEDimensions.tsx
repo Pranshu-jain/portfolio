@@ -214,12 +214,6 @@ function Radar({
               }}
             >
               {d.axis}
-              <span
-                className="block text-[9px] tabular-nums transition-opacity duration-200"
-                style={{ opacity: isActive ? 1 : 0.45 }}
-              >
-                {d.score}
-              </span>
             </motion.button>
           );
         })}
@@ -231,15 +225,16 @@ function Radar({
           transition={{ delay: reduced ? 0 : 1.5, duration: 0.5 }}
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
         >
+          {/* Locator, not a score — which of the eight is selected. */}
           <div className="text-center">
             <div
-              className="text-3xl font-black tabular-nums leading-none transition-colors duration-300"
+              className="mono text-2xl font-black tabular-nums leading-none transition-colors duration-300"
               style={{ color: active.color }}
             >
-              {active.score}
+              {String(activeIndex + 1).padStart(2, "0")}
             </div>
             <div className="mono text-[8px] uppercase tracking-[2px] text-[#334155] mt-1">
-              depth
+              of {String(dimensions.length).padStart(2, "0")}
             </div>
           </div>
         </motion.div>
@@ -316,26 +311,18 @@ export default function FDEDimensions() {
                     {active.short}
                   </p>
 
-                  {/* Depth meter */}
-                  <div className="flex items-center gap-3 mb-7">
-                    <div className="flex-1 h-1.5 rounded-full bg-[rgba(255,255,255,0.05)] overflow-hidden">
-                      <motion.div
-                        className="h-full rounded-full"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${active.score}%` }}
-                        transition={{ duration: 0.8, ease: EASE }}
-                        style={{
-                          background: `linear-gradient(90deg, ${active.color}66, ${active.color})`,
-                        }}
-                      />
-                    </div>
-                    <span
-                      className="mono text-xs tabular-nums font-bold"
-                      style={{ color: active.color }}
-                    >
-                      {active.score}
-                    </span>
-                  </div>
+                  {/* Accent rule where the score meter used to be — the
+                      evidence below carries the argument instead. */}
+                  <motion.div
+                    className="h-px mb-7"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.6, ease: EASE }}
+                    style={{
+                      transformOrigin: "left",
+                      background: `linear-gradient(90deg, ${active.color}66, transparent)`,
+                    }}
+                  />
 
                   <p className="text-[#94a3b8] text-[15px] leading-relaxed mb-7">
                     {active.detail}
