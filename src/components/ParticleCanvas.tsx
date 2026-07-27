@@ -112,12 +112,14 @@ function Network() {
             args={[positions, 3]}
           />
         </bufferGeometry>
+        {/* Violet nodes over sky-blue links: two hues so the network keeps
+            depth on a light ground, where a single accent goes flat. */}
         <pointsMaterial
-          color="#00d4ff"
-          size={0.07}
+          color="#7c3aed"
+          size={0.075}
           sizeAttenuation
           transparent
-          opacity={0.75}
+          opacity={0.8}
         />
       </points>
 
@@ -133,9 +135,9 @@ function Network() {
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#00d4ff"
+          color="#0284c7"
           transparent
-          opacity={0.25}
+          opacity={0.32}
         />
       </lineSegments>
     </>

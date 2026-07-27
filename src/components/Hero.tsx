@@ -30,9 +30,9 @@ const fadeUp = {
 
 /** Headline words animate in individually — reads as a system coming online. */
 const HEADLINE: { text: string; className: string }[] = [
-  { text: "I deploy", className: "text-white" },
+  { text: "I deploy", className: "text-[#0f172a]" },
   { text: "into your stack", className: "gradient-text" },
-  { text: "and ship.", className: "text-white" },
+  { text: "and ship.", className: "text-[#0f172a]" },
 ];
 
 /**
@@ -59,22 +59,22 @@ function EngagementPanel() {
       animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
       transition={{ delay: 0.7, duration: 0.9, ease: EASE }}
       aria-hidden="true"
-      className="relative w-full max-w-sm rounded-2xl glass border border-[rgba(255,255,255,0.07)] overflow-hidden"
+      className="relative w-full max-w-sm rounded-2xl glass border border-[rgba(15,23,42,0.09)] overflow-hidden"
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/50 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0284c7]/50 to-transparent" />
 
       {/* Title bar */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-[rgba(255,255,255,0.05)]">
-        <Terminal size={12} className="text-[#00d4ff]" />
-        <span className="mono text-[10px] uppercase tracking-[2px] text-[#475569]">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[rgba(15,23,42,0.06)]">
+        <Terminal size={12} className="text-[#0284c7]" />
+        <span className="mono text-[10px] uppercase tracking-[2px] text-[#64748b]">
           engagement.live
         </span>
         <span className="ml-auto flex items-center gap-1.5">
           <span className="relative flex h-1.5 w-1.5">
-            <span className="ping-ring absolute inline-flex h-full w-full rounded-full bg-[#22c55e]" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#22c55e]" />
+            <span className="ping-ring absolute inline-flex h-full w-full rounded-full bg-[#10b981]" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#10b981]" />
           </span>
-          <span className="mono text-[9px] text-[#22c55e]">ACTIVE</span>
+          <span className="mono text-[9px] text-[#10b981]">ACTIVE</span>
         </span>
       </div>
 
@@ -95,7 +95,7 @@ function EngagementPanel() {
                 <motion.span
                   className="w-2 h-2 rounded-full shrink-0"
                   animate={{
-                    background: isActive || isDone ? phase.color : "#1e293b",
+                    background: isActive || isDone ? phase.color : "#cbd5e1",
                     scale: isActive ? 1.35 : 1,
                     boxShadow: isActive
                       ? `0 0 12px ${phase.color}aa`
@@ -108,7 +108,7 @@ function EngagementPanel() {
               <div className="min-w-0 flex-1">
                 <div
                   className="text-[11px] font-semibold truncate transition-colors duration-500"
-                  style={{ color: isActive ? "#f8fafc" : isDone ? "#64748b" : "#334155" }}
+                  style={{ color: isActive ? "#0f172a" : isDone ? "#475569" : "#94a3b8" }}
                 >
                   {phase.title}
                 </div>
@@ -116,7 +116,7 @@ function EngagementPanel() {
 
               <span
                 className="mono text-[9px] tracking-wider transition-colors duration-500 shrink-0"
-                style={{ color: isActive ? phase.color : "#293548" }}
+                style={{ color: isActive ? phase.color : "#cbd5e1" }}
               >
                 {phase.window}
               </span>
@@ -126,9 +126,9 @@ function EngagementPanel() {
       </div>
 
       {/* Progress bar across the loop */}
-      <div className="h-px bg-[rgba(255,255,255,0.05)] mx-4" />
+      <div className="h-px bg-[rgba(15,23,42,0.06)] mx-4" />
       <div className="px-4 py-3 flex items-center gap-3">
-        <div className="flex-1 h-[3px] rounded-full bg-[rgba(255,255,255,0.05)] overflow-hidden">
+        <div className="flex-1 h-[3px] rounded-full bg-[rgba(15,23,42,0.06)] overflow-hidden">
           <motion.div
             className="h-full rounded-full"
             animate={{
@@ -138,7 +138,7 @@ function EngagementPanel() {
             transition={{ duration: 0.6, ease: EASE }}
           />
         </div>
-        <span className="mono text-[9px] text-[#334155]">
+        <span className="mono text-[9px] text-[#94a3b8]">
           {String(active + 1).padStart(2, "0")}/
           {String(deploymentLoop.length).padStart(2, "0")}
         </span>
@@ -160,11 +160,11 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 25% 45%, rgba(0,212,255,0.05) 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 85% 35%, rgba(124,58,237,0.07) 0%, transparent 60%)",
+            "radial-gradient(ellipse 70% 60% at 25% 45%, rgba(14,165,233,0.05) 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 85% 35%, rgba(124,58,237,0.07) 0%, transparent 60%)",
         }}
       />
 
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050505] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#fafaff] to-transparent pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-24 w-full">
         <div className="grid lg:grid-cols-[1fr_auto] gap-16 items-center">
@@ -175,11 +175,11 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass border border-[rgba(0,212,255,0.15)] text-xs font-medium text-[#00d4ff] mb-8"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass border border-[rgba(14,165,233,0.15)] text-xs font-medium text-[#0284c7] mb-8"
             >
               <span className="relative flex h-2 w-2">
-                <span className="ping-ring absolute inline-flex h-full w-full rounded-full bg-[#22c55e]" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]" />
+                <span className="ping-ring absolute inline-flex h-full w-full rounded-full bg-[#10b981]" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10b981]" />
               </span>
               Available for deployment · Remote or on-site
             </motion.div>
@@ -227,7 +227,7 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="text-lg sm:text-2xl text-[#64748b] mb-10 min-h-[2rem]"
+              className="text-lg sm:text-2xl text-[#475569] mb-10 min-h-[2rem]"
             >
               <TypeAnimation
                 sequence={siteConfig.hero.flatMap((line) => [line, 2400])}
@@ -248,7 +248,7 @@ export default function Hero() {
               <Magnetic>
                 <Link
                   href="/#deployments"
-                  className="flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-white font-semibold text-[15px] shine"
+                  className="flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-[#0f172a] font-semibold text-[15px] shine"
                 >
                   See Deployments <ArrowRight size={15} />
                 </Link>
@@ -258,7 +258,7 @@ export default function Hero() {
                   onClick={() =>
                     window.dispatchEvent(new CustomEvent("open-chat"))
                   }
-                  className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(255,255,255,0.1)] text-white font-semibold text-[15px] hover:border-[rgba(0,212,255,0.25)] hover:bg-white/[0.03] transition-all duration-300"
+                  className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(15,23,42,0.12)] text-[#0f172a] font-semibold text-[15px] hover:border-[rgba(14,165,233,0.25)] hover:bg-white/[0.03] transition-all duration-300"
                 >
                   Scope an Engagement
                 </button>
@@ -273,10 +273,10 @@ export default function Hero() {
               animate="visible"
               className="flex items-center gap-5"
             >
-              <span className="mono text-[10px] text-[#334155] uppercase tracking-widest">
+              <span className="mono text-[10px] text-[#94a3b8] uppercase tracking-widest">
                 Contact
               </span>
-              <div className="w-8 h-px bg-[rgba(255,255,255,0.06)]" />
+              <div className="w-8 h-px bg-[rgba(15,23,42,0.08)]" />
               <div className="flex gap-3">
                 {[
                   {
@@ -303,7 +303,7 @@ export default function Hero() {
                     aria-label={label}
                     whileHover={{ y: -3 }}
                     transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                    className="w-10 h-10 rounded-full glass flex items-center justify-center text-[#475569] hover:text-[#00d4ff] hover:border-[rgba(0,212,255,0.25)] transition-colors duration-200"
+                    className="w-10 h-10 rounded-full glass flex items-center justify-center text-[#64748b] hover:text-[#0284c7] hover:border-[rgba(14,165,233,0.25)] transition-colors duration-200"
                   >
                     <Icon size={15} />
                   </motion.a>
@@ -326,13 +326,13 @@ export default function Hero() {
         transition={{ delay: 2.4, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
       >
-        <span className="mono text-[9px] text-[#334155] uppercase tracking-[3px]">
+        <span className="mono text-[9px] text-[#94a3b8] uppercase tracking-[3px]">
           Scroll
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-10 bg-gradient-to-b from-[#334155] to-transparent"
+          className="w-px h-10 bg-gradient-to-b from-[#94a3b8] to-transparent"
         />
       </motion.div>
     </section>

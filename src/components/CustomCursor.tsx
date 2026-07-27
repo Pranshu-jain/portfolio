@@ -65,7 +65,7 @@ export default function CustomCursor() {
     <>
       {/* Outer ring */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-[rgba(0,212,255,0.5)]"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-[rgba(14,165,233,0.5)]"
         style={{
           x: springX,
           y: springY,
@@ -77,20 +77,20 @@ export default function CustomCursor() {
           width: ringSize,
           height: ringSize,
           borderColor: hovering
-            ? "rgba(0,212,255,0.8)"
-            : "rgba(0,212,255,0.4)",
+            ? "rgba(14,165,233,0.8)"
+            : "rgba(14,165,233,0.4)",
           // Fully transparent cyan rather than the keyword `transparent`,
           // which isn't an animatable value.
           backgroundColor: hovering
-            ? "rgba(0,212,255,0.05)"
-            : "rgba(0,212,255,0)",
+            ? "rgba(14,165,233,0.05)"
+            : "rgba(14,165,233,0)",
         }}
         transition={{ duration: 0.15 }}
       />
 
       {/* Center dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] w-[5px] h-[5px] rounded-full bg-[#00d4ff]"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] w-[5px] h-[5px] rounded-full bg-[#0284c7]"
         style={{
           x: dotX,
           y: dotY,

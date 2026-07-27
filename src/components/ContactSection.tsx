@@ -77,14 +77,14 @@ export default function ContactSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,212,255,0.05) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(14,165,233,0.05) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative max-w-5xl mx-auto px-6">
         <SectionHeading
           eyebrow="Start an Engagement"
-          accent="#00d4ff"
+          accent="#0284c7"
           align="center"
           title={
             <>
@@ -105,7 +105,7 @@ export default function ContactSection() {
                   key="sent"
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="h-full min-h-[340px] flex flex-col items-center justify-center gap-5 p-10 rounded-3xl glass border border-[rgba(0,212,255,0.12)]"
+                  className="h-full min-h-[340px] flex flex-col items-center justify-center gap-5 p-10 rounded-3xl glass border border-[rgba(14,165,233,0.12)]"
                 >
                   <motion.div
                     initial={{ y: 12, opacity: 0 }}
@@ -115,8 +115,8 @@ export default function ContactSection() {
                   >
                     🛬
                   </motion.div>
-                  <h3 className="text-xl font-bold text-white">Received.</h3>
-                  <p className="text-[#64748b] text-center text-sm max-w-xs leading-relaxed">
+                  <h3 className="text-xl font-bold text-[#0f172a]">Received.</h3>
+                  <p className="text-[#475569] text-center text-sm max-w-xs leading-relaxed">
                     I&apos;ll come back within 24 hours with either a first read
                     on the constraint or the questions I need answered to give
                     you one.
@@ -136,7 +136,7 @@ export default function ContactSection() {
                       <div key={f.key}>
                         <label
                           htmlFor={f.key}
-                          className="block mono text-[10px] font-semibold text-[#475569] mb-2 uppercase tracking-widest"
+                          className="block mono text-[10px] font-semibold text-[#64748b] mb-2 uppercase tracking-widest"
                         >
                           {f.label}
                         </label>
@@ -147,7 +147,7 @@ export default function ContactSection() {
                           value={form[f.key as keyof typeof form]}
                           onChange={(e) => update(f.key, e.target.value)}
                           required
-                          className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.35)] focus:bg-[rgba(0,212,255,0.02)] transition-all text-sm"
+                          className="w-full px-4 py-3 rounded-xl bg-[rgba(15,23,42,0.03)] border border-[rgba(15,23,42,0.08)] text-[#0f172a] placeholder-[#94a3b8] focus:outline-none focus:border-[rgba(14,165,233,0.35)] focus:bg-[rgba(14,165,233,0.02)] transition-all text-sm"
                         />
                       </div>
                     ))}
@@ -155,7 +155,7 @@ export default function ContactSection() {
 
                   {/* Engagement shape */}
                   <div>
-                    <span className="block mono text-[10px] font-semibold text-[#475569] mb-2 uppercase tracking-widest">
+                    <span className="block mono text-[10px] font-semibold text-[#64748b] mb-2 uppercase tracking-widest">
                       Engagement shape
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -169,9 +169,9 @@ export default function ContactSection() {
                             aria-pressed={active}
                             className="px-4 py-2 rounded-xl text-xs font-semibold border transition-all duration-200"
                             style={{
-                              background: active ? `${eng.color}16` : "rgba(255,255,255,0.02)",
-                              borderColor: active ? `${eng.color}44` : "rgba(255,255,255,0.06)",
-                              color: active ? eng.color : "#64748b",
+                              background: active ? `${eng.color}16` : "rgba(15,23,42,0.03)",
+                              borderColor: active ? `${eng.color}44` : "rgba(15,23,42,0.08)",
+                              color: active ? eng.color : "#475569",
                             }}
                           >
                             {eng.name}
@@ -183,7 +183,7 @@ export default function ContactSection() {
 
                   {/* Timeline */}
                   <div>
-                    <span className="block mono text-[10px] font-semibold text-[#475569] mb-2 uppercase tracking-widest">
+                    <span className="block mono text-[10px] font-semibold text-[#64748b] mb-2 uppercase tracking-widest">
                       Timeline
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -197,8 +197,8 @@ export default function ContactSection() {
                             aria-pressed={active}
                             className={`px-4 py-2 rounded-xl text-xs font-medium border transition-all duration-200 ${
                               active
-                                ? "border-[rgba(0,212,255,0.35)] bg-[rgba(0,212,255,0.08)] text-[#00d4ff]"
-                                : "border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] text-[#64748b] hover:text-white"
+                                ? "border-[rgba(14,165,233,0.35)] bg-[rgba(14,165,233,0.08)] text-[#0284c7]"
+                                : "border-[rgba(15,23,42,0.08)] bg-[rgba(15,23,42,0.03)] text-[#475569] hover:text-[#0f172a]"
                             }`}
                           >
                             {t}
@@ -211,7 +211,7 @@ export default function ContactSection() {
                   <div>
                     <label
                       htmlFor="message"
-                      className="block mono text-[10px] font-semibold text-[#475569] mb-2 uppercase tracking-widest"
+                      className="block mono text-[10px] font-semibold text-[#64748b] mb-2 uppercase tracking-widest"
                     >
                       What&apos;s the situation?
                     </label>
@@ -222,7 +222,7 @@ export default function ContactSection() {
                       onChange={(e) => update("message", e.target.value)}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.35)] focus:bg-[rgba(0,212,255,0.02)] transition-all text-sm resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-[rgba(15,23,42,0.03)] border border-[rgba(15,23,42,0.08)] text-[#0f172a] placeholder-[#94a3b8] focus:outline-none focus:border-[rgba(14,165,233,0.35)] focus:bg-[rgba(14,165,233,0.02)] transition-all text-sm resize-none"
                     />
                   </div>
 
@@ -238,7 +238,7 @@ export default function ContactSection() {
                         {error}{" "}
                         <a
                           href={`mailto:${siteConfig.email}`}
-                          className="underline hover:text-white"
+                          className="underline hover:text-[#0f172a]"
                         >
                           {siteConfig.email}
                         </a>
@@ -250,13 +250,13 @@ export default function ContactSection() {
                     <button
                       type="submit"
                       disabled={sending}
-                      className="w-full flex items-center justify-center gap-2 py-4 rounded-xl btn-gradient text-white font-semibold shine disabled:opacity-60 transition-opacity"
+                      className="w-full flex items-center justify-center gap-2 py-4 rounded-xl btn-gradient text-[#0f172a] font-semibold shine disabled:opacity-60 transition-opacity"
                     >
                       {sending ? (
                         <motion.div
                           animate={{ rotate: 360 }}
                           transition={{ duration: 0.9, repeat: Infinity, ease: "linear" }}
-                          className="w-5 h-5 border-2 border-white/25 border-t-white rounded-full"
+                          className="w-5 h-5 border-2 border-white/25 border-t-[#0f172a] rounded-full"
                         />
                       ) : (
                         <>
@@ -274,7 +274,7 @@ export default function ContactSection() {
           <Reveal direction="left" delay={0.12} className="md:col-span-2">
             <div className="flex flex-col gap-5 h-full">
               <div className="p-6 rounded-2xl card-border">
-                <h3 className="text-sm font-bold text-white mb-5">
+                <h3 className="text-sm font-bold text-[#0f172a] mb-5">
                   Direct channels
                 </h3>
                 <div className="flex flex-col gap-4">
@@ -307,17 +307,17 @@ export default function ContactSection() {
                       transition={{ type: "spring", stiffness: 400, damping: 20 }}
                       className="flex items-center gap-3 group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.04)] flex items-center justify-center group-hover:border-[rgba(0,212,255,0.25)] transition-colors">
+                      <div className="w-8 h-8 rounded-lg bg-[rgba(15,23,42,0.04)] border border-[rgba(15,23,42,0.05)] flex items-center justify-center group-hover:border-[rgba(14,165,233,0.25)] transition-colors">
                         <Icon
                           size={13}
-                          className="text-[#475569] group-hover:text-[#00d4ff] transition-colors"
+                          className="text-[#64748b] group-hover:text-[#0284c7] transition-colors"
                         />
                       </div>
                       <div className="min-w-0">
-                        <div className="mono text-[9px] text-[#334155] uppercase tracking-wider">
+                        <div className="mono text-[9px] text-[#94a3b8] uppercase tracking-wider">
                           {label}
                         </div>
-                        <div className="text-xs text-[#64748b] group-hover:text-white transition-colors truncate max-w-[150px]">
+                        <div className="text-xs text-[#475569] group-hover:text-[#0f172a] transition-colors truncate max-w-[150px]">
                           {value}
                         </div>
                       </div>
@@ -327,13 +327,13 @@ export default function ContactSection() {
               </div>
 
               <div className="p-6 rounded-2xl gradient-border relative overflow-hidden flex-1">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,212,255,0.07),transparent_70%)] pointer-events-none" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(14,165,233,0.07),transparent_70%)] pointer-events-none" />
                 <div className="relative">
                   <div className="text-3xl mb-4">📞</div>
-                  <h3 className="font-bold text-white mb-2 text-sm">
+                  <h3 className="font-bold text-[#0f172a] mb-2 text-sm">
                     Skip the form
                   </h3>
-                  <p className="text-[#475569] text-xs mb-5 leading-relaxed">
+                  <p className="text-[#64748b] text-xs mb-5 leading-relaxed">
                     Thirty minutes on a call usually surfaces the real
                     constraint faster than any written brief. No commitment.
                   </p>
@@ -341,7 +341,7 @@ export default function ContactSection() {
                     href={siteConfig.calendly}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-[#00d4ff] font-semibold hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-sm text-[#0284c7] font-semibold hover:gap-3 transition-all"
                   >
                     Book a call <ArrowRight size={14} />
                   </a>

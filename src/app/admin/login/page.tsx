@@ -3,13 +3,13 @@ import { signIn } from "@/auth";
 
 export default function AdminLoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 bg-[#050505]">
+    <div className="min-h-screen flex items-center justify-center px-6 bg-[#fafaff]">
       <div className="w-full max-w-sm p-8 rounded-3xl gradient-border relative overflow-hidden text-center">
-        <div className="flex items-center justify-center gap-2 mb-3 text-[#00d4ff]">
+        <div className="flex items-center justify-center gap-2 mb-3 text-[#0284c7]">
           <Lock size={18} />
-          <h1 className="text-lg font-bold text-white">Admin access</h1>
+          <h1 className="text-lg font-bold text-[#0f172a]">Admin access</h1>
         </div>
-        <p className="text-sm text-[#475569] mb-6">
+        <p className="text-sm text-[#64748b] mb-6">
           Sign in with the owner Google account to continue.
         </p>
         <form
@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
         >
           <button
             type="submit"
-            className="w-full py-2.5 rounded-xl btn-gradient text-white text-sm font-medium flex items-center justify-center gap-2"
+            className="w-full py-2.5 rounded-xl btn-gradient text-[#0f172a] text-sm font-medium flex items-center justify-center gap-2"
           >
             {/* Google "G" */}
             <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true">

@@ -11,7 +11,7 @@ import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } fro
 export default function TiltCard({
   children,
   className,
-  glare = "rgba(0,212,255,0.10)",
+  glare = "rgba(14,165,233,0.10)",
   max = 7,
 }: {
   children: ReactNode;

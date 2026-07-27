@@ -103,7 +103,7 @@ export default function FunnelTable() {
 
   return (
     <section className="p-6 rounded-2xl card-border">
-      <h2 className="text-lg font-bold text-white mb-4">Application funnel</h2>
+      <h2 className="text-lg font-bold text-[#0f172a] mb-4">Application funnel</h2>
 
       {/* Add form */}
       <form onSubmit={addEntry} className="flex flex-wrap gap-2 mb-5">
@@ -111,31 +111,31 @@ export default function FunnelTable() {
           placeholder="Platform (e.g. micro1)"
           value={draft.platform}
           onChange={(e) => setDraft({ ...draft, platform: e.target.value })}
-          className="flex-1 min-w-[140px] px-3 py-2 rounded-lg text-sm bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-white focus:outline-none focus:border-[rgba(0,212,255,0.25)]"
+          className="flex-1 min-w-[140px] px-3 py-2 rounded-lg text-sm bg-[rgba(15,23,42,0.05)] border border-[rgba(15,23,42,0.08)] text-[#0f172a] focus:outline-none focus:border-[rgba(14,165,233,0.25)]"
         />
         <input
           placeholder="Rate seen"
           value={draft.rate_seen}
           onChange={(e) => setDraft({ ...draft, rate_seen: e.target.value })}
-          className="w-28 px-3 py-2 rounded-lg text-sm bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-white focus:outline-none focus:border-[rgba(0,212,255,0.25)]"
+          className="w-28 px-3 py-2 rounded-lg text-sm bg-[rgba(15,23,42,0.05)] border border-[rgba(15,23,42,0.08)] text-[#0f172a] focus:outline-none focus:border-[rgba(14,165,233,0.25)]"
         />
         <button
           type="submit"
           disabled={saving || !draft.platform.trim()}
-          className="px-4 py-2 rounded-lg btn-gradient text-white text-sm font-medium flex items-center gap-1.5 disabled:opacity-40"
+          className="px-4 py-2 rounded-lg btn-gradient text-[#0f172a] text-sm font-medium flex items-center gap-1.5 disabled:opacity-40"
         >
           <Plus size={14} /> Add
         </button>
       </form>
 
-      {loading && <p className="text-[#475569] text-sm">Loading…</p>}
+      {loading && <p className="text-[#64748b] text-sm">Loading…</p>}
       {error && (
         <p className="text-sm text-amber-400 mb-3">
           {error}. If this is the first run, set <code>DATABASE_URL</code> in Vercel.
         </p>
       )}
       {!loading && !error && entries.length === 0 && (
-        <p className="text-[#475569] text-sm">
+        <p className="text-[#64748b] text-sm">
           No applications tracked yet. Add micro1 / Toptal above once you apply.
         </p>
       )}
@@ -144,7 +144,7 @@ export default function FunnelTable() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-[11px] uppercase tracking-wider text-[#475569]">
+              <tr className="text-left text-[11px] uppercase tracking-wider text-[#64748b]">
                 <th className="py-2 pr-3">Platform</th>
                 <th className="py-2 pr-3">Account</th>
                 <th className="py-2 pr-3">Stage</th>
@@ -154,18 +154,18 @@ export default function FunnelTable() {
             </thead>
             <tbody>
               {entries.map((entry) => (
-                <tr key={entry.id} className="border-t border-[rgba(255,255,255,0.06)]">
-                  <td className="py-2 pr-3 text-white font-medium">{entry.platform}</td>
+                <tr key={entry.id} className="border-t border-[rgba(15,23,42,0.08)]">
+                  <td className="py-2 pr-3 text-[#0f172a] font-medium">{entry.platform}</td>
                   <td className="py-2 pr-3">
                     <select
                       value={entry.account_status}
                       onChange={(e) =>
                         patchEntry(entry.id, { account_status: e.target.value })
                       }
-                      className="bg-transparent border border-[rgba(255,255,255,0.08)] rounded-md px-2 py-1 text-[#94a3b8] focus:outline-none"
+                      className="bg-transparent border border-[rgba(15,23,42,0.10)] rounded-md px-2 py-1 text-[#475569] focus:outline-none"
                     >
                       {ACCOUNT_STATUSES.map((s) => (
-                        <option key={s} value={s} className="bg-[#0f0f0f]">
+                        <option key={s} value={s} className="bg-[#ffffff]">
                           {s}
                         </option>
                       ))}
@@ -175,21 +175,21 @@ export default function FunnelTable() {
                     <select
                       value={entry.stage}
                       onChange={(e) => patchEntry(entry.id, { stage: e.target.value })}
-                      className="bg-transparent border border-[rgba(255,255,255,0.08)] rounded-md px-2 py-1 text-[#94a3b8] focus:outline-none"
+                      className="bg-transparent border border-[rgba(15,23,42,0.10)] rounded-md px-2 py-1 text-[#475569] focus:outline-none"
                     >
                       {STAGES.map((s) => (
-                        <option key={s} value={s} className="bg-[#0f0f0f]">
+                        <option key={s} value={s} className="bg-[#ffffff]">
                           {s}
                         </option>
                       ))}
                     </select>
                   </td>
-                  <td className="py-2 pr-3 text-[#94a3b8]">{entry.rate_seen ?? "—"}</td>
+                  <td className="py-2 pr-3 text-[#475569]">{entry.rate_seen ?? "—"}</td>
                   <td className="py-2 pr-3 text-right">
                     <button
                       onClick={() => removeEntry(entry.id)}
                       aria-label="Delete entry"
-                      className="text-[#334155] hover:text-red-400 transition-colors"
+                      className="text-[#94a3b8] hover:text-red-400 transition-colors"
                     >
                       <Trash2 size={15} />
                     </button>

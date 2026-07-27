@@ -51,14 +51,14 @@ function DeploymentDossier({
       aria-modal="true"
       aria-label={`${deployment.title} deployment dossier`}
     >
-      <div className="absolute inset-0 bg-black/85 backdrop-blur-md" />
+      <div className="absolute inset-0 bg-[rgba(15,23,42,0.45)] backdrop-blur-md" />
 
       <motion.div
         initial={{ scale: 0.94, opacity: 0, y: 24 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.94, opacity: 0, y: 24 }}
         transition={{ type: "spring", damping: 28, stiffness: 300 }}
-        className="relative w-full max-w-3xl bg-[#0b0b0c] rounded-3xl border border-[rgba(255,255,255,0.08)] overflow-hidden max-h-[90dvh] overflow-y-auto scrollbar-hide"
+        className="relative w-full max-w-3xl bg-[#ffffff] rounded-3xl border border-[rgba(15,23,42,0.10)] overflow-hidden max-h-[90dvh] overflow-y-auto scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
         <div
@@ -85,7 +85,7 @@ function DeploymentDossier({
                 >
                   Deployment Dossier
                 </div>
-                <h3 className="text-xl font-black text-white truncate">
+                <h3 className="text-xl font-black text-[#0f172a] truncate">
                   {deployment.title}
                 </h3>
               </div>
@@ -93,14 +93,14 @@ function DeploymentDossier({
             <button
               onClick={onClose}
               aria-label="Close dossier"
-              className="w-8 h-8 rounded-full flex items-center justify-center text-[#475569] hover:text-white hover:bg-white/[0.06] transition-all shrink-0"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-[#64748b] hover:text-[#0f172a] hover:bg-white/[0.06] transition-all shrink-0"
             >
               <X size={16} />
             </button>
           </div>
 
           {/* Role strip */}
-          <div className="mono text-[10px] uppercase tracking-wider text-[#475569] mb-7 px-3 py-2 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)]">
+          <div className="mono text-[10px] uppercase tracking-wider text-[#64748b] mb-7 px-3 py-2 rounded-lg bg-[rgba(15,23,42,0.03)] border border-[rgba(15,23,42,0.05)]">
             Role — {deployment.role}
           </div>
 
@@ -112,7 +112,7 @@ function DeploymentDossier({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
-                className="p-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)] text-center"
+                className="p-4 rounded-xl bg-[rgba(15,23,42,0.03)] border border-[rgba(15,23,42,0.05)] text-center"
               >
                 <div
                   className="mono text-base sm:text-lg font-black leading-none mb-1.5"
@@ -120,7 +120,7 @@ function DeploymentDossier({
                 >
                   {o.value}
                 </div>
-                <div className="text-[10px] text-[#475569] leading-tight">
+                <div className="text-[10px] text-[#64748b] leading-tight">
                   {o.metric}
                 </div>
               </motion.div>
@@ -134,18 +134,18 @@ function DeploymentDossier({
                 icon: Crosshair,
                 label: "What I landed in",
                 content: deployment.context,
-                color: "#00d4ff",
+                color: "#0284c7",
               },
               {
                 icon: Lock,
                 label: "The binding constraint",
                 content: deployment.constraint,
-                color: "#f59e0b",
+                color: "#d97706",
               },
             ].map(({ icon: Icon, label, content, color }) => (
               <div
                 key={label}
-                className="flex gap-3.5 p-4 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)]"
+                className="flex gap-3.5 p-4 rounded-xl bg-[rgba(15,23,42,0.03)] border border-[rgba(15,23,42,0.05)]"
               >
                 <div
                   className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
@@ -154,10 +154,10 @@ function DeploymentDossier({
                   <Icon size={14} style={{ color }} />
                 </div>
                 <div>
-                  <div className="mono text-[10px] font-semibold uppercase tracking-wider text-[#475569] mb-1.5">
+                  <div className="mono text-[10px] font-semibold uppercase tracking-wider text-[#64748b] mb-1.5">
                     {label}
                   </div>
-                  <div className="text-[13px] text-[#94a3b8] leading-relaxed">
+                  <div className="text-[13px] text-[#475569] leading-relaxed">
                     {content}
                   </div>
                 </div>
@@ -168,8 +168,8 @@ function DeploymentDossier({
           {/* Shipped */}
           <div className="mb-7">
             <div className="flex items-center gap-2 mb-3.5">
-              <PackageCheck size={14} className="text-[#22c55e]" />
-              <span className="mono text-[10px] font-semibold uppercase tracking-wider text-[#475569]">
+              <PackageCheck size={14} className="text-[#10b981]" />
+              <span className="mono text-[10px] font-semibold uppercase tracking-wider text-[#64748b]">
                 What shipped
               </span>
             </div>
@@ -188,7 +188,7 @@ function DeploymentDossier({
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[13px] text-[#94a3b8] leading-relaxed">
+                  <span className="text-[13px] text-[#475569] leading-relaxed">
                     {item}
                   </span>
                 </motion.div>
@@ -200,7 +200,7 @@ function DeploymentDossier({
           <div className="mb-7">
             <div className="flex items-center gap-2 mb-3">
               <Plug size={14} className="text-[#7c3aed]" />
-              <span className="mono text-[10px] font-semibold uppercase tracking-wider text-[#475569]">
+              <span className="mono text-[10px] font-semibold uppercase tracking-wider text-[#64748b]">
                 Integration surface
               </span>
             </div>
@@ -226,7 +226,7 @@ function DeploymentDossier({
             {deployment.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 rounded-full text-[11px] font-medium bg-[rgba(255,255,255,0.04)] text-[#64748b] border border-[rgba(255,255,255,0.04)]"
+                className="px-3 py-1 rounded-full text-[11px] font-medium bg-[rgba(15,23,42,0.05)] text-[#475569] border border-[rgba(15,23,42,0.05)]"
               >
                 {tag}
               </span>
@@ -239,7 +239,7 @@ function DeploymentDossier({
               href={deployment.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[rgba(255,255,255,0.08)] text-sm text-[#64748b] hover:text-white hover:border-[rgba(255,255,255,0.15)] transition-all"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[rgba(15,23,42,0.10)] text-sm text-[#475569] hover:text-[#0f172a] hover:border-[rgba(15,23,42,0.18)] transition-all"
             >
               <GithubIcon size={14} /> Source Code
             </a>
@@ -248,7 +248,7 @@ function DeploymentDossier({
                 href={deployment.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full btn-gradient text-sm text-white font-medium shine"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full btn-gradient text-sm text-[#0f172a] font-medium shine"
               >
                 <ExternalLink size={14} /> Live Deployment
               </a>
@@ -292,7 +292,7 @@ function DeploymentCard({
             }
           }}
           aria-label={`Open dossier for ${deployment.title}`}
-          className="relative h-full cursor-pointer rounded-2xl overflow-hidden card-border p-6 flex flex-col gap-5 group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#00d4ff]"
+          className="relative h-full cursor-pointer rounded-2xl overflow-hidden card-border p-6 flex flex-col gap-5 group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#0284c7]"
           style={{ minHeight: "340px" }}
         >
           <div
@@ -322,23 +322,23 @@ function DeploymentCard({
             <motion.div
               animate={{ x: hovered ? 0 : 6, opacity: hovered ? 1 : 0 }}
               transition={{ duration: 0.2 }}
-              className="text-[#475569]"
+              className="text-[#64748b]"
             >
               <ArrowRight size={16} />
             </motion.div>
           </div>
 
           <div className="relative">
-            <h3 className="text-base font-bold text-white mb-2">
+            <h3 className="text-base font-bold text-[#0f172a] mb-2">
               {deployment.title}
             </h3>
-            <p className="text-sm text-[#475569] leading-relaxed line-clamp-3">
+            <p className="text-sm text-[#64748b] leading-relaxed line-clamp-3">
               {deployment.shortDesc}
             </p>
           </div>
 
           {/* Headline outcome — the reason to open the card */}
-          <div className="relative flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.04)] mt-auto">
+          <div className="relative flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-[rgba(15,23,42,0.03)] border border-[rgba(15,23,42,0.05)] mt-auto">
             <TrendingUp
               size={13}
               className="shrink-0"
@@ -350,7 +350,7 @@ function DeploymentCard({
             >
               {headline.value}
             </span>
-            <span className="text-[11px] text-[#475569] truncate">
+            <span className="text-[11px] text-[#64748b] truncate">
               {headline.metric}
             </span>
           </div>
@@ -359,19 +359,19 @@ function DeploymentCard({
             {deployment.surfaces.slice(0, 3).map((s) => (
               <span
                 key={s}
-                className="mono px-2 py-1 rounded-md text-[10px] text-[#475569] bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.04)]"
+                className="mono px-2 py-1 rounded-md text-[10px] text-[#64748b] bg-[rgba(15,23,42,0.04)] border border-[rgba(15,23,42,0.05)]"
               >
                 {s}
               </span>
             ))}
             {deployment.surfaces.length > 3 && (
-              <span className="mono px-2 py-1 rounded-md text-[10px] text-[#334155] bg-[rgba(255,255,255,0.02)]">
+              <span className="mono px-2 py-1 rounded-md text-[10px] text-[#94a3b8] bg-[rgba(15,23,42,0.03)]">
                 +{deployment.surfaces.length - 3}
               </span>
             )}
           </div>
 
-          <div className="relative mono text-[10px] uppercase tracking-wider text-[#334155] flex items-center gap-1.5 group-hover:text-[#475569] transition-colors">
+          <div className="relative mono text-[10px] uppercase tracking-wider text-[#94a3b8] flex items-center gap-1.5 group-hover:text-[#64748b] transition-colors">
             Open dossier <ArrowRight size={9} />
           </div>
         </motion.article>
@@ -387,7 +387,7 @@ export default function ProjectsSection() {
     <section id="deployments" className="py-28 max-w-7xl mx-auto px-6">
       <SectionHeading
         eyebrow="Deployments"
-        accent="#00d4ff"
+        accent="#0284c7"
         title={
           <>
             Problems I was{" "}
@@ -420,7 +420,7 @@ export default function ProjectsSection() {
             href="https://github.com/Pranshu-jain"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[rgba(255,255,255,0.07)] text-sm text-[#475569] hover:text-white hover:border-[rgba(0,212,255,0.2)] transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[rgba(15,23,42,0.09)] text-sm text-[#64748b] hover:text-[#0f172a] hover:border-[rgba(14,165,233,0.2)] transition-all duration-300"
           >
             <GithubIcon size={14} /> Full source on GitHub{" "}
             <ArrowRight size={13} />

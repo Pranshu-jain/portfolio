@@ -19,14 +19,14 @@ export default function IntegrationSurface() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 50% at 50% 50%, rgba(0,212,255,0.025) 0%, transparent 70%)",
+            "radial-gradient(ellipse 80% 50% at 50% 50%, rgba(14,165,233,0.025) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative max-w-7xl mx-auto px-6 mb-14">
         <SectionHeading
           eyebrow="Integration Surface"
-          accent="#ff6b35"
+          accent="#f97316"
           align="center"
           title={
             <>
@@ -96,7 +96,7 @@ export default function IntegrationSurface() {
                         ease: "easeInOut",
                       }}
                     />
-                    <h3 className="font-bold text-white text-sm">
+                    <h3 className="font-bold text-[#0f172a] text-sm">
                       {group.category}
                     </h3>
                   </div>
@@ -105,15 +105,15 @@ export default function IntegrationSurface() {
                     {group.items.map((item) => (
                       <span
                         key={item}
-                        className="mono px-2 py-1 rounded-md text-[10px] text-[#64748b] bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.04)] transition-colors duration-300"
+                        className="mono px-2 py-1 rounded-md text-[10px] text-[#475569] bg-[rgba(15,23,42,0.04)] border border-[rgba(15,23,42,0.05)] transition-colors duration-300"
                       >
                         {item}
                       </span>
                     ))}
                   </div>
 
-                  <div className="mt-auto pt-4 border-t border-[rgba(255,255,255,0.04)]">
-                    <p className="text-[12px] text-[#475569] leading-relaxed">
+                  <div className="mt-auto pt-4 border-t border-[rgba(15,23,42,0.05)]">
+                    <p className="text-[12px] text-[#64748b] leading-relaxed">
                       {group.note}
                     </p>
                   </div>

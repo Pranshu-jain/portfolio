@@ -28,8 +28,8 @@ export default function Marquee({
       aria-hidden="true"
     >
       {/* Edge masks so items dissolve instead of clipping at the bounds. */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#050505] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#050505] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#fafaff] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#fafaff] to-transparent" />
 
       <div
         className="marquee-track flex w-max"

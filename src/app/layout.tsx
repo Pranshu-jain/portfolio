@@ -52,7 +52,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
-      <body className="h-full bg-[#050505] text-[#f8fafc] antialiased overflow-x-hidden">
+      <body className="h-full bg-[#fafaff] text-[#0f172a] antialiased overflow-x-hidden">
+        {/* Drifting colour wash behind everything — the thing that keeps a
+            light page from reading as blank paper. */}
+        <div className="mesh-bg" aria-hidden="true" />
         <div className="noise-overlay" aria-hidden="true" />
         <CustomCursor />
         <Navigation />
