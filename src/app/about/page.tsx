@@ -1,166 +1,156 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Philosophy from "@/components/Philosophy";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/motion/Reveal";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { dimensions } from "@/lib/fde";
 
 export const metadata: Metadata = {
   title: "About — Pranshu, Forward Deployed Engineer",
   description:
-    "Why I work as a forward deployed engineer: embedded with the team, deployed in their stack, owning the problem from ambiguity through adoption.",
+    "Why I work forward deployed: embedded with the team, building inside their systems, owning the problem from ambiguity through adoption.",
 };
 
-const capabilities = [
-  { emoji: "🛬", label: "Discovery on site", sub: "Ambiguity → one-page spec" },
-  { emoji: "⚡", label: "Next.js / React", sub: "Frontend & SSR" },
-  { emoji: "💎", label: "Rails / Ruby", sub: "Domain logic & APIs" },
-  { emoji: "🐍", label: "Python / Django", sub: "Services & pipelines" },
-  { emoji: "🗄️", label: "PostgreSQL / Redis", sub: "Modelling & indexing" },
-  { emoji: "🤖", label: "LLMs / Agents", sub: "Deployed, not demoed" },
-  { emoji: "🔌", label: "REST / Webhooks", sub: "Third-party integration" },
-  { emoji: "☁️", label: "Docker / Vercel / Railway", sub: "Ship & operate" },
+const toolkit = [
+  { label: "Discovery on site", sub: "Ambiguity to one-page spec" },
+  { label: "Next.js / React", sub: "Front end and SSR" },
+  { label: "Rails / Ruby", sub: "Domain logic and APIs" },
+  { label: "Python / Django", sub: "Services and pipelines" },
+  { label: "PostgreSQL / Redis", sub: "Modelling and indexing" },
+  { label: "LLMs / agents", sub: "Deployed, not demoed" },
+  { label: "REST / webhooks", sub: "Third-party integration" },
+  { label: "Docker / Vercel / Railway", sub: "Ship and operate" },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      <div className="pt-28 max-w-7xl mx-auto px-6">
-        {/* Hero */}
-        <div className="max-w-3xl mb-24">
+      <section
+        data-sheet="Surveyor"
+        className="sheet pt-[clamp(96px,15vh,150px)]"
+      >
+        <div className="page">
           <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(0,212,255,0.08)] text-[#00d4ff] border border-[rgba(0,212,255,0.12)] mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00d4ff]" />
-              About
+            <div className="sheet-label">
+              <span className="num">A</span>
+              <span>Surveyor</span>
+              <span className="rule" />
+              <span className="hidden sm:block">P. Jain</span>
             </div>
           </Reveal>
 
-          <Reveal delay={0.06}>
-            <h1 className="text-5xl sm:text-7xl font-black text-white mb-8 leading-[1.02] tracking-tight">
-              I&apos;m Pranshu.
-              <br />
-              <span className="gradient-text">I deploy forward.</span>
-            </h1>
-          </Reveal>
+          <div className="max-w-[62ch]">
+            <Reveal delay={0.05}>
+              <h1 className="display h1 mb-7">
+                I&rsquo;m Pranshu.
+                <br />
+                I deploy <span className="text-blue">forward</span>.
+              </h1>
+            </Reveal>
 
-          <Reveal delay={0.12}>
-            <p className="text-[#94a3b8] text-xl leading-relaxed mb-6">
-              Most engineering roles start after someone else has already done
-              the hard part — deciding what to build. Forward deployment starts
-              before that. I land inside the customer&apos;s environment, watch
-              the actual work, and find the constraint that makes the obvious
-              answer wrong.
-            </p>
-          </Reveal>
+            <Reveal delay={0.1}>
+              <p className="text-[clamp(1rem,1.35vw,1.15rem)] leading-[1.65] text-graphite mb-5">
+                Most engineering roles start after somebody else has done the
+                hard part — deciding what to build. Forward deployment starts
+                before that. I land inside the customer&rsquo;s environment,
+                watch the actual work, and find the condition that makes the
+                obvious answer wrong.
+              </p>
+            </Reveal>
 
-          <Reveal delay={0.18}>
-            <p className="text-[#64748b] text-xl leading-relaxed mb-6">
-              Then I build. In their stack, against their APIs, under their
-              conventions — a thin end-to-end slice live on real data inside the
-              first week, hardened into something load-bearing over the next
-              few. Not a prototype handed to another team to finish.
-            </p>
-          </Reveal>
+            <Reveal delay={0.15}>
+              <p className="text-[15px] leading-relaxed text-soft mb-5">
+                Then I build. In their stack, against their APIs, under their
+                conventions — a thin end-to-end slice live on real data inside
+                the first week, hardened into something load-bearing over the
+                next few. Not a prototype handed to another team to finish.
+              </p>
+            </Reveal>
 
-          <Reveal delay={0.24}>
-            <p className="text-[#64748b] text-xl leading-relaxed mb-10">
-              And I stay until it&apos;s used. Shipped is not the finish line —
-              adopted is. The engagement ends when the customer&apos;s team can
-              operate and extend it without me, and the metric we agreed on has
-              actually moved.
-            </p>
-          </Reveal>
+            <Reveal delay={0.2}>
+              <p className="text-[15px] leading-relaxed text-soft mb-8">
+                And I stay until it&rsquo;s used. Shipped is not the finish
+                line — adopted is. The engagement ends when the customer&rsquo;s
+                team can operate and extend it without me, and the number we
+                agreed on has actually moved.
+              </p>
+            </Reveal>
 
-          <Reveal delay={0.3}>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/build-with-me"
-                className="flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-white font-semibold shine"
-              >
-                Deploy Me <ArrowRight size={16} />
-              </Link>
-              <Link
-                href="/#deployments"
-                className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(0,212,255,0.2)] transition-all"
-              >
-                See Deployments
-              </Link>
-            </div>
-          </Reveal>
+            <Reveal delay={0.25}>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/contact" className="btn btn-solid">
+                  Start a survey
+                </Link>
+                <Link href="/#conditions" className="btn">
+                  Read the survey
+                </Link>
+              </div>
+            </Reveal>
+          </div>
         </div>
+      </section>
 
-        {/* Dimension summary */}
-        <div className="mb-24">
+      <section data-sheet="Capability marks" className="sheet">
+        <div className="page">
           <Reveal>
-            <h2 className="text-2xl font-black text-white mb-2">
-              Graded on eight axes
-            </h2>
-            <p className="text-[#475569] mb-8 max-w-xl">
-              The full breakdown, with evidence for each, lives{" "}
-              <Link
-                href="/#dimensions"
-                className="text-[#00d4ff] hover:underline"
-              >
-                on the home page
+            <div className="sheet-label">
+              <span className="num">B</span>
+              <span>Capability marks</span>
+              <span className="rule" />
+              <span className="hidden sm:block">A1&ndash;A8</span>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <p className="text-[15px] text-soft max-w-[56ch] mb-7">
+              The full schedule, with load profiles and evidence for each mark,
+              is{" "}
+              <Link href="/#dimensions" className="text-blue underline">
+                on the survey
               </Link>
               .
             </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-graphite">
             {dimensions.map((d, i) => (
-              <Reveal key={d.id} delay={i * 0.05}>
-                <div className="p-5 rounded-2xl card-border h-full">
-                  <div className="flex items-center justify-between mb-3">
-                    <span
-                      className="mono text-[10px] font-bold tracking-widest"
-                      style={{ color: d.color }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+              <Reveal key={d.id} delay={i * 0.04}>
+                <div className="h-full border-r border-b border-graphite p-5">
+                  <div className="font-mono text-[11px] text-blue font-semibold mb-3">
+                    {d.mark}
                   </div>
-                  {/* Relative emphasis, deliberately unlabelled — a
-                      self-assessed number would read as false precision. */}
-                  <div className="h-1 rounded-full bg-[rgba(255,255,255,0.05)] overflow-hidden mb-4">
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        width: `${d.score}%`,
-                        background: `linear-gradient(90deg, ${d.color}55, ${d.color})`,
-                      }}
-                    />
-                  </div>
-                  <div className="text-sm font-bold text-white mb-1">
-                    {d.label}
-                  </div>
-                  <div className="text-xs text-[#475569]">{d.short}</div>
+                  <div className="display-sm text-[14px] mb-1.5">{d.label}</div>
+                  <div className="text-[12px] text-soft">{d.short}</div>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Toolkit */}
-        <div className="mb-24">
+      <section data-sheet="Toolkit" className="sheet">
+        <div className="page">
           <Reveal>
-            <h2 className="text-2xl font-black text-white mb-8">
-              What I bring on deployment
-            </h2>
+            <div className="sheet-label">
+              <span className="num">C</span>
+              <span>Toolkit</span>
+              <span className="rule" />
+              <span className="hidden sm:block">What I bring on site</span>
+            </div>
           </Reveal>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {capabilities.map((c, i) => (
-              <Reveal key={c.label} delay={i * 0.05}>
-                <div className="p-5 rounded-2xl card-border flex flex-col gap-2 h-full">
-                  <div className="text-2xl">{c.emoji}</div>
-                  <div className="text-sm font-bold text-white">{c.label}</div>
-                  <div className="text-xs text-[#475569]">{c.sub}</div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-graphite">
+            {toolkit.map((t, i) => (
+              <Reveal key={t.label} delay={i * 0.04}>
+                <div className="h-full border-r border-b border-graphite p-5">
+                  <div className="display-sm text-[14px] mb-1.5">{t.label}</div>
+                  <div className="text-[12px] text-soft">{t.sub}</div>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       <Philosophy />
       <Footer />

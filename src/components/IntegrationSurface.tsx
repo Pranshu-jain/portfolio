@@ -1,127 +1,74 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { integrationSurface } from "@/lib/fde";
 import SectionHeading from "@/components/motion/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
-import TiltCard from "@/components/motion/TiltCard";
-import Marquee from "@/components/motion/Marquee";
 
-/** Flattened token list for the marquee strip. */
-const stack = integrationSurface.flatMap((group) =>
-  group.items.map((item) => ({ item, color: group.color })),
-);
-
+/**
+ * The surface schedule. Each row is a class of system I have to plug
+ * into, the components within it, and the rule that class is held to —
+ * the rule column is the point, not the logo soup.
+ */
 export default function IntegrationSurface() {
   return (
-    <section id="surface" className="py-28 relative overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% 50%, rgba(0,212,255,0.025) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-6 mb-14">
+    <section id="surface" data-sheet="Integration surface" className="sheet">
+      <div className="page">
         <SectionHeading
-          eyebrow="Integration Surface"
-          accent="#ff6b35"
-          align="center"
+          number="06"
+          name="Integration surface"
+          field={`${integrationSurface.length} classes`}
           title={
             <>
-              I land in{" "}
-              <span className="gradient-text-warm">stacks I didn&apos;t choose</span>
+              Stacks I{" "}
+              <span className="text-blue">didn&rsquo;t choose</span>.
             </>
           }
-          description="Forward deployment means writing code in someone else's repo, against someone else's API, under someone else's conventions. These are the surfaces I plug into — and the rule I hold each one to."
+          description="Forward deployment means writing in someone else's repo, against someone else's API, under someone else's conventions. These are the surfaces I plug into, and the rule each one is held to."
+          className="mb-9"
         />
-      </div>
 
-      {/* Stack strip — two rows drifting in opposite directions */}
-      <Reveal blur={false} className="mb-16">
-        <div className="flex flex-col gap-3">
-          <Marquee speed={42}>
-            {stack.map(({ item, color }, i) => (
-              <span
-                key={`a-${item}-${i}`}
-                className="mono mx-1.5 px-4 py-2 rounded-full text-[11px] whitespace-nowrap border"
-                style={{
-                  color: `${color}dd`,
-                  borderColor: `${color}22`,
-                  background: `${color}08`,
-                }}
-              >
-                {item}
-              </span>
-            ))}
-          </Marquee>
-          <Marquee speed={52} reverse>
-            {[...stack].reverse().map(({ item, color }, i) => (
-              <span
-                key={`b-${item}-${i}`}
-                className="mono mx-1.5 px-4 py-2 rounded-full text-[11px] whitespace-nowrap border"
-                style={{
-                  color: `${color}99`,
-                  borderColor: `${color}18`,
-                  background: `${color}05`,
-                }}
-              >
-                {item}
-              </span>
-            ))}
-          </Marquee>
-        </div>
-      </Reveal>
-
-      <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {integrationSurface.map((group, i) => (
-            <Reveal key={group.category} delay={i * 0.07}>
-              <TiltCard
-                className="h-full rounded-2xl"
-                glare={`${group.color}14`}
-                max={6}
-              >
-                <div className="h-full p-6 rounded-2xl card-border flex flex-col group">
-                  <div className="flex items-center gap-2.5 mb-4">
-                    <motion.span
-                      className="w-2 h-2 rounded-full shrink-0"
-                      style={{ background: group.color }}
-                      animate={{ opacity: [1, 0.35, 1] }}
-                      transition={{
-                        duration: 2.4,
-                        repeat: Infinity,
-                        delay: i * 0.3,
-                        ease: "easeInOut",
-                      }}
-                    />
-                    <h3 className="font-bold text-white text-sm">
+        <Reveal>
+          <div className="overflow-x-auto scrollbar-none -mx-[var(--gutter)] px-[var(--gutter)] md:mx-0 md:px-0">
+            <table className="schedule min-w-[620px]">
+              <thead>
+                <tr>
+                  <th className="w-[42px]">Mk</th>
+                  <th className="w-[20%]">Class</th>
+                  <th className="w-[32%]">Components</th>
+                  <th>Rule held to</th>
+                </tr>
+              </thead>
+              <tbody>
+                {integrationSurface.map((group, i) => (
+                  <tr key={group.category}>
+                    <td className="font-mono text-[11.5px] text-blue font-semibold">
+                      S{String(i + 1).padStart(2, "0")}
+                    </td>
+                    <td className="font-semibold text-ink text-[13.5px]">
                       {group.category}
-                    </h3>
-                  </div>
-
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {group.items.map((item) => (
-                      <span
-                        key={item}
-                        className="mono px-2 py-1 rounded-md text-[10px] text-[#64748b] bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.04)] transition-colors duration-300"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-auto pt-4 border-t border-[rgba(255,255,255,0.04)]">
-                    <p className="text-[12px] text-[#475569] leading-relaxed">
+                    </td>
+                    <td>
+                      <div className="flex flex-wrap gap-1">
+                        {group.items.map((item) => (
+                          <span
+                            key={item}
+                            className="font-mono text-[10px] px-1.5 py-0.5 border text-soft"
+                            style={{ borderColor: "var(--line)" }}
+                          >
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="text-soft text-[12.5px] leading-snug">
                       {group.note}
-                    </p>
-                  </div>
-                </div>
-              </TiltCard>
-            </Reveal>
-          ))}
-        </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
