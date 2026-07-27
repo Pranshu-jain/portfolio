@@ -79,7 +79,11 @@ export default function CustomCursor() {
           borderColor: hovering
             ? "rgba(0,212,255,0.8)"
             : "rgba(0,212,255,0.4)",
-          backgroundColor: hovering ? "rgba(0,212,255,0.05)" : "transparent",
+          // Fully transparent cyan rather than the keyword `transparent`,
+          // which isn't an animatable value.
+          backgroundColor: hovering
+            ? "rgba(0,212,255,0.05)"
+            : "rgba(0,212,255,0)",
         }}
         transition={{ duration: 0.15 }}
       />

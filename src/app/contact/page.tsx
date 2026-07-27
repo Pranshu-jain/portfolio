@@ -3,8 +3,9 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Contact — Pranshu",
-  description: "Get in touch to discuss your project, startup idea, or just to say hi.",
+  title: "Contact — Pranshu, Forward Deployed Engineer",
+  description:
+    "Tell me what's actually broken. Rough is fine — turning rough into a spec is the first phase of the engagement.",
 };
 
 export default function ContactPage() {

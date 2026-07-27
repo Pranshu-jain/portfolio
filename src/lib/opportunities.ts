@@ -31,7 +31,9 @@ export function formatSalaryRange(
   const lo = typeof min === "number" && min > 0 ? min : null;
   const hi = typeof max === "number" && max > 0 ? max : null;
   if (lo === null && hi === null) return null;
-  const fmt = (n: number) => "$" + n.toLocaleString();
+  // Pin the locale: without it, grouping follows the host machine (en-IN
+  // renders 100000 as 1,00,000), so output varied by where this ran.
+  const fmt = (n: number) => "$" + n.toLocaleString("en-US");
   if (lo !== null && hi !== null && lo !== hi) return `${fmt(lo)}–${fmt(hi)}`;
   return fmt((lo ?? hi) as number);
 }

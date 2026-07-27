@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 
@@ -11,6 +11,14 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+
+  // Reading-position bar pinned to the bottom edge of the nav.
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 26,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -41,8 +49,13 @@ export default function Navigation() {
             <div className="w-8 h-8 rounded-lg btn-gradient flex items-center justify-center text-white font-black text-sm shine">
               P
             </div>
-            <span className="hidden sm:block text-sm font-semibold text-white/80 group-hover:text-white transition-colors">
-              Pranshu
+            <span className="hidden sm:flex flex-col leading-none">
+              <span className="text-sm font-semibold text-white/80 group-hover:text-white transition-colors">
+                Pranshu
+              </span>
+              <span className="mono text-[8px] uppercase tracking-[1.5px] text-[#475569] mt-0.5">
+                Forward Deployed Engineer
+              </span>
             </span>
           </Link>
 
@@ -71,7 +84,7 @@ export default function Navigation() {
               href="/build-with-me"
               className="flex items-center gap-2 px-5 py-2 text-sm rounded-full btn-gradient text-white font-medium shine"
             >
-              Build With Me <ArrowRight size={13} />
+              Deploy Me <ArrowRight size={13} />
             </Link>
           </div>
 
@@ -106,6 +119,17 @@ export default function Navigation() {
             </AnimatePresence>
           </button>
         </div>
+
+        {/* Reading progress */}
+        <motion.div
+          aria-hidden="true"
+          className="absolute bottom-0 left-0 right-0 h-px origin-left"
+          style={{
+            scaleX: progress,
+            background:
+              "linear-gradient(90deg, #00d4ff 0%, #7c3aed 50%, #ff6b35 100%)",
+          }}
+        />
       </motion.nav>
 
       {/* Mobile menu */}
@@ -143,7 +167,7 @@ export default function Navigation() {
                 href="/build-with-me"
                 className="flex items-center justify-center gap-2 py-3 rounded-xl btn-gradient text-white font-semibold text-sm shine"
               >
-                Build With Me <ArrowRight size={14} />
+                Deploy Me <ArrowRight size={14} />
               </Link>
             </motion.div>
           </motion.div>

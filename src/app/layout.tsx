@@ -12,31 +12,35 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Pranshu — AI-First Developer & Startup Partner",
+  title: "Pranshu — Forward Deployed Engineer",
   description:
-    "I build products in days, not months. AI-first developer, rapid execution engineer, and startup growth partner. Turn your idea into a shipped product fast.",
+    "Forward Deployed Engineer. I embed with your team, turn an ambiguous problem into a deployed system running on your real data, and stay until it's adopted.",
   keywords: [
-    "AI developer",
-    "startup partner",
+    "forward deployed engineer",
+    "FDE",
+    "solutions engineer",
+    "embedded engineer",
+    "systems integration",
+    "AI deployment",
+    "LLM integration",
     "Next.js developer",
-    "full stack engineer",
-    "automation specialist",
-    "MVP development",
-    "AI integrations",
-    "rapid prototyping",
+    "Rails API",
+    "customer-facing engineer",
   ],
-  authors: [{ name: "Pranshu", url: "https://github.com/pranshu007" }],
+  authors: [
+    { name: "Pranshu", url: "https://github.com/Pranshu-jain" },
+  ],
   openGraph: {
-    title: "Pranshu — AI-First Developer & Startup Partner",
+    title: "Pranshu — Forward Deployed Engineer",
     description:
-      "I build products in days, not months. AI-first developer & startup growth partner.",
+      "I deploy into your stack and ship until the metric moves. Ambiguous problem → live system on your real data.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pranshu — AI-First Developer & Startup Partner",
-    description: "I build products in days, not months.",
+    title: "Pranshu — Forward Deployed Engineer",
+    description: "I deploy into your stack and ship until the metric moves.",
   },
   robots: { index: true, follow: true },
 };

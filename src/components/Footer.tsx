@@ -15,17 +15,20 @@ export default function Footer() {
             </div>
             <div>
               <div className="text-sm font-bold text-white">Pranshu</div>
-              <div className="text-[10px] text-[#334155]">AI-First Developer</div>
+              <div className="mono text-[9px] uppercase tracking-[1.5px] text-[#334155]">
+                Forward Deployed Engineer
+              </div>
             </div>
           </Link>
 
           {/* Nav */}
           <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2">
             {[
-              ["Projects", "/#projects"],
+              ["Dimensions", "/#dimensions"],
+              ["Deployments", "/#deployments"],
+              ["The Loop", "/#loop"],
               ["About", "/about"],
-              ["Build With Me", "/build-with-me"],
-              ["Blog", "/blog"],
+              ["Field Notes", "/blog"],
               ["Contact", "/contact"],
             ].map(([label, href]) => (
               <Link
