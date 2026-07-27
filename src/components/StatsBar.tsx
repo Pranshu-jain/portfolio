@@ -1,46 +1,48 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { proofMetrics } from "@/lib/fde";
 import CountUp from "@/components/motion/CountUp";
 import Reveal from "@/components/motion/Reveal";
 
 /**
- * The proof strip directly under the hero. Numbers count up on first view —
- * the point is that each claim on this page resolves to something countable.
+ * The dimension strip. On a drawing, dimensions are the measured facts
+ * you can check against the built work — which is exactly the contract
+ * these numbers are under (see the rule at the top of lib/fde.ts).
  */
 export default function StatsBar() {
   return (
-    <section className="border-y border-[rgba(255,255,255,0.04)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(0,212,255,0.025)_0%,transparent_70%)]" />
-
-      {/* Sweep that crosses the strip once on entry */}
-      <motion.div
-        aria-hidden="true"
-        className="absolute inset-y-0 w-40 bg-gradient-to-r from-transparent via-[rgba(0,212,255,0.06)] to-transparent"
-        initial={{ x: "-20%" }}
-        whileInView={{ x: "120vw" }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.6, ease: "easeInOut", delay: 0.2 }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-[rgba(255,255,255,0.04)]">
+    <section className="border-y border-graphite">
+      <div className="page">
+        <div className="grid grid-cols-2 md:grid-cols-4">
           {proofMetrics.map((metric, i) => (
-            <Reveal key={metric.label} delay={i * 0.08} blur={false}>
-              <div className="group flex flex-col items-center gap-1.5 py-9 px-5 text-center">
+            <Reveal key={metric.label} delay={i * 0.07} blur={false}>
+              <div
+                className={`py-7 pr-5 ${
+                  i > 0 ? "md:border-l md:border-graphite md:pl-5" : ""
+                } ${i % 2 === 1 ? "border-l border-graphite pl-5 md:pl-5" : ""}`}
+              >
+                {/* Dimension line: tick — measure — tick */}
+                <div
+                  className="flex items-center gap-1 mb-3 text-blue"
+                  aria-hidden="true"
+                >
+                  <span className="w-px h-2 bg-current" />
+                  <span className="flex-1 h-px bg-current opacity-40" />
+                  <span className="w-px h-2 bg-current" />
+                </div>
+
                 <CountUp
                   value={metric.value}
                   prefix={metric.prefix}
                   suffix={metric.suffix}
-                  className="text-3xl sm:text-4xl font-black gradient-text leading-none tabular-nums"
+                  className="display block text-[clamp(1.5rem,2.6vw,2.1rem)] leading-none tabular-nums"
                 />
-                <span className="text-xs text-[#64748b] tracking-wide mt-1">
+                <div className="text-[13px] text-graphite mt-2 leading-snug">
                   {metric.label}
-                </span>
-                <span className="mono text-[9px] text-[#334155] uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                </div>
+                <div className="mono !text-[9px] mt-1.5 !tracking-[0.1em] text-faint">
                   {metric.sub}
-                </span>
+                </div>
               </div>
             </Reveal>
           ))}

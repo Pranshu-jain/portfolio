@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <>
-      <div className="pt-20">
+      <div className="pt-[clamp(64px,9vh,100px)]">
         <ProjectsSection />
       </div>
       <Footer />

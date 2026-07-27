@@ -20,13 +20,15 @@ export type Dimension = {
   axis: string;
   /** Two-to-four word gloss shown under the label. */
   short: string;
+  /** Schedule mark, keyed to the capability schedule. */
+  mark: string;
   /**
-   * Relative emphasis across the eight axes, 0–100. This drives the radar's
-   * geometry only — it is deliberately never shown as a figure, because a
-   * self-assessed number reads as precision nobody can check. The evidence
-   * list is what actually makes the case.
+   * Where this capability bears load across the five phases of the loop,
+   * in order: land, measure, slice, harden, handover. 2 = carries the
+   * phase, 1 = in play, 0 = not load-bearing. Observable from how an
+   * engagement actually runs, unlike a self-assessed score.
    */
-  score: number;
+  load: [number, number, number, number, number];
   color: string;
   /** What the dimension actually means in the field. */
   detail: string;
@@ -42,11 +44,12 @@ export type Dimension = {
 export const dimensions: Dimension[] = [
   {
     id: "ambiguity",
+    mark: "A1",
     label: "Ambiguity → Spec",
     axis: "Ambiguity",
     short: "Turning vague into buildable",
-    score: 92,
     color: "#00d4ff",
+    load: [2, 2, 1, 0, 0],
     detail:
       "Customers describe symptoms, not specs. I sit with the people doing the work, watch the actual workflow, and leave with a one-page spec, a named success metric, and an explicit list of what we are not building.",
     evidence: [
@@ -57,11 +60,12 @@ export const dimensions: Dimension[] = [
   },
   {
     id: "prototype",
+    mark: "A2",
     label: "Rapid Prototyping",
     axis: "Prototype",
     short: "Working slice in days",
-    score: 95,
     color: "#7c3aed",
+    load: [0, 1, 2, 0, 0],
     detail:
       "A demo on a real URL ends more arguments than a month of meetings. I get a thin end-to-end slice deployed inside the first week, running on the customer's real data, so feedback is about the product instead of the mockup.",
     evidence: [
@@ -72,11 +76,12 @@ export const dimensions: Dimension[] = [
   },
   {
     id: "production",
+    mark: "A3",
     label: "Production Hardening",
     axis: "Production",
     short: "From demo to load-bearing",
-    score: 88,
     color: "#22c55e",
+    load: [0, 0, 1, 2, 1],
     detail:
       "The prototype is the easy half. Hardening is error paths, access control, indexes, tests, and the runbook that lets someone else operate it at 3am without calling me.",
     evidence: [
@@ -87,11 +92,12 @@ export const dimensions: Dimension[] = [
   },
   {
     id: "integration",
+    mark: "A4",
     label: "Systems Integration",
     axis: "Integration",
     short: "Into stacks I didn't choose",
-    score: 90,
     color: "#ff6b35",
+    load: [1, 2, 2, 1, 0],
     detail:
       "Forward deployment means writing code in someone else's repo, against someone else's API, under someone else's conventions. I read the codebase before I touch it and integrate without breaking what already works.",
     evidence: [
@@ -102,11 +108,12 @@ export const dimensions: Dimension[] = [
   },
   {
     id: "data",
+    mark: "A5",
     label: "Data & Pipelines",
     axis: "Data",
     short: "Real data, not fixtures",
-    score: 85,
     color: "#f59e0b",
+    load: [1, 1, 2, 1, 0],
     detail:
       "Customer data is messy, high-volume, and never shaped like the schema you'd have designed. I model it, index it, backfill it, and build the analytics layer that turns it into something a decision-maker can act on.",
     evidence: [
@@ -117,11 +124,12 @@ export const dimensions: Dimension[] = [
   },
   {
     id: "ai",
+    mark: "A6",
     label: "AI Deployment",
     axis: "AI",
     short: "LLMs that survive users",
-    score: 93,
     color: "#6366f1",
+    load: [0, 1, 2, 1, 0],
     detail:
       "Wiring an LLM into a demo takes an afternoon. Deploying one takes prompt design, failure handling, cost control, and a fallback for the day the API is down — plus the judgment to know when the answer isn't a model at all.",
     evidence: [
@@ -132,11 +140,12 @@ export const dimensions: Dimension[] = [
   },
   {
     id: "comms",
+    mark: "A7",
     label: "Customer Comms",
     axis: "Comms",
     short: "Technical depth, plain words",
-    score: 90,
     color: "#ec4899",
+    load: [2, 2, 1, 1, 2],
     detail:
       "Half the role is not engineering. It's the demo to the executive, the honest 'that will take three weeks, here's why', and the written update that keeps a room aligned without a meeting.",
     evidence: [
@@ -147,11 +156,12 @@ export const dimensions: Dimension[] = [
   },
   {
     id: "ownership",
+    mark: "A8",
     label: "Ownership Loop",
     axis: "Ownership",
     short: "I stay until it's used",
-    score: 94,
     color: "#14b8a6",
+    load: [0, 0, 1, 1, 2],
     detail:
       "Shipped is not the finish line — adopted is. I stay attached through rollout, watch what real usage breaks, and iterate until the metric we agreed on actually moves.",
     evidence: [
@@ -406,7 +416,7 @@ export const proofMetrics: {
     value: 10000,
     suffix: "+",
     label: "Records in production",
-    sub: "Indexed PostgreSQL, not caching tricks",
+    sub: "Indexed PostgreSQL",
   },
   {
     value: 200,

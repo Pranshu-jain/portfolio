@@ -2,13 +2,12 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Mail, ArrowRight, AlertCircle } from "lucide-react";
+import { Mail, AlertCircle } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { siteConfig } from "@/lib/config";
 import { engagements } from "@/lib/fde";
 import SectionHeading from "@/components/motion/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
-import Magnetic from "@/components/motion/Magnetic";
 
 const TIMELINES = ["ASAP", "This month", "This quarter", "Exploring"];
 
@@ -51,8 +50,6 @@ export default function ContactSection() {
       });
 
       if (!res.ok) {
-        // 503 means the mail key isn't configured — say so rather than
-        // pretending the message went somewhere.
         setError(
           res.status === 503
             ? "Email delivery isn't configured on this deployment yet."
@@ -61,7 +58,6 @@ export default function ContactSection() {
         setStatus("error");
         return;
       }
-
       setStatus("sent");
     } catch {
       setError("Network error. Email me directly and it'll reach me.");
@@ -71,55 +67,46 @@ export default function ContactSection() {
 
   const sending = status === "sending";
 
-  return (
-    <section id="contact" className="py-28 relative overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,212,255,0.05) 0%, transparent 70%)",
-        }}
-      />
+  const chip = (active: boolean) =>
+    `px-3.5 py-2 border font-mono text-[10px] tracking-[0.1em] uppercase transition-colors duration-150 ${
+      active
+        ? "border-blue bg-blue text-white"
+        : "border-graphite text-graphite hover:bg-graphite hover:text-stock"
+    }`;
 
-      <div className="relative max-w-5xl mx-auto px-6">
+  return (
+    <section id="contact" data-sheet="Start a survey" className="sheet">
+      <div className="page">
         <SectionHeading
-          eyebrow="Start an Engagement"
-          accent="#00d4ff"
-          align="center"
+          number="09"
+          name="Start a survey"
           title={
             <>
-              Tell me what&apos;s{" "}
-              <span className="gradient-text">actually broken</span>
+              Tell me the rule you{" "}
+              <span className="text-blue">can&rsquo;t change</span>.
             </>
           }
-          description="Not the feature request — the thing behind it. Rough is fine; the first job of an engagement is turning rough into a spec. I reply within 24 hours."
-          className="mb-16"
+          description="Not the feature request — the condition underneath it. Rough is fine; turning rough into a spec is the first phase of the work, not a prerequisite for it."
+          className="mb-9"
         />
 
-        <div className="grid md:grid-cols-5 gap-8">
-          {/* Form */}
-          <Reveal direction="right" className="md:col-span-3">
+        <div className="grid md:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] gap-[clamp(24px,4vw,48px)]">
+          <Reveal>
             <AnimatePresence mode="wait">
               {status === "sent" ? (
                 <motion.div
                   key="sent"
-                  initial={{ opacity: 0, scale: 0.94 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="h-full min-h-[340px] flex flex-col items-center justify-center gap-5 p-10 rounded-3xl glass border border-[rgba(0,212,255,0.12)]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="panel p-8 min-h-[300px] flex flex-col justify-center"
                 >
-                  <motion.div
-                    initial={{ y: 12, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="text-5xl"
-                  >
-                    🛬
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-white">Received.</h3>
-                  <p className="text-[#64748b] text-center text-sm max-w-xs leading-relaxed">
-                    I&apos;ll come back within 24 hours with either a first read
-                    on the constraint or the questions I need answered to give
-                    you one.
+                  <div className="mono !text-[9.5px] mb-3">Received</div>
+                  <h3 className="display-sm text-xl mb-3">
+                    Logged. I&rsquo;ll come back within 24 hours.
+                  </h3>
+                  <p className="text-[14px] text-soft m-0 max-w-[44ch]">
+                    Either with a first read on the constraint, or with the
+                    questions I need answered to give you one.
                   </p>
                 </motion.div>
               ) : (
@@ -130,14 +117,11 @@ export default function ContactSection() {
                 >
                   <div className="grid sm:grid-cols-2 gap-5">
                     {[
-                      { key: "name", label: "Your Name", type: "text", placeholder: "Alex Chen" },
-                      { key: "email", label: "Work Email", type: "email", placeholder: "alex@company.com" },
+                      { key: "name", label: "Your name", type: "text", placeholder: "Alex Chen" },
+                      { key: "email", label: "Work email", type: "email", placeholder: "alex@company.com" },
                     ].map((f) => (
                       <div key={f.key}>
-                        <label
-                          htmlFor={f.key}
-                          className="block mono text-[10px] font-semibold text-[#475569] mb-2 uppercase tracking-widest"
-                        >
+                        <label htmlFor={f.key} className="mono !text-[9.5px] block mb-2">
                           {f.label}
                         </label>
                         <input
@@ -147,205 +131,134 @@ export default function ContactSection() {
                           value={form[f.key as keyof typeof form]}
                           onChange={(e) => update(f.key, e.target.value)}
                           required
-                          className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.35)] focus:bg-[rgba(0,212,255,0.02)] transition-all text-sm"
+                          className="field"
                         />
                       </div>
                     ))}
                   </div>
 
-                  {/* Engagement shape */}
                   <div>
-                    <span className="block mono text-[10px] font-semibold text-[#475569] mb-2 uppercase tracking-widest">
+                    <span className="mono !text-[9.5px] block mb-2">
                       Engagement shape
                     </span>
                     <div className="flex flex-wrap gap-2">
-                      {engagements.map((eng) => {
-                        const active = form.engagement === eng.name;
-                        return (
-                          <button
-                            key={eng.id}
-                            type="button"
-                            onClick={() => update("engagement", eng.name)}
-                            aria-pressed={active}
-                            className="px-4 py-2 rounded-xl text-xs font-semibold border transition-all duration-200"
-                            style={{
-                              background: active ? `${eng.color}16` : "rgba(255,255,255,0.02)",
-                              borderColor: active ? `${eng.color}44` : "rgba(255,255,255,0.06)",
-                              color: active ? eng.color : "#64748b",
-                            }}
-                          >
-                            {eng.name}
-                          </button>
-                        );
-                      })}
+                      {engagements.map((eng) => (
+                        <button
+                          key={eng.id}
+                          type="button"
+                          onClick={() => update("engagement", eng.name)}
+                          aria-pressed={form.engagement === eng.name}
+                          className={chip(form.engagement === eng.name)}
+                        >
+                          {eng.name}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
-                  {/* Timeline */}
                   <div>
-                    <span className="block mono text-[10px] font-semibold text-[#475569] mb-2 uppercase tracking-widest">
-                      Timeline
-                    </span>
+                    <span className="mono !text-[9.5px] block mb-2">Timeline</span>
                     <div className="flex flex-wrap gap-2">
-                      {TIMELINES.map((t) => {
-                        const active = form.timeline === t;
-                        return (
-                          <button
-                            key={t}
-                            type="button"
-                            onClick={() => update("timeline", t)}
-                            aria-pressed={active}
-                            className={`px-4 py-2 rounded-xl text-xs font-medium border transition-all duration-200 ${
-                              active
-                                ? "border-[rgba(0,212,255,0.35)] bg-[rgba(0,212,255,0.08)] text-[#00d4ff]"
-                                : "border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] text-[#64748b] hover:text-white"
-                            }`}
-                          >
-                            {t}
-                          </button>
-                        );
-                      })}
+                      {TIMELINES.map((t) => (
+                        <button
+                          key={t}
+                          type="button"
+                          onClick={() => update("timeline", t)}
+                          aria-pressed={form.timeline === t}
+                          className={chip(form.timeline === t)}
+                        >
+                          {t}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="message"
-                      className="block mono text-[10px] font-semibold text-[#475569] mb-2 uppercase tracking-widest"
-                    >
-                      What&apos;s the situation?
+                    <label htmlFor="message" className="mono !text-[9.5px] block mb-2">
+                      What&rsquo;s the situation?
                     </label>
                     <textarea
                       id="message"
-                      placeholder="What the team is doing manually today, what's blocking it, and what would count as this being fixed..."
+                      placeholder="What the team does manually today, what blocks it, and what would count as this being fixed..."
                       value={form.message}
                       onChange={(e) => update("message", e.target.value)}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] text-white placeholder-[#334155] focus:outline-none focus:border-[rgba(0,212,255,0.35)] focus:bg-[rgba(0,212,255,0.02)] transition-all text-sm resize-none"
+                      className="field resize-none"
                     />
                   </div>
 
                   {status === "error" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-start gap-2.5 px-4 py-3 rounded-xl bg-[rgba(239,68,68,0.06)] border border-[rgba(239,68,68,0.18)]"
-                      role="alert"
-                    >
-                      <AlertCircle size={14} className="text-[#ef4444] shrink-0 mt-0.5" />
-                      <span className="text-xs text-[#fca5a5] leading-relaxed">
+                    <div className="note flex items-start gap-2.5" role="alert">
+                      <AlertCircle size={14} className="text-bind-ink shrink-0 mt-0.5" />
+                      <span className="text-[12.5px] leading-relaxed text-ink">
                         {error}{" "}
-                        <a
-                          href={`mailto:${siteConfig.email}`}
-                          className="underline hover:text-white"
-                        >
+                        <a href={`mailto:${siteConfig.email}`} className="underline">
                           {siteConfig.email}
                         </a>
                       </span>
-                    </motion.div>
+                    </div>
                   )}
 
-                  <Magnetic strength={0.15}>
-                    <button
-                      type="submit"
-                      disabled={sending}
-                      className="w-full flex items-center justify-center gap-2 py-4 rounded-xl btn-gradient text-white font-semibold shine disabled:opacity-60 transition-opacity"
-                    >
-                      {sending ? (
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 0.9, repeat: Infinity, ease: "linear" }}
-                          className="w-5 h-5 border-2 border-white/25 border-t-white rounded-full"
-                        />
-                      ) : (
-                        <>
-                          <Send size={16} /> Send Brief
-                        </>
-                      )}
-                    </button>
-                  </Magnetic>
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="btn btn-solid justify-center disabled:opacity-60"
+                  >
+                    {sending ? "Sending…" : "Send brief"}
+                  </button>
                 </motion.form>
               )}
             </AnimatePresence>
           </Reveal>
 
-          {/* Sidebar */}
-          <Reveal direction="left" delay={0.12} className="md:col-span-2">
-            <div className="flex flex-col gap-5 h-full">
-              <div className="p-6 rounded-2xl card-border">
-                <h3 className="text-sm font-bold text-white mb-5">
-                  Direct channels
-                </h3>
-                <div className="flex flex-col gap-4">
+          <Reveal direction="left" delay={0.1}>
+            <div className="flex flex-col gap-5">
+              <div className="panel p-6">
+                <div className="mono !text-[9.5px] mb-4">Direct channels</div>
+                <div className="flex flex-col gap-3.5">
                   {[
-                    {
-                      icon: Mail,
-                      label: "Email",
-                      href: `mailto:${siteConfig.email}`,
-                      value: siteConfig.email,
-                    },
-                    {
-                      icon: GithubIcon,
-                      label: "GitHub",
-                      href: `https://github.com/${siteConfig.github}`,
-                      value: `@${siteConfig.github}`,
-                    },
-                    {
-                      icon: LinkedinIcon,
-                      label: "LinkedIn",
-                      href: siteConfig.linkedin,
-                      value: "/in/pranshu-jain",
-                    },
+                    { icon: Mail, label: "Email", href: `mailto:${siteConfig.email}`, value: siteConfig.email },
+                    { icon: GithubIcon, label: "GitHub", href: `https://github.com/${siteConfig.github}`, value: `@${siteConfig.github}` },
+                    { icon: LinkedinIcon, label: "LinkedIn", href: siteConfig.linkedin, value: "/in/pranshu-jain" },
                   ].map(({ icon: Icon, label, href, value }) => (
-                    <motion.a
+                    <a
                       key={label}
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ x: 3 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
                       className="flex items-center gap-3 group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.04)] flex items-center justify-center group-hover:border-[rgba(0,212,255,0.25)] transition-colors">
-                        <Icon
-                          size={13}
-                          className="text-[#475569] group-hover:text-[#00d4ff] transition-colors"
-                        />
+                      <div className="w-8 h-8 border border-graphite flex items-center justify-center group-hover:bg-graphite group-hover:text-stock transition-colors">
+                        <Icon size={13} />
                       </div>
                       <div className="min-w-0">
-                        <div className="mono text-[9px] text-[#334155] uppercase tracking-wider">
+                        <div className="mono !text-[8.5px] !tracking-[0.11em]">
                           {label}
                         </div>
-                        <div className="text-xs text-[#64748b] group-hover:text-white transition-colors truncate max-w-[150px]">
+                        <div className="text-[12.5px] text-graphite truncate max-w-[170px]">
                           {value}
                         </div>
                       </div>
-                    </motion.a>
+                    </a>
                   ))}
                 </div>
               </div>
 
-              <div className="p-6 rounded-2xl gradient-border relative overflow-hidden flex-1">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,212,255,0.07),transparent_70%)] pointer-events-none" />
-                <div className="relative">
-                  <div className="text-3xl mb-4">📞</div>
-                  <h3 className="font-bold text-white mb-2 text-sm">
-                    Skip the form
-                  </h3>
-                  <p className="text-[#475569] text-xs mb-5 leading-relaxed">
-                    Thirty minutes on a call usually surfaces the real
-                    constraint faster than any written brief. No commitment.
-                  </p>
-                  <a
-                    href={siteConfig.calendly}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-[#00d4ff] font-semibold hover:gap-3 transition-all"
-                  >
-                    Book a call <ArrowRight size={14} />
-                  </a>
-                </div>
+              <div className="panel p-6 flex-1">
+                <div className="mono !text-[9.5px] mb-3">Skip the form</div>
+                <p className="text-[13px] leading-relaxed text-soft m-0 mb-5">
+                  Thirty minutes on a call usually surfaces the real constraint
+                  faster than any written brief. No commitment.
+                </p>
+                <a
+                  href={siteConfig.calendly}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-sm"
+                >
+                  Book 30 minutes
+                </a>
               </div>
             </div>
           </Reveal>
