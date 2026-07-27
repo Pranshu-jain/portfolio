@@ -1,4 +1,39 @@
-export const featuredProjects = [
+/**
+ * Deployments, told the way an FDE reports them: the context I landed in, the
+ * constraint that shaped the design, what actually shipped, and the outcome
+ * with a number attached. `problem`/`solution`/`impact` are kept for the
+ * shorter surfaces that only need one line each.
+ */
+export type Deployment = {
+  id: string;
+  emoji: string;
+  title: string;
+  shortDesc: string;
+  description: string;
+  problem: string;
+  solution: string;
+  impact: string;
+  /** Who I was deployed into and what state it was in. */
+  context: string;
+  /** My scope of ownership on the engagement. */
+  role: string;
+  /** The binding constraint — the thing that made the obvious answer wrong. */
+  constraint: string;
+  /** Concrete artifacts left behind. */
+  shipped: string[];
+  /** Measurable result. `value` is rendered as the headline figure. */
+  outcome: { metric: string; value: string }[];
+  /** Systems this deployment had to plug into. */
+  surfaces: string[];
+  tags: string[];
+  github: string;
+  demo: string;
+  color: string;
+  accentColor: string;
+  featured: boolean;
+};
+
+export const featuredProjects: Deployment[] = [
   {
     id: "salary-management",
     emoji: "💼",
@@ -13,6 +48,24 @@ export const featuredProjects = [
       "Decoupled Rails 7 API + Next.js 16 frontend with 5 real-time analytical dashboards, paginated employee CRUD, full test coverage, and a seed system that generates 10,000 employees in ~2.4s",
     impact:
       "Manages 10,000+ employees · Sub-200ms queries via indexed PostgreSQL · 13+ RSpec model tests · Production-ready architecture",
+    context:
+      "An HR function running compensation for 10,000+ people out of spreadsheets — no view of salary equity, headcount distribution, or tenure across departments and countries.",
+    role: "Sole engineer — discovery, architecture, build, deploy, handoff",
+    constraint:
+      "Compensation data is sensitive and high-volume. The analytics had to be fast enough to explore live in a leadership meeting, and every rule that touched pay had to be testable — so caching tricks and denormalised shortcuts were off the table.",
+    shipped: [
+      "Decoupled Rails 7 JSON API with a versioned contract, consumed by a Next.js 16 frontend",
+      "Five analytical views: salary by country, by job title, department headcount, tenure distribution, top-paying roles",
+      "Paginated employee CRUD with search across the full 10,000-record set",
+      "Indexed PostgreSQL schema plus a seed system that reproduces production scale in ~2.4s",
+      "RSpec coverage on the model rules that must never be bypassed",
+    ],
+    outcome: [
+      { metric: "Records in production", value: "10,000+" },
+      { metric: "Query latency", value: "<200ms" },
+      { metric: "Seed to full scale", value: "~2.4s" },
+    ],
+    surfaces: ["Rails 7 API", "PostgreSQL", "Next.js 16", "TanStack Query", "RSpec"],
     tags: ["Rails 7", "Ruby", "Next.js 16", "TypeScript", "PostgreSQL", "TanStack Query", "Recharts", "RSpec"],
     github: "https://github.com/Pranshu-jain/salary-management",
     demo: "https://salary-management-ui-lake.vercel.app",
@@ -34,6 +87,24 @@ export const featuredProjects = [
       "Fully custom full-stack Next.js app with SQLite (via better-sqlite3), server-side JWT auth, Stripe integration, and image processing — all in one deployable codebase",
     impact:
       "Complete cart-to-checkout flow · Stripe payment processing · JWT auth with bcrypt · Zero external CMS dependencies",
+    context:
+      "A storefront blocked on commerce platforms — every customisation meant fighting a hosted layer, and every deploy meant coordinating three vendors.",
+    role: "Sole engineer — full stack, payments, deploy",
+    constraint:
+      "No external CMS and no hosted commerce layer: the whole thing had to deploy as one self-contained app a small team could operate. That ruled out the usual escape hatches, while the money path still had to be correct on the first try.",
+    shipped: [
+      "Full-stack Next.js storefront: catalog, cart state, checkout, order flow",
+      "Stripe-powered payments with server-side verification",
+      "JWT authentication with bcrypt hashing, no third-party identity provider",
+      "SQLite via better-sqlite3 — single-file datastore, zero external services",
+      "Sharp-based image pipeline so product media stays fast without a CDN contract",
+    ],
+    outcome: [
+      { metric: "External services required", value: "0" },
+      { metric: "Cart-to-checkout", value: "complete" },
+      { metric: "Deploy surface", value: "1 app" },
+    ],
+    surfaces: ["Stripe", "SQLite", "JWT", "Sharp", "Vercel"],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "SQLite", "Stripe", "JWT", "bcryptjs", "Sharp"],
     github: "https://github.com/Pranshu-jain/ecommerce-platform",
     demo: "https://ecommerce-platform-phi-five.vercel.app",
@@ -55,6 +126,23 @@ export const featuredProjects = [
       "Ruby service layer that intercepts key user lifecycle events and pushes them to Iterable via REST, enabling automated campaigns, onboarding sequences, and re-engagement flows",
     impact:
       "Automated user lifecycle triggers · Real-time event sync · Reusable service pattern for future integrations",
+    context:
+      "A growth team running campaigns blind: Iterable had no idea what users were doing inside the product, so onboarding and re-engagement fired on calendar time instead of behaviour.",
+    role: "Integration engineer — inside an existing production Rails app",
+    constraint:
+      "This was someone else's live codebase. The integration could not change application behaviour, could not block a user request, and could not take the app down if Iterable was slow or unavailable. Fail-open was the hard requirement.",
+    shipped: [
+      "Ruby service layer intercepting key user lifecycle events at well-defined seams",
+      "REST push to Iterable with event contracts versioned so campaigns don't silently break",
+      "List and subscriber management wired to in-app state",
+      "A reusable integration pattern the resident team applied to later vendors",
+    ],
+    outcome: [
+      { metric: "Campaign triggers", value: "behaviour-driven" },
+      { metric: "Event sync", value: "real-time" },
+      { metric: "App behaviour changed", value: "none" },
+    ],
+    surfaces: ["Iterable REST API", "Rails", "Webhooks", "Lifecycle events"],
     tags: ["Ruby", "Rails", "REST API", "Iterable", "Marketing Automation", "Webhooks"],
     github: "https://github.com/Pranshu-jain/IterableIntegration",
     demo: "https://github.com/Pranshu-jain/IterableIntegration",
@@ -64,7 +152,7 @@ export const featuredProjects = [
   },
 ];
 
-export const allProjects = [
+export const allProjects: Deployment[] = [
   ...featuredProjects,
   {
     id: "brain",
@@ -75,6 +163,17 @@ export const allProjects = [
     problem: "No lightweight course hosting solution for small creators",
     solution: "Simple courses platform with structured content delivery",
     impact: "Functional courses site deployed",
+    context:
+      "Small creators with course material and nowhere lightweight to host it — every option was either an enterprise LMS or a raw file dump.",
+    role: "Sole engineer — build and deploy",
+    constraint:
+      "Had to stay small enough that a non-technical creator could run it without a platform contract or a maintenance budget.",
+    shipped: [
+      "Structured course and lesson content model",
+      "Delivery site deployed and publicly reachable",
+    ],
+    outcome: [{ metric: "Hosting overhead", value: "minimal" }],
+    surfaces: ["Web", "Static hosting"],
     tags: ["Web", "Courses", "Content"],
     github: "https://github.com/Pranshu-jain/Brain",
     demo: "https://github.com/Pranshu-jain/Brain",

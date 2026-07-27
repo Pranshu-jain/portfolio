@@ -5,8 +5,9 @@ import { ArrowRight, Clock } from "lucide-react";
 import { blogPosts } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Blog — Pranshu",
-  description: "Insights on AI development, startup speed, and building products that matter.",
+  title: "Field Notes — Pranshu",
+  description:
+    "Notes from deployments: architecture decisions, integration patterns, and what actually holds up in production.",
 };
 
 export default function BlogPage() {
@@ -18,15 +19,16 @@ export default function BlogPage() {
         {/* Header */}
         <div className="max-w-2xl mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(0,212,255,0.08)] text-[#00d4ff] border border-[rgba(0,212,255,0.1)] mb-5">
-            Blog & Insights
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00d4ff]" />
+            Field Notes
           </div>
           <h1 className="text-5xl sm:text-6xl font-black text-white mb-5 leading-tight">
-            Ideas on AI,{" "}
-            <span className="gradient-text">startups & speed.</span>
+            What I learned{" "}
+            <span className="gradient-text">on deployment.</span>
           </h1>
-          <p className="text-[#475569] text-lg">
-            Thoughts on building fast, using AI as a multiplier, and shipping
-            products that matter.
+          <p className="text-[#64748b] text-lg">
+            Architecture decisions, integration patterns, and the tradeoffs that
+            only show up once something is running in production.
           </p>
         </div>
 

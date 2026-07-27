@@ -1,56 +1,37 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import ChatTrigger from "@/components/ChatTrigger";
+import Reveal from "@/components/motion/Reveal";
 import { siteConfig } from "@/lib/config";
-import { ArrowRight, CheckCircle2, Zap, Clock, Shield, Star, Wrench, PlusCircle, RefreshCw } from "lucide-react";
+import { engagements, deploymentLoop } from "@/lib/fde";
+import { ArrowRight, CheckCircle2, Crosshair, Gauge, Layers, Users } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Build With Me — Pranshu",
-  description: "Have a startup idea? I can build and scale it fast using AI. MVP in days, AI integrations, automation systems.",
+  title: "Deploy Me — Pranshu, Forward Deployed Engineer",
+  description:
+    "Engagement models for forward deployment: a two-week strike, a multi-month embed, or ongoing systems and AI integration. Same loop, different depth.",
 };
 
-const packages = [
+const whyFDE = [
   {
-    name: "MVP Sprint",
-    price: "Let's Talk",
-    desc: "Full-stack MVP shipped in 1–2 weeks",
-    features: [
-      "Complete full-stack application",
-      "Authentication + database",
-      "Responsive UI/UX",
-      "Deployed and production-ready",
-      "1 week of post-launch support",
-    ],
-    color: "#00d4ff",
-    highlight: false,
+    icon: Crosshair,
+    title: "You get the discovery too",
+    desc: "I don't need a finished spec. Turning the fuzzy version into a buildable one is the first phase of the work, not a prerequisite for it.",
   },
   {
-    name: "AI Product",
-    price: "Let's Talk",
-    desc: "AI-first product with agents and automation",
-    features: [
-      "Everything in MVP Sprint",
-      "LLM integration (GPT-4 / Claude)",
-      "Custom AI agents + workflows",
-      "Automation pipelines",
-      "2 weeks of post-launch support",
-    ],
-    color: "#7c3aed",
-    highlight: true,
+    icon: Layers,
+    title: "Deployed in your stack",
+    desc: "Your repo, your conventions, your deploy pipeline. Not a sandbox demo your team has to rebuild before it counts.",
   },
   {
-    name: "Scale Partner",
-    price: "Let's Talk",
-    desc: "Long-term startup tech partner",
-    features: [
-      "Ongoing development retainer",
-      "Architecture reviews",
-      "Performance optimization",
-      "New feature development",
-      "Priority response time",
-    ],
-    color: "#ff6b35",
-    highlight: false,
+    icon: Gauge,
+    title: "Measured, not asserted",
+    desc: "We agree on one number before I build, and instrumentation ships in the same commit as the feature.",
+  },
+  {
+    icon: Users,
+    title: "Your team owns it after",
+    desc: "Documentation and a walkthrough are deliverables. The engagement succeeds when you don't need me anymore.",
   },
 ];
 
@@ -60,163 +41,198 @@ export default function BuildWithMePage() {
       <div className="pt-28 max-w-7xl mx-auto px-6">
         {/* Hero */}
         <div className="text-center max-w-3xl mx-auto mb-24">
-          <div className="flex flex-wrap justify-center gap-2 mb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(124,58,237,0.08)] text-[#7c3aed] border border-[rgba(124,58,237,0.12)]">
-              New Websites & Apps
+          <Reveal>
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              {engagements.map((eng) => (
+                <span
+                  key={eng.id}
+                  className="mono inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-wider"
+                  style={{
+                    background: `${eng.color}14`,
+                    color: eng.color,
+                    border: `1px solid ${eng.color}26`,
+                  }}
+                >
+                  {eng.name} · {eng.duration}
+                </span>
+              ))}
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(0,212,255,0.08)] text-[#00d4ff] border border-[rgba(0,212,255,0.12)]">
-              Existing Site Improvement
-            </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[rgba(255,107,53,0.08)] text-[#ff6b35] border border-[rgba(255,107,53,0.12)]">
-              Feature Addition & AI
-            </div>
-          </div>
-          <h1 className="text-5xl sm:text-7xl font-black text-white mb-6 leading-tight">
-            Whatever you need —
-            <br />
-            <span className="gradient-text">I&apos;ll build it fast.</span>
-          </h1>
-          <p className="text-[#475569] text-xl leading-relaxed mb-8">
-            New website, existing site that needs improvement, features to add, or AI to integrate —
-            I work 3× faster using AI-augmented development without sacrificing quality.
-          </p>
-          <ChatTrigger className="inline-flex items-center gap-2 px-10 py-4 rounded-full btn-gradient text-white font-semibold text-lg shine">
-            Start a Conversation <ArrowRight size={18} />
-          </ChatTrigger>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <h1 className="text-5xl sm:text-7xl font-black text-white mb-6 leading-[1.02] tracking-tight">
+              Hand me the fuzzy problem —
+              <br />
+              <span className="gradient-text">I&apos;ll deploy the answer.</span>
+            </h1>
+          </Reveal>
+
+          <Reveal delay={0.14}>
+            <p className="text-[#64748b] text-xl leading-relaxed mb-8">
+              Forward deployment means I take the problem before it&apos;s been
+              specified, build inside your environment, and stay attached until
+              your team has adopted what I shipped.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <ChatTrigger className="inline-flex items-center gap-2 px-10 py-4 rounded-full btn-gradient text-white font-semibold text-lg shine">
+              Scope an Engagement <ArrowRight size={18} />
+            </ChatTrigger>
+          </Reveal>
         </div>
 
-        {/* Why me */}
+        {/* Why an FDE, not a contractor */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
-          {[
-            { icon: Zap,     title: "AI-Augmented Speed",  desc: "I ship in days what takes teams weeks" },
-            { icon: Shield,  title: "Production Quality",  desc: "No shortcuts — scalable, tested code" },
-            { icon: Clock,   title: "Fast Iteration",      desc: "Daily updates, weekly demos" },
-            { icon: Star,    title: "Full Ownership",      desc: "I own it end-to-end until it ships" },
-          ].map((item) => (
-            <div key={item.title} className="p-6 rounded-2xl card-border">
-              <item.icon size={22} className="text-[#00d4ff] mb-4" />
-              <h3 className="font-bold text-white text-sm mb-2">{item.title}</h3>
-              <p className="text-[#475569] text-xs leading-relaxed">{item.desc}</p>
-            </div>
+          {whyFDE.map((item, i) => (
+            <Reveal key={item.title} delay={i * 0.07}>
+              <div className="p-6 rounded-2xl card-border h-full">
+                <item.icon size={22} className="text-[#00d4ff] mb-4" />
+                <h3 className="font-bold text-white text-sm mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-[#475569] text-xs leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        {/* Packages */}
+        {/* Engagement models */}
         <div className="mb-24">
-          <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-12">
-            How we can <span className="gradient-text">work together</span>
-          </h2>
+          <Reveal>
+            <h2 className="text-3xl sm:text-4xl font-black text-white text-center mb-3">
+              Three ways to <span className="gradient-text">deploy me</span>
+            </h2>
+            <p className="text-[#475569] text-center mb-12 max-w-xl mx-auto">
+              Same loop in all three. The difference is how much ambiguity
+              you&apos;re handing over and how long I stay attached.
+            </p>
+          </Reveal>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {packages.map((pkg) => (
-              <div
-                key={pkg.name}
-                className={`relative p-7 rounded-2xl flex flex-col gap-5 ${
-                  pkg.highlight
-                    ? "gradient-border"
-                    : "card-border"
-                }`}
-              >
-                {pkg.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-bold bg-[#7c3aed] text-white uppercase tracking-wider">
-                    Most Popular
-                  </div>
-                )}
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-widest mb-2"
-                    style={{ color: pkg.color }}>
-                    {pkg.name}
-                  </div>
-                  <div className="text-3xl font-black text-white mb-1">{pkg.price}</div>
-                  <div className="text-[#475569] text-sm">{pkg.desc}</div>
-                </div>
-                <div className="flex flex-col gap-2.5 flex-1">
-                  {pkg.features.map((f) => (
-                    <div key={f} className="flex items-start gap-2.5">
-                      <CheckCircle2 size={14} className="mt-0.5 shrink-0" style={{ color: pkg.color }} />
-                      <span className="text-[#64748b] text-xs">{f}</span>
-                    </div>
-                  ))}
-                </div>
-                <a
-                  href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(`${pkg.name} — Let's Build`)}`}
-                  className={`flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all ${
-                    pkg.highlight
-                      ? "btn-gradient text-white shine"
-                      : "border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(255,255,255,0.15)]"
+            {engagements.map((eng, i) => (
+              <Reveal key={eng.id} delay={i * 0.09}>
+                <div
+                  className={`relative h-full p-7 rounded-2xl flex flex-col gap-5 ${
+                    eng.highlight ? "gradient-border" : "card-border"
                   }`}
                 >
-                  Get Started <ArrowRight size={14} />
-                </a>
-              </div>
+                  {eng.highlight && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full mono text-[10px] font-bold bg-[#7c3aed] text-white uppercase tracking-wider">
+                      Most engagements
+                    </div>
+                  )}
+
+                  <div>
+                    <div className="flex items-baseline justify-between gap-3 mb-2">
+                      <span
+                        className="mono text-[11px] font-bold uppercase tracking-widest"
+                        style={{ color: eng.color }}
+                      >
+                        {eng.name}
+                      </span>
+                      <span className="mono text-[10px] text-[#334155]">
+                        {eng.duration}
+                      </span>
+                    </div>
+                    <div className="text-lg font-bold text-white mb-2 leading-snug">
+                      {eng.desc}
+                    </div>
+                    <div className="text-[#475569] text-xs">{eng.best}</div>
+                  </div>
+
+                  <div className="h-px bg-[rgba(255,255,255,0.05)]" />
+
+                  <div className="flex flex-col gap-2.5 flex-1">
+                    {eng.features.map((f) => (
+                      <div key={f} className="flex items-start gap-2.5">
+                        <CheckCircle2
+                          size={13}
+                          className="mt-0.5 shrink-0"
+                          style={{ color: eng.color }}
+                        />
+                        <span className="text-[#64748b] text-xs leading-relaxed">
+                          {f}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <a
+                    href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(
+                      `${eng.name} engagement — scoping`,
+                    )}`}
+                    className={`flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all ${
+                      eng.highlight
+                        ? "btn-gradient text-white shine"
+                        : "border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(255,255,255,0.15)]"
+                    }`}
+                  >
+                    Scope this <ArrowRight size={14} />
+                  </a>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
 
-        {/* Website services section */}
+        {/* What every engagement runs through */}
         <div className="mb-24">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
-              Already have a website? <span className="gradient-text">I can help.</span>
-            </h2>
-            <p className="text-[#475569] text-lg max-w-xl mx-auto">
-              You don&apos;t need to build from scratch to work with me. I improve, fix, and extend what you already have.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              {
-                icon: Wrench,
-                title: "Site Audit & Revamp",
-                color: "#22c55e",
-                desc: "Full audit of your existing website — performance, SEO, UX, and conversion issues — followed by targeted improvements.",
-                points: ["Performance & Core Web Vitals", "UX & design refresh", "SEO improvements", "Conversion optimization"],
-              },
-              {
-                icon: PlusCircle,
-                title: "Feature Addition",
-                color: "#00d4ff",
-                desc: "Need a new feature on your existing product? I analyze your codebase and ship the feature fast.",
-                points: ["Codebase analysis first", "Clean integration", "No breaking changes", "Tested and deployed"],
-              },
-              {
-                icon: RefreshCw,
-                title: "Maintenance & Support",
-                color: "#ff6b35",
-                desc: "Ongoing technical partner for your live site. Bug fixes, updates, monitoring, and rapid response.",
-                points: ["Bug fixes & patches", "Dependency updates", "Performance monitoring", "Priority response time"],
-              },
-            ].map((item) => (
-              <div key={item.title} className="p-7 rounded-2xl card-border flex flex-col gap-4">
-                <item.icon size={22} style={{ color: item.color }} />
-                <div>
-                  <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-[#475569] text-sm leading-relaxed">{item.desc}</p>
+          <Reveal>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
+                Every engagement runs{" "}
+                <span className="gradient-text">the same loop</span>
+              </h2>
+              <p className="text-[#475569] text-lg max-w-xl mx-auto">
+                Windows compress or stretch with the engagement. The order
+                doesn&apos;t change.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {deploymentLoop.map((phase, i) => (
+              <Reveal key={phase.id} delay={i * 0.07}>
+                <div className="p-6 rounded-2xl card-border h-full flex flex-col">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{ background: phase.color }}
+                    />
+                    <span
+                      className="mono text-[10px] font-bold uppercase tracking-widest"
+                      style={{ color: phase.color }}
+                    >
+                      {phase.window}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-white text-sm mb-2">
+                    {phase.title}
+                  </h3>
+                  <p className="text-[#475569] text-xs leading-relaxed">
+                    {phase.description}
+                  </p>
                 </div>
-                <div className="flex flex-col gap-2 flex-1">
-                  {item.points.map((p) => (
-                    <div key={p} className="flex items-start gap-2">
-                      <CheckCircle2 size={13} className="mt-0.5 shrink-0" style={{ color: item.color }} />
-                      <span className="text-[#64748b] text-xs">{p}</span>
-                    </div>
-                  ))}
-                </div>
-                <ChatTrigger className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold border border-[rgba(255,255,255,0.08)] text-[#94a3b8] hover:text-white hover:border-[rgba(255,255,255,0.15)] transition-all w-full">
-                  Discuss This <ArrowRight size={13} />
-                </ChatTrigger>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
 
         {/* Final CTA */}
-        <div className="text-center pb-16">
-          <p className="text-[#475569] text-lg mb-6">
-            Not sure which option fits? Let&apos;s just talk.
-          </p>
-          <ChatTrigger className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(0,212,255,0.2)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.05)] transition-all font-semibold">
-            Start a Conversation <ArrowRight size={16} />
-          </ChatTrigger>
-        </div>
+        <Reveal>
+          <div className="text-center pb-16">
+            <p className="text-[#64748b] text-lg mb-6">
+              Still deciding which shape fits? That usually means the problem is
+              fuzzy — which is the case for forward deployment, not against it.
+            </p>
+            <ChatTrigger className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(0,212,255,0.2)] text-[#00d4ff] hover:bg-[rgba(0,212,255,0.05)] transition-all font-semibold">
+              Start a Conversation <ArrowRight size={16} />
+            </ChatTrigger>
+          </div>
+        </Reveal>
       </div>
       <Footer />
     </>

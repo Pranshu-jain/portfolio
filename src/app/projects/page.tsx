@@ -3,8 +3,9 @@ import ProjectsSection from "@/components/ProjectsSection";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Projects — Pranshu",
-  description: "A showcase of products built fast using AI — from MVPs to full-scale automation systems.",
+  title: "Deployments — Pranshu",
+  description:
+    "Engagement dossiers: the situation I landed in, the binding constraint, what shipped, and the number that moved.",
 };
 
 export default function ProjectsPage() {
