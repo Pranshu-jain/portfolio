@@ -19,9 +19,10 @@ const AFTER_OUT_MS = 620;
 type Rendered = { cmd: string; out: string | null; tone: string };
 
 /**
- * Replays one engagement as terminal output, typed line by line. It exists to
- * show the shape of the work — land, map, slice, harden, measure, hand off —
- * in the medium the work actually happens in.
+ * Replays one real deployment as terminal output, typed line by line. It shows
+ * the shape of the work — land, observe, map constraints, integrate, verify,
+ * hand off — in the medium the work actually happens in. Lines come from
+ * `fieldLog`, which is held to the no-invented-figures rule in `lib/fde.ts`.
  */
 function Terminal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -101,7 +102,7 @@ function Terminal() {
           <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
         </div>
         <span className="mono text-[10px] text-[#475569] ml-2 truncate">
-          ~/engagements/current — field log
+          ~/deployments/iterable — field log
         </span>
         <span className="ml-auto flex items-center gap-1.5 shrink-0">
           <span
@@ -185,17 +186,17 @@ export default function FieldLog() {
                   <span className="gradient-text">from the inside</span>
                 </>
               }
-              description="One engagement, compressed. Land on site, find the constraints that actually bind, deploy a slice on real data by day six, harden it, then prove the metric moved before handing over the keys."
+              description="One real deployment, compressed: the Iterable integration. Land in a live Rails codebase I didn't write, find the constraint that actually binds — fail-open, no matter what — and leave behind a pattern the resident team could reuse without me."
               className="mb-8"
             />
 
             <Reveal delay={0.2}>
               <div className="grid grid-cols-2 gap-3 max-w-md">
                 {[
-                  { k: "Time to live slice", v: "6 days", c: "#22c55e" },
-                  { k: "Metric movement", v: "6.0h → 0.4h", c: "#00d4ff" },
-                  { k: "Adoption at handoff", v: "91%", c: "#7c3aed" },
-                  { k: "Dependency on me", v: "none", c: "#ff6b35" },
+                  { k: "Campaign triggers", v: "behaviour-driven", c: "#22c55e" },
+                  { k: "Event sync", v: "real-time", c: "#00d4ff" },
+                  { k: "App behaviour changed", v: "none", c: "#7c3aed" },
+                  { k: "Pattern reuse", v: "later vendors", c: "#ff6b35" },
                 ].map((item) => (
                   <div
                     key={item.k}

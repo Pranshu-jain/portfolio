@@ -5,9 +5,14 @@
  * the competency dimensions (rendered as the radar), the engagement loop, the
  * integration surface, and the operating doctrine. Sections read from this file
  * so the narrative stays consistent across the site.
+ *
+ * Rule for this file: no invented figures. Anything numeric traces back to a
+ * deployment recorded in `./projects.ts`.
  */
 
-/** A single axis on the capability radar. Scores are self-assessed depth, 0–100. */
+import { featuredProjects } from "./projects";
+
+/** A single axis on the capability radar. */
 export type Dimension = {
   id: string;
   label: string;
@@ -15,6 +20,12 @@ export type Dimension = {
   axis: string;
   /** Two-to-four word gloss shown under the label. */
   short: string;
+  /**
+   * Relative emphasis across the eight axes, 0–100. This drives the radar's
+   * geometry only — it is deliberately never shown as a figure, because a
+   * self-assessed number reads as precision nobody can check. The evidence
+   * list is what actually makes the case.
+   */
   score: number;
   color: string;
   /** What the dimension actually means in the field. */
@@ -210,15 +221,20 @@ export const deploymentLoop: LoopPhase[] = [
   },
 ];
 
-/** Terminal-style field log — the visible texture of an engagement in progress. */
+/**
+ * Terminal-style field log. Every line traces to the Iterable integration
+ * recorded in `src/lib/projects.ts` — a real deployment into someone else's
+ * live Rails codebase. No figure appears here that isn't in that record.
+ */
 export const fieldLog: { cmd: string; out: string; tone: "ok" | "info" | "warn" }[] = [
-  { cmd: "fde land --customer acme --mode embedded", out: "on-site. shadowing ops team. 3 workflows observed.", tone: "info" },
-  { cmd: "fde map --constraints", out: "legacy payroll API is read-only · PII cannot leave region", tone: "warn" },
-  { cmd: "fde spec --one-page", out: "success metric locked: 6h/wk of manual reconciliation → 0", tone: "ok" },
-  { cmd: "git push origin slice/day-6", out: "deployed → acme-internal.vercel.app · live on real data", tone: "ok" },
-  { cmd: "fde harden --tests --observability", out: "13 specs green · p95 187ms · alerts wired", tone: "ok" },
-  { cmd: "fde measure --metric reconciliation_hours", out: "6.0h/wk → 0.4h/wk · adoption 91% · target beaten", tone: "ok" },
-  { cmd: "fde handoff --train --docs", out: "runbook shipped. owning team green. next problem scoped.", tone: "info" },
+  { cmd: "fde land --repo client-rails-app", out: "existing production app. reading before touching.", tone: "info" },
+  { cmd: "fde observe --campaigns", out: "onboarding + re-engagement firing on calendar time, not behaviour", tone: "warn" },
+  { cmd: "fde map --constraints", out: "cannot change app behaviour · cannot block a user request · fail-open if Iterable is down", tone: "warn" },
+  { cmd: "fde spec --one-page", out: "goal: campaigns react to what users actually do in-product", tone: "ok" },
+  { cmd: "rails g service iterable/event_dispatcher", out: "lifecycle events tapped at well-defined seams", tone: "info" },
+  { cmd: "fde integrate --vendor iterable --contract v1", out: "event contracts versioned · downstream campaigns won't silently break", tone: "ok" },
+  { cmd: "fde verify --fail-open", out: "iterable unreachable → user request unaffected. requirement met.", tone: "ok" },
+  { cmd: "fde handoff --pattern reusable", out: "resident team applied the same pattern to later vendors.", tone: "info" },
 ];
 
 /** The surfaces a forward deployment actually has to plug into. */
@@ -365,7 +381,14 @@ export const engagements: {
   },
 ];
 
-/** Headline proof numbers. `value` is parsed by CountUp; `suffix`/`prefix` are literal. */
+/**
+ * Headline proof numbers. `value` is animated by CountUp; `prefix`/`suffix`
+ * are literal.
+ *
+ * Every figure here is traceable to a deployment recorded in
+ * `src/lib/projects.ts` — nothing self-reported, nothing unfalsifiable. If you
+ * add a metric, it has to be checkable from the dossiers.
+ */
 export const proofMetrics: {
   value: number;
   prefix?: string;
@@ -373,8 +396,28 @@ export const proofMetrics: {
   label: string;
   sub: string;
 }[] = [
-  { value: 6, suffix: " days", label: "To first live slice", sub: "Deployed, on real data" },
-  { value: 10000, suffix: "+", label: "Records in production", sub: "Sub-200ms indexed queries" },
-  { value: 8, suffix: "/8", label: "FDE dimensions covered", sub: "Discovery through handoff" },
-  { value: 100, suffix: "%", label: "Engagements shipped", sub: "Owned until adopted" },
+  {
+    // Derived, so this stays true as the deployment list grows.
+    value: featuredProjects.length,
+    label: "Deployments shipped",
+    sub: "Discovery through handoff",
+  },
+  {
+    value: 10000,
+    suffix: "+",
+    label: "Records in production",
+    sub: "Indexed PostgreSQL, not caching tricks",
+  },
+  {
+    value: 200,
+    prefix: "<",
+    suffix: "ms",
+    label: "Query latency at that scale",
+    sub: "Across five analytical views",
+  },
+  {
+    value: 0,
+    label: "External services required",
+    sub: "Self-contained storefront, payments included",
+  },
 ];

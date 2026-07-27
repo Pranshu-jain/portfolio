@@ -18,12 +18,8 @@ export const siteConfig = {
     "Shipped isn't done. Adopted is done.",
   ],
 
-  stats: [
-    { value: "6 days", label: "To first live slice" },
-    { value: "10k+", label: "Records in production" },
-    { value: "8/8", label: "FDE dimensions covered" },
-    { value: "100%", label: "Engagements shipped" },
-  ],
+  // Headline proof numbers live in `lib/fde.ts` as `proofMetrics`, where they
+  // are derived from real deployments. Deliberately not duplicated here.
 
   services: [
     {
