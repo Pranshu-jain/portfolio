@@ -68,8 +68,8 @@ export const siteConfig = {
   ],
 
   navLinks: [
-    { href: "/#dimensions", label: "Dimensions" },
     { href: "/#builds", label: "Builds" },
+    { href: "/#experience", label: "Experience" },
     { href: "/#loop", label: "The Loop" },
     { href: "/about", label: "About" },
     { href: "/blog", label: "Field Notes" },

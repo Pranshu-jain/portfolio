@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import FDEDimensions from "@/components/FDEDimensions";
 import Philosophy from "@/components/Philosophy";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/motion/Reveal";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { dimensions } from "@/lib/fde";
 
 export const metadata: Metadata = {
   title: "About",
@@ -90,59 +90,8 @@ export default function AboutPage() {
           </Reveal>
         </div>
 
-        {/* Dimension summary */}
-        <div className="mb-24">
-          <Reveal>
-            <h2 className="text-2xl font-black text-[#0f172a] mb-2">
-              Graded on eight axes
-            </h2>
-            <p className="text-[#64748b] mb-8 max-w-xl">
-              The full breakdown, with evidence for each, lives{" "}
-              <Link
-                href="/#dimensions"
-                className="text-[#0284c7] hover:underline"
-              >
-                on the home page
-              </Link>
-              .
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {dimensions.map((d, i) => (
-              <Reveal key={d.id} delay={i * 0.05}>
-                <div className="p-5 rounded-2xl card-border h-full">
-                  <div className="flex items-center justify-between mb-3">
-                    <span
-                      className="mono text-[10px] font-bold tracking-widest"
-                      style={{ color: d.color }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  {/* Relative emphasis, deliberately unlabelled — a
-                      self-assessed number would read as false precision. */}
-                  <div className="h-1 rounded-full bg-[rgba(15,23,42,0.06)] overflow-hidden mb-4">
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        width: `${d.score}%`,
-                        background: `linear-gradient(90deg, ${d.color}55, ${d.color})`,
-                      }}
-                    />
-                  </div>
-                  <div className="text-sm font-bold text-[#0f172a] mb-1">
-                    {d.label}
-                  </div>
-                  <div className="text-xs text-[#64748b]">{d.short}</div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
         {/* Toolkit */}
-        <div className="mb-24">
+        <div className="mb-4">
           <Reveal>
             <h2 className="text-2xl font-black text-[#0f172a] mb-8">
               What I bring on deployment
@@ -162,6 +111,8 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Moved here from the home page — philosophy lives on About only. */}
+      <FDEDimensions />
       <Philosophy />
       <Footer />
     </>
