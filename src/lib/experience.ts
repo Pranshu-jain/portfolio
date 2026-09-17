@@ -28,7 +28,7 @@ export const experience: Role[] = [
     product:
       "An inspection and audit platform for field teams, on web and mobile.",
     summary:
-      "AI assistant, offline-safe sync, and the data pipeline behind an inspection and audit platform.",
+      "AI assistant, conflict-safe web–mobile sync, and the data pipeline behind an inspection and audit platform.",
     bullets: [
       "Field auditors query inspection and audit data in natural language — an AI assistant (LangChain + LangGraph, RAG) grounded in platform data.",
       "Field work survives low connectivity: engineered conflict-safe sync between web and mobile.",
