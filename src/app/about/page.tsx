@@ -16,11 +16,11 @@ const capabilities = [
   { emoji: "🛬", label: "Discovery on site", sub: "Ambiguity → one-page spec" },
   { emoji: "⚡", label: "Next.js / React", sub: "Frontend & SSR" },
   { emoji: "💎", label: "Rails / Ruby", sub: "Domain logic & APIs" },
-  { emoji: "🐍", label: "Python / Django", sub: "Services & pipelines" },
-  { emoji: "🗄️", label: "PostgreSQL / Redis", sub: "Modelling & indexing" },
-  { emoji: "🤖", label: "LLMs / Agents", sub: "Deployed, not demoed" },
-  { emoji: "🔌", label: "REST / Webhooks", sub: "Third-party integration" },
-  { emoji: "☁️", label: "Docker / Vercel / Railway", sub: "Ship & operate" },
+  { emoji: "🐍", label: "Python / PySpark", sub: "Pipelines" },
+  { emoji: "🗄️", label: "PostgreSQL / Redis", sub: "Modelling, indexing, Sidekiq jobs" },
+  { emoji: "🤖", label: "LangChain / LangGraph", sub: "RAG & agents" },
+  { emoji: "🔌", label: "REST / GraphQL", sub: "APIs & third-party integration" },
+  { emoji: "☁️", label: "Docker / AWS / Vercel", sub: "Ship & operate" },
 ];
 
 export default function AboutPage() {

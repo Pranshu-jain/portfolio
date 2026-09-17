@@ -237,7 +237,12 @@ export const fieldLog: { cmd: string; out: string; tone: "ok" | "info" | "warn" 
   { cmd: "fde handoff --pattern reusable", out: "service pattern is vendor-agnostic · reusable for the next integration.", tone: "info" },
 ];
 
-/** The surfaces a forward deployment actually has to plug into. */
+/**
+ * The surfaces a forward deployment actually has to plug into.
+ *
+ * Rule: only list what a shown project or a role in `./experience.ts` backs
+ * up. If a tool isn't demonstrated somewhere on this site, it doesn't go here.
+ */
 export const integrationSurface: {
   category: string;
   color: string;
@@ -245,39 +250,41 @@ export const integrationSurface: {
   note: string;
 }[] = [
   {
-    category: "Identity & Access",
+    category: "Application & APIs",
     color: "#00d4ff",
-    items: ["OAuth 2.0", "Auth.js", "JWT", "bcrypt", "Role gates"],
-    note: "Fails closed by default — locked until every secret is present.",
+    items: ["Ruby on Rails", "React / Next.js", "REST / GraphQL", "WebSockets"],
+    note: "A versioned contract between the API and whatever consumes it.",
   },
   {
-    category: "Money & Billing",
-    color: "#22c55e",
-    items: ["Stripe", "Checkout", "Webhooks", "Idempotency"],
-    note: "Never hand-rolled. Payment state reconciles against the provider.",
-  },
-  {
-    category: "Data Stores",
+    category: "Data Stores & Jobs",
     color: "#7c3aed",
-    items: ["PostgreSQL", "Neon", "SQLite", "Redis", "Migrations"],
+    items: ["PostgreSQL", "Redis", "Sidekiq"],
     note: "Indexed for the query you actually run, not the one you imagined.",
   },
   {
-    category: "Messaging & Growth",
+    category: "Identity, Payments & Messaging",
+    color: "#22c55e",
+    items: ["JWT", "OAuth 2.0", "Stripe", "Iterable"],
+    note: "Never hand-rolled. Auth fails closed; event contracts are versioned.",
+  },
+  {
+    category: "Data Pipelines",
     color: "#ff6b35",
-    items: ["Iterable", "Resend", "Webhooks", "Lifecycle events"],
-    note: "Event contracts versioned so downstream campaigns don't silently break.",
+    items: ["Python", "PySpark", "Airflow", "dbt", "Snowflake", "BigQuery"],
+    note: "Spark → Airflow → dbt → warehouse, feeding live dashboards.",
   },
   {
     category: "AI Layer",
     color: "#6366f1",
-    items: ["Claude", "GPT", "Gemini", "Agents", "Streaming", "Evals"],
-    note: "With fallbacks, cost ceilings, and a plan for when the model is wrong.",
+    // TODO: "Evals", "cost ceilings" and "fallbacks" were removed from this
+    // card — add them back only once a shown project demonstrates them.
+    items: ["LangChain", "LangGraph", "RAG", "OpenAI API"],
+    note: "Grounded in the platform's own data — answers trace back to a source.",
   },
   {
     category: "Runtime & Deploy",
     color: "#f59e0b",
-    items: ["Vercel", "Railway", "Docker", "CI", "Feature flags"],
+    items: ["Docker", "Vercel", "AWS", "Heroku"],
     note: "Their pipeline, their conventions — I adapt to the stack I land in.",
   },
 ];
@@ -372,7 +379,9 @@ export const engagements: {
     best: "Best when the pieces exist but don't talk.",
     features: [
       "Legacy and third-party API integration",
-      "LLM features deployed with fallbacks and cost ceilings",
+      // TODO: was "LLM features deployed with fallbacks and cost ceilings" —
+      // restore once a shown project demonstrates fallbacks / cost controls.
+      "LLM features grounded in your own data (RAG)",
       "Versioned contracts between services",
       "Retainer for the systems I've deployed",
     ],
