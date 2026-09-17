@@ -247,10 +247,10 @@ export default function Hero() {
             >
               <Magnetic>
                 <Link
-                  href="/#deployments"
+                  href="/#builds"
                   className="flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-[#0f172a] font-semibold text-[15px] shine"
                 >
-                  See Deployments <ArrowRight size={15} />
+                  See Builds <ArrowRight size={15} />
                 </Link>
               </Magnetic>
               <Magnetic strength={0.25}>

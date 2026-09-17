@@ -6,8 +6,8 @@
  * integration surface, and the operating doctrine. Sections read from this file
  * so the narrative stays consistent across the site.
  *
- * Rule for this file: no invented figures. Anything numeric traces back to a
- * deployment recorded in `./projects.ts`.
+ * Rule for this file: no invented figures, no implied customers. Anything
+ * numeric traces back to a build recorded in `./projects.ts`.
  */
 
 import { featuredProjects } from "./projects";
@@ -80,7 +80,7 @@ export const dimensions: Dimension[] = [
     detail:
       "The prototype is the easy half. Hardening is error paths, access control, indexes, tests, and the runbook that lets someone else operate it at 3am without calling me.",
     evidence: [
-      "Sub-200ms queries on 10,000+ records via indexed PostgreSQL, not caching tricks",
+      "Sub-200ms queries on a 10,000-record dataset via indexed PostgreSQL, not caching tricks",
       "13+ RSpec model tests covering the rules that must never be bypassed",
       "Auth that fails closed — admin surfaces stay locked until every secret is present",
     ],
@@ -104,15 +104,15 @@ export const dimensions: Dimension[] = [
     id: "data",
     label: "Data & Pipelines",
     axis: "Data",
-    short: "Real data, not fixtures",
+    short: "Modelled, indexed, queryable",
     score: 85,
     color: "#f59e0b",
     detail:
       "Customer data is messy, high-volume, and never shaped like the schema you'd have designed. I model it, index it, backfill it, and build the analytics layer that turns it into something a decision-maker can act on.",
     evidence: [
-      "Five analytical views over live compensation data: geography, title, headcount, tenure, top roles",
+      "Five analytical views over a generated 10,000-employee compensation dataset: geography, title, headcount, tenure, top roles",
       "Live job-market ingestion across multiple sources with dedupe, ranking, and relevance filtering",
-      "Postgres schema design with migrations, validations, and seeds that mirror production scale",
+      "Postgres schema design with migrations, validations, and seeds that generate realistic volume",
     ],
   },
   {
@@ -223,18 +223,18 @@ export const deploymentLoop: LoopPhase[] = [
 
 /**
  * Terminal-style field log. Every line traces to the Iterable integration
- * recorded in `src/lib/projects.ts` — a real deployment into someone else's
- * live Rails codebase. No figure appears here that isn't in that record.
+ * recorded in `src/lib/projects.ts`. It shows the method, not a client
+ * engagement — no line may imply a customer or a team that adopted it.
  */
 export const fieldLog: { cmd: string; out: string; tone: "ok" | "info" | "warn" }[] = [
-  { cmd: "fde land --repo client-rails-app", out: "existing production app. reading before touching.", tone: "info" },
-  { cmd: "fde observe --campaigns", out: "onboarding + re-engagement firing on calendar time, not behaviour", tone: "warn" },
+  { cmd: "fde scope --integration iterable", out: "target: an existing rails app. design for code I don't own.", tone: "info" },
+  { cmd: "fde observe --campaigns", out: "problem: onboarding + re-engagement fire on calendar time, not behaviour", tone: "warn" },
   { cmd: "fde map --constraints", out: "cannot change app behaviour · cannot block a user request · fail-open if Iterable is down", tone: "warn" },
   { cmd: "fde spec --one-page", out: "goal: campaigns react to what users actually do in-product", tone: "ok" },
   { cmd: "rails g service iterable/event_dispatcher", out: "lifecycle events tapped at well-defined seams", tone: "info" },
   { cmd: "fde integrate --vendor iterable --contract v1", out: "event contracts versioned · downstream campaigns won't silently break", tone: "ok" },
   { cmd: "fde verify --fail-open", out: "iterable unreachable → user request unaffected. requirement met.", tone: "ok" },
-  { cmd: "fde handoff --pattern reusable", out: "resident team applied the same pattern to later vendors.", tone: "info" },
+  { cmd: "fde handoff --pattern reusable", out: "service pattern is vendor-agnostic · reusable for the next integration.", tone: "info" },
 ];
 
 /** The surfaces a forward deployment actually has to plug into. */
@@ -385,7 +385,7 @@ export const engagements: {
  * Headline proof numbers. `value` is animated by CountUp; `prefix`/`suffix`
  * are literal.
  *
- * Every figure here is traceable to a deployment recorded in
+ * Every figure here is traceable to a build recorded in
  * `src/lib/projects.ts` — nothing self-reported, nothing unfalsifiable. If you
  * add a metric, it has to be checkable from the dossiers.
  */
@@ -397,16 +397,16 @@ export const proofMetrics: {
   sub: string;
 }[] = [
   {
-    // Derived, so this stays true as the deployment list grows.
+    // Derived, so this stays true as the build list grows.
     value: featuredProjects.length,
-    label: "Deployments shipped",
-    sub: "Discovery through handoff",
+    label: "Projects shipped",
+    sub: "Source on GitHub",
   },
   {
+    // Seeded demo data, not production records — the label has to say so.
     value: 10000,
-    suffix: "+",
-    label: "Records in production",
-    sub: "Indexed PostgreSQL, not caching tricks",
+    label: "Record demo dataset",
+    sub: "Generated seed data · indexed PostgreSQL",
   },
   {
     value: 200,

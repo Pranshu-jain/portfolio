@@ -25,7 +25,7 @@ export default function Footer() {
           <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2">
             {[
               ["Dimensions", "/#dimensions"],
-              ["Deployments", "/#deployments"],
+              ["Builds", "/#builds"],
               ["The Loop", "/#loop"],
               ["About", "/about"],
               ["Field Notes", "/blog"],

@@ -81,10 +81,10 @@ export default function AboutPage() {
                 Deploy Me <ArrowRight size={16} />
               </Link>
               <Link
-                href="/#deployments"
+                href="/#builds"
                 className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(15,23,42,0.10)] text-[#475569] hover:text-[#0f172a] hover:border-[rgba(14,165,233,0.2)] transition-all"
               >
-                See Deployments
+                See Builds
               </Link>
             </div>
           </Reveal>
