@@ -166,7 +166,7 @@ export default function Hero() {
 
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#fafaff] to-transparent pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-24 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-36 w-full">
         <div className="grid lg:grid-cols-[1fr_auto] gap-16 items-center">
           <div className="max-w-3xl">
             {/* Status badge */}
@@ -190,7 +190,7 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="mono text-[10px] sm:text-[11px] tracking-wider text-[#64748b] mb-8 pl-1"
+              className="mono text-[10px] sm:text-[11px] tracking-tight sm:tracking-wider text-[#64748b] mb-8 pl-1"
             >
               {siteConfig.location}
             </motion.p>

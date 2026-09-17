@@ -68,7 +68,7 @@ export const featuredProjects: Deployment[] = [
       "RSpec coverage on the model rules that must never be bypassed",
     ],
     outcome: [
-      { metric: "Records in demo dataset (generated)", value: "10,000" },
+      { metric: "Generated demo records", value: "10,000" },
       { metric: "Query latency", value: "<200ms" },
       { metric: "Seed to full scale", value: "~2.4s" },
     ],
