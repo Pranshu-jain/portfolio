@@ -14,7 +14,7 @@ export default function Footer() {
               P
             </div>
             <div>
-              <div className="text-sm font-bold text-[#0f172a]">Pranshu</div>
+              <div className="text-sm font-bold text-[#0f172a]">{siteConfig.name}</div>
               <div className="mono text-[9px] uppercase tracking-[1.5px] text-[#94a3b8]">
                 Forward Deployed Engineer
               </div>
@@ -64,10 +64,10 @@ export default function Footer() {
 
         <div className="border-t border-[rgba(15,23,42,0.04)] pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
           <p className="text-[11px] text-[#cbd5e1]">
-            © {new Date().getFullYear()} Pranshu — Built with Next.js, Tailwind CSS & framer-motion
+            © {new Date().getFullYear()} {siteConfig.name} — Built with Next.js, Tailwind CSS & framer-motion
           </p>
           <p className="text-[11px] text-[#cbd5e1]">
-            jpranshu36@gmail.com
+            {siteConfig.email}
           </p>
         </div>
       </div>

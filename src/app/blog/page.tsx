@@ -5,7 +5,7 @@ import { ArrowRight, Clock } from "lucide-react";
 import { blogPosts } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Field Notes — Pranshu",
+  title: "Field Notes",
   description:
     "Notes from deployments: architecture decisions, integration patterns, and what actually holds up in production.",
 };

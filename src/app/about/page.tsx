@@ -7,7 +7,7 @@ import Link from "next/link";
 import { dimensions } from "@/lib/fde";
 
 export const metadata: Metadata = {
-  title: "About — Pranshu, Forward Deployed Engineer",
+  title: "About",
   description:
     "Why I work as a forward deployed engineer: embedded with the team, deployed in their stack, owning the problem from ambiguity through adoption.",
 };
@@ -38,7 +38,7 @@ export default function AboutPage() {
 
           <Reveal delay={0.06}>
             <h1 className="text-5xl sm:text-7xl font-black text-[#0f172a] mb-8 leading-[1.02] tracking-tight">
-              I&apos;m Pranshu.
+              I&apos;m Pranshu Jain.
               <br />
               <span className="gradient-text">I deploy forward.</span>
             </h1>

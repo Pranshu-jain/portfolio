@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/lib/projects";
+import { siteConfig } from "@/lib/config";
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
@@ -16,11 +17,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) return { title: "Post not found — Pranshu" };
+  if (!post) return { title: "Post not found" };
   return {
-    title: `${post.title} — Pranshu`,
+    title: post.title,
     description: post.excerpt,
-    openGraph: { title: post.title, description: post.excerpt, type: "article" },
+    openGraph: {
+      title: `${post.title} — ${siteConfig.name}`,
+      description: post.excerpt,
+      type: "article",
+    },
   };
 }
 

@@ -3,7 +3,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Contact — Pranshu, Forward Deployed Engineer",
+  title: "Contact",
   description:
     "Tell me what's actually broken. Rough is fine — turning rough into a spec is the first phase of the engagement.",
 };
