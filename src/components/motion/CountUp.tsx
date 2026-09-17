@@ -7,7 +7,9 @@ import { useInView, useReducedMotion } from "framer-motion";
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
 /**
- * Counts from 0 to `value` the first time it scrolls into view. Numbers are
+ * Renders the final `value` in the server HTML — crawlers, link previews and
+ * no-JS visitors must never see a zero. With JS, it counts up from 0 the first
+ * time it scrolls into view, as a progressive enhancement. Numbers are
  * formatted with locale separators so 10000 reads as 10,000.
  */
 export default function CountUp({
@@ -24,13 +26,15 @@ export default function CountUp({
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-15%" });
+  // Same margin as <Reveal>, so the reset to 0 happens while the wrapping
+  // fade-in is still at opacity 0 — the real value never visibly flashes.
+  const inView = useInView(ref, { once: true, margin: "-12%" });
   const reduced = useReducedMotion();
-  const [display, setDisplay] = useState(0);
-
-  // Under reduced motion the final value is derived rather than animated to,
-  // so the effect never has to write state for that case.
-  const shown = reduced ? value : display;
+  // null = "not animating": show the real value. Only the running animation
+  // ever overrides it, so SSR, pre-hydration and reduced motion all get the
+  // final number without the effect writing state for those cases.
+  const [display, setDisplay] = useState<number | null>(null);
+  const shown = reduced || display === null ? value : display;
 
   useEffect(() => {
     if (!inView || reduced) return;
