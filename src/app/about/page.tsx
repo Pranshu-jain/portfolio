@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import Reveal from "@/components/motion/Reveal";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { siteConfig } from "@/lib/config";
+import { experience } from "@/lib/experience";
 
 export const metadata: Metadata = {
   title: "About",
@@ -44,7 +46,45 @@ export default function AboutPage() {
             </h1>
           </Reveal>
 
+          {/* The facts first — who, how long, where. Philosophy comes after. */}
+          <Reveal delay={0.1}>
+            <p className="text-[#0f172a] text-xl leading-relaxed mb-6">
+              I&apos;m a software engineer with {siteConfig.experience} of
+              experience shipping Rails apps, data pipelines, and AI agents to
+              production, across three companies:
+            </p>
+          </Reveal>
+
           <Reveal delay={0.12}>
+            <ul className="flex flex-col gap-3 mb-6">
+              {experience.map((role) => (
+                <li key={role.id} className="flex items-start gap-3">
+                  <span
+                    className="w-1.5 h-1.5 rounded-full shrink-0 mt-[9px]"
+                    style={{ background: role.color }}
+                  />
+                  <span className="text-[#475569] text-base leading-relaxed">
+                    <span className="font-semibold text-[#0f172a]">
+                      {role.company}
+                    </span>{" "}
+                    <span className="mono text-[11px] text-[#94a3b8]">
+                      {role.dates}
+                    </span>
+                    <br />
+                    {role.summary}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={0.14}>
+            <p className="mono text-[11px] tracking-wider text-[#64748b] mb-12">
+              {siteConfig.location} · Open to remote work
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.16}>
             <p className="text-[#475569] text-xl leading-relaxed mb-6">
               Most engineering roles start after someone else has already done
               the hard part — deciding what to build. Forward deployment starts

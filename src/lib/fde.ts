@@ -48,9 +48,8 @@ export const dimensions: Dimension[] = [
     score: 92,
     color: "#00d4ff",
     detail:
-      "Customers describe symptoms, not specs. I sit with the people doing the work, watch the actual workflow, and leave with a one-page spec, a named success metric, and an explicit list of what we are not building.",
+      "Customers describe symptoms, not specs. I watch the actual workflow and leave with a one-page spec, a named success metric, and an explicit list of what we are not building.",
     evidence: [
-      "Every deployment starts with a written constraint map before a line of code",
       "One-page spec: primary flow, data model, success metric, explicit non-goals",
       "Scope cut at the spec stage, where it's free — not mid-sprint, where it's expensive",
     ],
@@ -63,11 +62,10 @@ export const dimensions: Dimension[] = [
     score: 95,
     color: "#7c3aed",
     detail:
-      "A demo on a real URL ends more arguments than a month of meetings. I get a thin end-to-end slice deployed inside the first week, running on the customer's real data, so feedback is about the product instead of the mockup.",
+      "A demo on a real URL ends more arguments than a month of meetings. I get a thin end-to-end slice deployed early, so feedback is about the product instead of the mockup.",
     evidence: [
       "Full-stack e-commerce platform — catalog, cart, Stripe checkout, JWT auth — shipped self-contained",
       "10,000-employee seed dataset generated in ~2.4s so demos run on realistic volume from day one",
-      "Deploy to a live URL before the product is 'done' — every commit after is shareable",
     ],
   },
   {
@@ -78,11 +76,10 @@ export const dimensions: Dimension[] = [
     score: 88,
     color: "#22c55e",
     detail:
-      "The prototype is the easy half. Hardening is error paths, access control, indexes, tests, and the runbook that lets someone else operate it at 3am without calling me.",
+      "The prototype is the easy half. Hardening is error paths, access control, indexes, tests, and the runbook that lets someone else operate it at 3am.",
     evidence: [
+      "At Builder.ai: API response times cut 70% by eliminating N+1 queries; test coverage raised from 40% to 80%",
       "Sub-200ms queries on a 10,000-record dataset via indexed PostgreSQL, not caching tricks",
-      "13+ RSpec model tests covering the rules that must never be bypassed",
-      "Auth that fails closed — admin surfaces stay locked until every secret is present",
     ],
   },
   {
@@ -93,11 +90,10 @@ export const dimensions: Dimension[] = [
     score: 90,
     color: "#ff6b35",
     detail:
-      "Forward deployment means writing code in someone else's repo, against someone else's API, under someone else's conventions. I read the codebase before I touch it and integrate without breaking what already works.",
+      "Forward deployment means writing code in someone else's repo, against someone else's API, under someone else's conventions. I read the codebase before I touch it.",
     evidence: [
       "Rails service layer bridging in-app lifecycle events to Iterable's REST API",
       "Decoupled Rails 7 API + Next.js frontend joined by a versioned JSON contract",
-      "Feature work on live products: codebase analysis first, no breaking changes",
     ],
   },
   {
@@ -108,11 +104,10 @@ export const dimensions: Dimension[] = [
     score: 85,
     color: "#f59e0b",
     detail:
-      "Customer data is messy, high-volume, and never shaped like the schema you'd have designed. I model it, index it, backfill it, and build the analytics layer that turns it into something a decision-maker can act on.",
+      "Real data is messy, high-volume, and never shaped like the schema you'd have designed. I model it, index it, and build the layer that turns it into something a decision-maker can act on.",
     evidence: [
-      "Five analytical views over a generated 10,000-employee compensation dataset: geography, title, headcount, tenure, top roles",
-      "Live job-market ingestion across multiple sources with dedupe, ranking, and relevance filtering",
-      "Postgres schema design with migrations, validations, and seeds that generate realistic volume",
+      "At Bandgi Technologies: Spark/PySpark → Airflow → dbt → Snowflake/BigQuery pipeline feeding live dashboards",
+      "Five analytical views over a generated 10,000-employee compensation dataset",
     ],
   },
   {
@@ -122,12 +117,13 @@ export const dimensions: Dimension[] = [
     short: "LLMs that survive users",
     score: 93,
     color: "#6366f1",
+    // TODO: the original copy also claimed failure handling, cost control and
+    // API-down fallbacks. Restore once a shown project demonstrates them.
     detail:
-      "Wiring an LLM into a demo takes an afternoon. Deploying one takes prompt design, failure handling, cost control, and a fallback for the day the API is down — plus the judgment to know when the answer isn't a model at all.",
+      "Wiring an LLM into a demo takes an afternoon. Deploying one means grounding it in real data — plus the judgment to know when the answer isn't a model at all.",
     evidence: [
-      "Production LLM chat assistant that qualifies inbound leads and captures requirements",
-      "Automated summary pipeline turning raw conversations into structured, actionable digests",
-      "AI-augmented build process across the stack — architecture, implementation, review",
+      "At Bandgi Technologies: AI assistant (LangChain + LangGraph, RAG) answering natural-language questions grounded in platform data",
+      "The chat assistant on this site: qualifies inbound leads and turns the conversation into a structured summary",
     ],
   },
   {
@@ -138,9 +134,8 @@ export const dimensions: Dimension[] = [
     score: 90,
     color: "#ec4899",
     detail:
-      "Half the role is not engineering. It's the demo to the executive, the honest 'that will take three weeks, here's why', and the written update that keeps a room aligned without a meeting.",
+      "Half the role is not engineering. It's the honest 'that will take three weeks, here's why', and the written update that keeps a room aligned without a meeting.",
     evidence: [
-      "Weekly demos and daily written updates as the default operating rhythm",
       "Tradeoffs written down — including the ones that argue against my own preferred approach",
       "Long-form writing on architecture decisions, aimed at people who have to fund them",
     ],
@@ -153,11 +148,10 @@ export const dimensions: Dimension[] = [
     score: 94,
     color: "#14b8a6",
     detail:
-      "Shipped is not the finish line — adopted is. I stay attached through rollout, watch what real usage breaks, and iterate until the metric we agreed on actually moves.",
+      "Shipped is not the finish line — adopted is. I stay attached through rollout, watch what real usage breaks, and iterate until the agreed metric moves.",
     evidence: [
       "End-to-end ownership: discovery, build, deploy, rollout, iteration",
-      "Instrumented from launch, so 'is it working?' has a number instead of an opinion",
-      "Handoff means docs and a walkthrough — the customer's team owns it after me, not depends on me",
+      "Handoff means docs and a walkthrough — the team owns it after me, not depends on me",
     ],
   },
 ];
@@ -289,42 +283,33 @@ export const integrationSurface: {
   },
 ];
 
-/** Operating doctrine — how the role is actually practised. */
+/**
+ * Operating doctrine — how the role is actually practised. Four rules, kept
+ * short: this renders on /about, below the factual intro.
+ */
 export const doctrine: { n: string; title: string; desc: string; color: string }[] = [
   {
     n: "01",
-    title: "Deploy forward, not behind glass",
-    desc: "The best spec in the world is worth less than one afternoon sitting with the person whose job you're about to change. I go to where the problem lives.",
-    color: "#00d4ff",
-  },
-  {
-    n: "02",
     title: "The constraint is the spec",
-    desc: "The legacy system that can't be touched, the rule that can't be broken, the team that has to maintain it after I leave — those define the solution far more than the feature list does.",
+    desc: "The legacy system that can't be touched, the rule that can't be broken, the team that maintains it after I leave — those define the solution more than the feature list does.",
     color: "#7c3aed",
   },
   {
-    n: "03",
+    n: "02",
     title: "A slice on day one beats a plan on day thirty",
-    desc: "Deployed software is the only artifact that tells the truth. I ship a narrow end-to-end path early, on real data, and let it correct the roadmap.",
+    desc: "Deployed software is the only artifact that tells the truth. I ship a narrow end-to-end path early and let it correct the roadmap.",
     color: "#22c55e",
   },
   {
-    n: "04",
+    n: "03",
     title: "Instrument it or it didn't happen",
-    desc: "'Is it working?' should have a number, not an opinion. I agree on the metric before building and wire up measurement in the same commit as the feature.",
+    desc: "'Is it working?' should have a number, not an opinion. I agree on the metric before building.",
     color: "#ff6b35",
   },
   {
-    n: "05",
-    title: "Their stack, their conventions",
-    desc: "Forward deployment is writing in someone else's codebase. I match the house style, integrate cleanly, and leave code the resident team recognises as their own.",
-    color: "#f59e0b",
-  },
-  {
-    n: "06",
+    n: "04",
     title: "Hand off working, not dependent",
-    desc: "The engagement succeeds when the customer's team can operate, extend, and debug it without me. Documentation and a walkthrough are deliverables, not afterthoughts.",
+    desc: "The work succeeds when the team can operate, extend, and debug it without me. Docs and a walkthrough are deliverables.",
     color: "#6366f1",
   },
 ];
