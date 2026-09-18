@@ -9,10 +9,13 @@ export const siteConfig = {
   // TODO(confirm): exact current job title at Bandgi Technologies. Used for
   // the JSON-LD Person `jobTitle`.
   jobTitle: "Software Engineer",
-  experience: "4.5 years",
+  // TODO(confirm): the roles listed in lib/experience.ts start Jan 2022
+  // (~4.7 years). The "6 years" figure includes earlier work not yet listed —
+  // add those roles to experience.ts so the dates on the page add up.
+  experience: "6 years",
   location: "Based in India (IST) · 4+ hours overlap with UK/EU",
   proofLine:
-    "4.5 years shipping Rails apps, data pipelines, and AI agents to production.",
+    "6 years shipping Rails apps, data pipelines, and AI agents to production.",
   role: "Forward Deployed Engineer",
   tagline: "I deploy into your stack and ship until the metric moves.",
   description:
