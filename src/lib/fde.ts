@@ -6,8 +6,8 @@
  * integration surface, and the operating doctrine. Sections read from this file
  * so the narrative stays consistent across the site.
  *
- * Rule for this file: no invented figures. Anything numeric traces back to a
- * deployment recorded in `./projects.ts`.
+ * Rule for this file: no invented figures, no implied customers. Anything
+ * numeric traces back to a build recorded in `./projects.ts`.
  */
 
 import { featuredProjects } from "./projects";
@@ -48,9 +48,8 @@ export const dimensions: Dimension[] = [
     score: 92,
     color: "#00d4ff",
     detail:
-      "Customers describe symptoms, not specs. I sit with the people doing the work, watch the actual workflow, and leave with a one-page spec, a named success metric, and an explicit list of what we are not building.",
+      "Customers describe symptoms, not specs. I watch the actual workflow and leave with a one-page spec, a named success metric, and an explicit list of what we are not building.",
     evidence: [
-      "Every deployment starts with a written constraint map before a line of code",
       "One-page spec: primary flow, data model, success metric, explicit non-goals",
       "Scope cut at the spec stage, where it's free — not mid-sprint, where it's expensive",
     ],
@@ -63,11 +62,10 @@ export const dimensions: Dimension[] = [
     score: 95,
     color: "#7c3aed",
     detail:
-      "A demo on a real URL ends more arguments than a month of meetings. I get a thin end-to-end slice deployed inside the first week, running on the customer's real data, so feedback is about the product instead of the mockup.",
+      "A demo on a real URL ends more arguments than a month of meetings. I get a thin end-to-end slice deployed early, so feedback is about the product instead of the mockup.",
     evidence: [
       "Full-stack e-commerce platform — catalog, cart, Stripe checkout, JWT auth — shipped self-contained",
       "10,000-employee seed dataset generated in ~2.4s so demos run on realistic volume from day one",
-      "Deploy to a live URL before the product is 'done' — every commit after is shareable",
     ],
   },
   {
@@ -78,11 +76,10 @@ export const dimensions: Dimension[] = [
     score: 88,
     color: "#22c55e",
     detail:
-      "The prototype is the easy half. Hardening is error paths, access control, indexes, tests, and the runbook that lets someone else operate it at 3am without calling me.",
+      "The prototype is the easy half. Hardening is error paths, access control, indexes, tests, and the runbook that lets someone else operate it at 3am.",
     evidence: [
-      "Sub-200ms queries on 10,000+ records via indexed PostgreSQL, not caching tricks",
-      "13+ RSpec model tests covering the rules that must never be bypassed",
-      "Auth that fails closed — admin surfaces stay locked until every secret is present",
+      "At Builder.ai: API response times cut 70% by eliminating N+1 queries; test coverage raised from 40% to 80%",
+      "Sub-200ms queries on a 10,000-record dataset via indexed PostgreSQL, not caching tricks",
     ],
   },
   {
@@ -93,26 +90,24 @@ export const dimensions: Dimension[] = [
     score: 90,
     color: "#ff6b35",
     detail:
-      "Forward deployment means writing code in someone else's repo, against someone else's API, under someone else's conventions. I read the codebase before I touch it and integrate without breaking what already works.",
+      "Forward deployment means writing code in someone else's repo, against someone else's API, under someone else's conventions. I read the codebase before I touch it.",
     evidence: [
       "Rails service layer bridging in-app lifecycle events to Iterable's REST API",
       "Decoupled Rails 7 API + Next.js frontend joined by a versioned JSON contract",
-      "Feature work on live products: codebase analysis first, no breaking changes",
     ],
   },
   {
     id: "data",
     label: "Data & Pipelines",
     axis: "Data",
-    short: "Real data, not fixtures",
+    short: "Modelled, indexed, queryable",
     score: 85,
     color: "#f59e0b",
     detail:
-      "Customer data is messy, high-volume, and never shaped like the schema you'd have designed. I model it, index it, backfill it, and build the analytics layer that turns it into something a decision-maker can act on.",
+      "Real data is messy, high-volume, and never shaped like the schema you'd have designed. I model it, index it, and build the layer that turns it into something a decision-maker can act on.",
     evidence: [
-      "Five analytical views over live compensation data: geography, title, headcount, tenure, top roles",
-      "Live job-market ingestion across multiple sources with dedupe, ranking, and relevance filtering",
-      "Postgres schema design with migrations, validations, and seeds that mirror production scale",
+      "At Bandgi Technologies: Spark/PySpark → Airflow → dbt → Snowflake/BigQuery pipeline feeding live dashboards",
+      "Five analytical views over a generated 10,000-employee compensation dataset",
     ],
   },
   {
@@ -122,12 +117,13 @@ export const dimensions: Dimension[] = [
     short: "LLMs that survive users",
     score: 93,
     color: "#6366f1",
+    // TODO: the original copy also claimed failure handling, cost control and
+    // API-down fallbacks. Restore once a shown project demonstrates them.
     detail:
-      "Wiring an LLM into a demo takes an afternoon. Deploying one takes prompt design, failure handling, cost control, and a fallback for the day the API is down — plus the judgment to know when the answer isn't a model at all.",
+      "Wiring an LLM into a demo takes an afternoon. Deploying one means grounding it in real data — plus the judgment to know when the answer isn't a model at all.",
     evidence: [
-      "Production LLM chat assistant that qualifies inbound leads and captures requirements",
-      "Automated summary pipeline turning raw conversations into structured, actionable digests",
-      "AI-augmented build process across the stack — architecture, implementation, review",
+      "At Bandgi Technologies: AI assistant (LangChain + LangGraph, RAG) answering natural-language questions grounded in platform data",
+      "The chat assistant on this site: qualifies inbound leads and turns the conversation into a structured summary",
     ],
   },
   {
@@ -138,9 +134,8 @@ export const dimensions: Dimension[] = [
     score: 90,
     color: "#ec4899",
     detail:
-      "Half the role is not engineering. It's the demo to the executive, the honest 'that will take three weeks, here's why', and the written update that keeps a room aligned without a meeting.",
+      "Half the role is not engineering. It's the honest 'that will take three weeks, here's why', and the written update that keeps a room aligned without a meeting.",
     evidence: [
-      "Weekly demos and daily written updates as the default operating rhythm",
       "Tradeoffs written down — including the ones that argue against my own preferred approach",
       "Long-form writing on architecture decisions, aimed at people who have to fund them",
     ],
@@ -153,11 +148,10 @@ export const dimensions: Dimension[] = [
     score: 94,
     color: "#14b8a6",
     detail:
-      "Shipped is not the finish line — adopted is. I stay attached through rollout, watch what real usage breaks, and iterate until the metric we agreed on actually moves.",
+      "Shipped is not the finish line — adopted is. I stay attached through rollout, watch what real usage breaks, and iterate until the agreed metric moves.",
     evidence: [
       "End-to-end ownership: discovery, build, deploy, rollout, iteration",
-      "Instrumented from launch, so 'is it working?' has a number instead of an opinion",
-      "Handoff means docs and a walkthrough — the customer's team owns it after me, not depends on me",
+      "Handoff means docs and a walkthrough — the team owns it after me, not depends on me",
     ],
   },
 ];
@@ -223,21 +217,26 @@ export const deploymentLoop: LoopPhase[] = [
 
 /**
  * Terminal-style field log. Every line traces to the Iterable integration
- * recorded in `src/lib/projects.ts` — a real deployment into someone else's
- * live Rails codebase. No figure appears here that isn't in that record.
+ * recorded in `src/lib/projects.ts`. It shows the method, not a client
+ * engagement — no line may imply a customer or a team that adopted it.
  */
 export const fieldLog: { cmd: string; out: string; tone: "ok" | "info" | "warn" }[] = [
-  { cmd: "fde land --repo client-rails-app", out: "existing production app. reading before touching.", tone: "info" },
-  { cmd: "fde observe --campaigns", out: "onboarding + re-engagement firing on calendar time, not behaviour", tone: "warn" },
+  { cmd: "fde scope --integration iterable", out: "target: an existing rails app. design for code I don't own.", tone: "info" },
+  { cmd: "fde observe --campaigns", out: "problem: onboarding + re-engagement fire on calendar time, not behaviour", tone: "warn" },
   { cmd: "fde map --constraints", out: "cannot change app behaviour · cannot block a user request · fail-open if Iterable is down", tone: "warn" },
   { cmd: "fde spec --one-page", out: "goal: campaigns react to what users actually do in-product", tone: "ok" },
   { cmd: "rails g service iterable/event_dispatcher", out: "lifecycle events tapped at well-defined seams", tone: "info" },
   { cmd: "fde integrate --vendor iterable --contract v1", out: "event contracts versioned · downstream campaigns won't silently break", tone: "ok" },
   { cmd: "fde verify --fail-open", out: "iterable unreachable → user request unaffected. requirement met.", tone: "ok" },
-  { cmd: "fde handoff --pattern reusable", out: "resident team applied the same pattern to later vendors.", tone: "info" },
+  { cmd: "fde handoff --pattern reusable", out: "service pattern is vendor-agnostic · reusable for the next integration.", tone: "info" },
 ];
 
-/** The surfaces a forward deployment actually has to plug into. */
+/**
+ * The surfaces a forward deployment actually has to plug into.
+ *
+ * Rule: only list what a shown project or a role in `./experience.ts` backs
+ * up. If a tool isn't demonstrated somewhere on this site, it doesn't go here.
+ */
 export const integrationSurface: {
   category: string;
   color: string;
@@ -245,79 +244,72 @@ export const integrationSurface: {
   note: string;
 }[] = [
   {
-    category: "Identity & Access",
+    category: "Application & APIs",
     color: "#00d4ff",
-    items: ["OAuth 2.0", "Auth.js", "JWT", "bcrypt", "Role gates"],
-    note: "Fails closed by default — locked until every secret is present.",
+    items: ["Ruby on Rails", "React / Next.js", "REST / GraphQL", "WebSockets"],
+    note: "A versioned contract between the API and whatever consumes it.",
   },
   {
-    category: "Money & Billing",
-    color: "#22c55e",
-    items: ["Stripe", "Checkout", "Webhooks", "Idempotency"],
-    note: "Never hand-rolled. Payment state reconciles against the provider.",
-  },
-  {
-    category: "Data Stores",
+    category: "Data Stores & Jobs",
     color: "#7c3aed",
-    items: ["PostgreSQL", "Neon", "SQLite", "Redis", "Migrations"],
+    items: ["PostgreSQL", "Redis", "Sidekiq"],
     note: "Indexed for the query you actually run, not the one you imagined.",
   },
   {
-    category: "Messaging & Growth",
+    category: "Identity, Payments & Messaging",
+    color: "#22c55e",
+    items: ["JWT", "OAuth 2.0", "Stripe", "Iterable"],
+    note: "Never hand-rolled. Auth fails closed; event contracts are versioned.",
+  },
+  {
+    category: "Data Pipelines",
     color: "#ff6b35",
-    items: ["Iterable", "Resend", "Webhooks", "Lifecycle events"],
-    note: "Event contracts versioned so downstream campaigns don't silently break.",
+    items: ["Python", "PySpark", "Airflow", "dbt", "Snowflake", "BigQuery"],
+    note: "Spark → Airflow → dbt → warehouse, feeding live dashboards.",
   },
   {
     category: "AI Layer",
     color: "#6366f1",
-    items: ["Claude", "GPT", "Gemini", "Agents", "Streaming", "Evals"],
-    note: "With fallbacks, cost ceilings, and a plan for when the model is wrong.",
+    // TODO: "Evals", "cost ceilings" and "fallbacks" were removed from this
+    // card — add them back only once a shown project demonstrates them.
+    items: ["LangChain", "LangGraph", "RAG", "OpenAI API"],
+    note: "Grounded in the platform's own data — answers trace back to a source.",
   },
   {
     category: "Runtime & Deploy",
     color: "#f59e0b",
-    items: ["Vercel", "Railway", "Docker", "CI", "Feature flags"],
+    items: ["Docker", "Vercel", "AWS", "Heroku"],
     note: "Their pipeline, their conventions — I adapt to the stack I land in.",
   },
 ];
 
-/** Operating doctrine — how the role is actually practised. */
+/**
+ * Operating doctrine — how the role is actually practised. Four rules, kept
+ * short: this renders on /about, below the factual intro.
+ */
 export const doctrine: { n: string; title: string; desc: string; color: string }[] = [
   {
     n: "01",
-    title: "Deploy forward, not behind glass",
-    desc: "The best spec in the world is worth less than one afternoon sitting with the person whose job you're about to change. I go to where the problem lives.",
-    color: "#00d4ff",
-  },
-  {
-    n: "02",
     title: "The constraint is the spec",
-    desc: "The legacy system that can't be touched, the rule that can't be broken, the team that has to maintain it after I leave — those define the solution far more than the feature list does.",
+    desc: "The legacy system that can't be touched, the rule that can't be broken, the team that maintains it after I leave — those define the solution more than the feature list does.",
     color: "#7c3aed",
   },
   {
-    n: "03",
+    n: "02",
     title: "A slice on day one beats a plan on day thirty",
-    desc: "Deployed software is the only artifact that tells the truth. I ship a narrow end-to-end path early, on real data, and let it correct the roadmap.",
+    desc: "Deployed software is the only artifact that tells the truth. I ship a narrow end-to-end path early and let it correct the roadmap.",
     color: "#22c55e",
   },
   {
-    n: "04",
+    n: "03",
     title: "Instrument it or it didn't happen",
-    desc: "'Is it working?' should have a number, not an opinion. I agree on the metric before building and wire up measurement in the same commit as the feature.",
+    desc: "'Is it working?' should have a number, not an opinion. I agree on the metric before building.",
     color: "#ff6b35",
   },
   {
-    n: "05",
-    title: "Their stack, their conventions",
-    desc: "Forward deployment is writing in someone else's codebase. I match the house style, integrate cleanly, and leave code the resident team recognises as their own.",
-    color: "#f59e0b",
-  },
-  {
-    n: "06",
+    n: "04",
     title: "Hand off working, not dependent",
-    desc: "The engagement succeeds when the customer's team can operate, extend, and debug it without me. Documentation and a walkthrough are deliverables, not afterthoughts.",
+    desc: "The work succeeds when the team can operate, extend, and debug it without me. Docs and a walkthrough are deliverables.",
     color: "#6366f1",
   },
 ];
@@ -372,7 +364,9 @@ export const engagements: {
     best: "Best when the pieces exist but don't talk.",
     features: [
       "Legacy and third-party API integration",
-      "LLM features deployed with fallbacks and cost ceilings",
+      // TODO: was "LLM features deployed with fallbacks and cost ceilings" —
+      // restore once a shown project demonstrates fallbacks / cost controls.
+      "LLM features grounded in your own data (RAG)",
       "Versioned contracts between services",
       "Retainer for the systems I've deployed",
     ],
@@ -385,7 +379,7 @@ export const engagements: {
  * Headline proof numbers. `value` is animated by CountUp; `prefix`/`suffix`
  * are literal.
  *
- * Every figure here is traceable to a deployment recorded in
+ * Every figure here is traceable to a build recorded in
  * `src/lib/projects.ts` — nothing self-reported, nothing unfalsifiable. If you
  * add a metric, it has to be checkable from the dossiers.
  */
@@ -397,16 +391,16 @@ export const proofMetrics: {
   sub: string;
 }[] = [
   {
-    // Derived, so this stays true as the deployment list grows.
+    // Derived, so this stays true as the build list grows.
     value: featuredProjects.length,
-    label: "Deployments shipped",
-    sub: "Discovery through handoff",
+    label: "Projects shipped",
+    sub: "Source on GitHub",
   },
   {
+    // Seeded demo data, not production records — the label has to say so.
     value: 10000,
-    suffix: "+",
-    label: "Records in production",
-    sub: "Indexed PostgreSQL, not caching tricks",
+    label: "Record demo dataset",
+    sub: "Generated seed data · indexed PostgreSQL",
   },
   {
     value: 200,

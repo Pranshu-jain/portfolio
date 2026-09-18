@@ -166,7 +166,7 @@ export default function Hero() {
 
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#fafaff] to-transparent pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-24 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-36 w-full">
         <div className="grid lg:grid-cols-[1fr_auto] gap-16 items-center">
           <div className="max-w-3xl">
             {/* Status badge */}
@@ -175,14 +175,25 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass border border-[rgba(14,165,233,0.15)] text-xs font-medium text-[#0284c7] mb-8"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass border border-[rgba(14,165,233,0.15)] text-xs font-medium text-[#0284c7] mb-3"
             >
               <span className="relative flex h-2 w-2">
                 <span className="ping-ring absolute inline-flex h-full w-full rounded-full bg-[#10b981]" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10b981]" />
               </span>
-              Available for deployment · Remote or on-site
+              Available for deployment · Open to remote
             </motion.div>
+
+            {/* Location + timezone overlap */}
+            <motion.p
+              custom={0.5}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="mono text-[10px] sm:text-[11px] tracking-tight sm:tracking-wider text-[#64748b] mb-8 pl-1"
+            >
+              {siteConfig.location}
+            </motion.p>
 
             {/* Role, decrypting */}
             <motion.div
@@ -202,7 +213,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Headline */}
-            <h1 className="text-[clamp(2.6rem,7.5vw,6rem)] font-black tracking-tight leading-[0.95] mb-8 select-none">
+            <h1 className="text-[clamp(2.6rem,7.5vw,6rem)] font-black tracking-tight leading-[0.95] mb-6 select-none">
               {HEADLINE.map((line, i) => (
                 <span key={line.text} className="block overflow-hidden">
                   <motion.span
@@ -220,6 +231,17 @@ export default function Hero() {
                 </span>
               ))}
             </h1>
+
+            {/* Proof line — the one sentence of evidence under the claim */}
+            <motion.p
+              custom={3.5}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="text-base sm:text-lg font-medium text-[#334155] mb-4 max-w-2xl"
+            >
+              {siteConfig.proofLine}
+            </motion.p>
 
             {/* Rotating claim */}
             <motion.p
@@ -247,10 +269,10 @@ export default function Hero() {
             >
               <Magnetic>
                 <Link
-                  href="/#deployments"
+                  href="/#builds"
                   className="flex items-center gap-2 px-8 py-4 rounded-full btn-gradient text-[#0f172a] font-semibold text-[15px] shine"
                 >
-                  See Deployments <ArrowRight size={15} />
+                  See Builds <ArrowRight size={15} />
                 </Link>
               </Magnetic>
               <Magnetic strength={0.25}>

@@ -49,9 +49,9 @@ export default function Navigation() {
             <div className="w-8 h-8 rounded-lg btn-gradient flex items-center justify-center text-[#0f172a] font-black text-sm shine">
               P
             </div>
-            <span className="hidden sm:flex flex-col leading-none">
+            <span className="flex flex-col leading-none">
               <span className="text-sm font-semibold text-[#0f172a]/80 group-hover:text-[#0f172a] transition-colors">
-                Pranshu
+                {siteConfig.name}
               </span>
               <span className="mono text-[8px] uppercase tracking-[1.5px] text-[#64748b] mt-0.5">
                 Forward Deployed Engineer

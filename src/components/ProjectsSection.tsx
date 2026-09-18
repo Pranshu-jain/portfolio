@@ -18,7 +18,7 @@ import SectionHeading from "@/components/motion/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 import TiltCard from "@/components/motion/TiltCard";
 
-/** Full engagement dossier: context → constraint → shipped → outcome. */
+/** Full build dossier: problem → constraint → shipped → outcome. */
 function DeploymentDossier({
   deployment,
   onClose,
@@ -49,7 +49,7 @@ function DeploymentDossier({
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`${deployment.title} deployment dossier`}
+      aria-label={`${deployment.title} build dossier`}
     >
       <div className="absolute inset-0 bg-[rgba(15,23,42,0.45)] backdrop-blur-md" />
 
@@ -83,7 +83,7 @@ function DeploymentDossier({
                   className="mono text-[10px] font-semibold uppercase tracking-widest mb-1"
                   style={{ color: deployment.color }}
                 >
-                  Deployment Dossier
+                  Build Dossier · {deployment.builtAs}
                 </div>
                 <h3 className="text-xl font-black text-[#0f172a] truncate">
                   {deployment.title}
@@ -132,7 +132,7 @@ function DeploymentDossier({
             {[
               {
                 icon: Crosshair,
-                label: "What I landed in",
+                label: "The problem",
                 content: deployment.context,
                 color: "#0284c7",
               },
@@ -250,7 +250,7 @@ function DeploymentDossier({
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-2.5 rounded-full btn-gradient text-sm text-[#0f172a] font-medium shine"
               >
-                <ExternalLink size={14} /> Live Deployment
+                <ExternalLink size={14} /> Live Demo
               </a>
             )}
           </div>
@@ -329,6 +329,12 @@ function DeploymentCard({
           </div>
 
           <div className="relative">
+            <div
+              className="mono text-[9px] font-semibold uppercase tracking-widest mb-2"
+              style={{ color: deployment.color }}
+            >
+              {deployment.builtAs}
+            </div>
             <h3 className="text-base font-bold text-[#0f172a] mb-2">
               {deployment.title}
             </h3>
@@ -384,17 +390,17 @@ export default function ProjectsSection() {
   const [selected, setSelected] = useState<Deployment | null>(null);
 
   return (
-    <section id="deployments" className="py-28 max-w-7xl mx-auto px-6">
+    <section id="builds" className="py-28 max-w-7xl mx-auto px-6">
       <SectionHeading
-        eyebrow="Deployments"
+        eyebrow="Builds"
         accent="#0284c7"
         title={
           <>
-            Problems I was{" "}
-            <span className="gradient-text">dropped into</span>
+            Things I&apos;ve{" "}
+            <span className="gradient-text">built and shipped</span>
           </>
         }
-        description="Each one reads the same way: the situation I landed in, the constraint that made the obvious answer wrong, what shipped, and the number that moved. Open a dossier for the full engagement."
+        description="Each one reads the same way: the problem, the constraint that made the obvious answer wrong, what shipped, and numbers you can check. Every card says where it was built. Open a dossier for the full write-up."
         className="mb-16"
       />
 

@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import FDEDimensions from "@/components/FDEDimensions";
 import Philosophy from "@/components/Philosophy";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/motion/Reveal";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { dimensions } from "@/lib/fde";
+import { siteConfig } from "@/lib/config";
+import { experience } from "@/lib/experience";
 
 export const metadata: Metadata = {
-  title: "About — Pranshu, Forward Deployed Engineer",
+  title: "About",
   description:
     "Why I work as a forward deployed engineer: embedded with the team, deployed in their stack, owning the problem from ambiguity through adoption.",
 };
@@ -16,11 +18,11 @@ const capabilities = [
   { emoji: "🛬", label: "Discovery on site", sub: "Ambiguity → one-page spec" },
   { emoji: "⚡", label: "Next.js / React", sub: "Frontend & SSR" },
   { emoji: "💎", label: "Rails / Ruby", sub: "Domain logic & APIs" },
-  { emoji: "🐍", label: "Python / Django", sub: "Services & pipelines" },
-  { emoji: "🗄️", label: "PostgreSQL / Redis", sub: "Modelling & indexing" },
-  { emoji: "🤖", label: "LLMs / Agents", sub: "Deployed, not demoed" },
-  { emoji: "🔌", label: "REST / Webhooks", sub: "Third-party integration" },
-  { emoji: "☁️", label: "Docker / Vercel / Railway", sub: "Ship & operate" },
+  { emoji: "🐍", label: "Python / PySpark", sub: "Pipelines" },
+  { emoji: "🗄️", label: "PostgreSQL / Redis", sub: "Modelling, indexing, Sidekiq jobs" },
+  { emoji: "🤖", label: "LangChain / LangGraph", sub: "RAG & agents" },
+  { emoji: "🔌", label: "REST / GraphQL", sub: "APIs & third-party integration" },
+  { emoji: "☁️", label: "Docker / AWS / Vercel", sub: "Ship & operate" },
 ];
 
 export default function AboutPage() {
@@ -38,13 +40,51 @@ export default function AboutPage() {
 
           <Reveal delay={0.06}>
             <h1 className="text-5xl sm:text-7xl font-black text-[#0f172a] mb-8 leading-[1.02] tracking-tight">
-              I&apos;m Pranshu.
+              I&apos;m Pranshu Jain.
               <br />
               <span className="gradient-text">I deploy forward.</span>
             </h1>
           </Reveal>
 
+          {/* The facts first — who, how long, where. Philosophy comes after. */}
+          <Reveal delay={0.1}>
+            <p className="text-[#0f172a] text-xl leading-relaxed mb-6">
+              I&apos;m a software engineer with {siteConfig.experience} of
+              experience shipping Rails apps, data pipelines, and AI agents to
+              production, across three companies:
+            </p>
+          </Reveal>
+
           <Reveal delay={0.12}>
+            <ul className="flex flex-col gap-3 mb-6">
+              {experience.map((role) => (
+                <li key={role.id} className="flex items-start gap-3">
+                  <span
+                    className="w-1.5 h-1.5 rounded-full shrink-0 mt-[9px]"
+                    style={{ background: role.color }}
+                  />
+                  <span className="text-[#475569] text-base leading-relaxed">
+                    <span className="font-semibold text-[#0f172a]">
+                      {role.company}
+                    </span>{" "}
+                    <span className="mono text-[11px] text-[#94a3b8]">
+                      {role.dates}
+                    </span>
+                    <br />
+                    {role.summary}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={0.14}>
+            <p className="mono text-[11px] tracking-wider text-[#64748b] mb-12">
+              {siteConfig.location} · Open to remote work
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.16}>
             <p className="text-[#475569] text-xl leading-relaxed mb-6">
               Most engineering roles start after someone else has already done
               the hard part — deciding what to build. Forward deployment starts
@@ -81,68 +121,17 @@ export default function AboutPage() {
                 Deploy Me <ArrowRight size={16} />
               </Link>
               <Link
-                href="/#deployments"
+                href="/#builds"
                 className="flex items-center gap-2 px-8 py-4 rounded-full border border-[rgba(15,23,42,0.10)] text-[#475569] hover:text-[#0f172a] hover:border-[rgba(14,165,233,0.2)] transition-all"
               >
-                See Deployments
+                See Builds
               </Link>
             </div>
           </Reveal>
         </div>
 
-        {/* Dimension summary */}
-        <div className="mb-24">
-          <Reveal>
-            <h2 className="text-2xl font-black text-[#0f172a] mb-2">
-              Graded on eight axes
-            </h2>
-            <p className="text-[#64748b] mb-8 max-w-xl">
-              The full breakdown, with evidence for each, lives{" "}
-              <Link
-                href="/#dimensions"
-                className="text-[#0284c7] hover:underline"
-              >
-                on the home page
-              </Link>
-              .
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {dimensions.map((d, i) => (
-              <Reveal key={d.id} delay={i * 0.05}>
-                <div className="p-5 rounded-2xl card-border h-full">
-                  <div className="flex items-center justify-between mb-3">
-                    <span
-                      className="mono text-[10px] font-bold tracking-widest"
-                      style={{ color: d.color }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  {/* Relative emphasis, deliberately unlabelled — a
-                      self-assessed number would read as false precision. */}
-                  <div className="h-1 rounded-full bg-[rgba(15,23,42,0.06)] overflow-hidden mb-4">
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        width: `${d.score}%`,
-                        background: `linear-gradient(90deg, ${d.color}55, ${d.color})`,
-                      }}
-                    />
-                  </div>
-                  <div className="text-sm font-bold text-[#0f172a] mb-1">
-                    {d.label}
-                  </div>
-                  <div className="text-xs text-[#64748b]">{d.short}</div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
         {/* Toolkit */}
-        <div className="mb-24">
+        <div className="mb-4">
           <Reveal>
             <h2 className="text-2xl font-black text-[#0f172a] mb-8">
               What I bring on deployment
@@ -162,6 +151,8 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Moved here from the home page — philosophy lives on About only. */}
+      <FDEDimensions />
       <Philosophy />
       <Footer />
     </>

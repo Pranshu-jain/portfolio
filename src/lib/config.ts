@@ -1,5 +1,18 @@
+// TODO(confirm): final LinkedIn URL. Change it here only — the href and the
+// visible label everywhere on the site are both derived from this constant.
+const LINKEDIN_URL = "https://www.linkedin.com/in/pranshu-jain-2a492114a/";
+
 export const siteConfig = {
-  name: "Pranshu",
+  name: "Pranshu Jain",
+  /** Canonical deployed origin — used for metadataBase and JSON-LD. */
+  siteUrl: "https://portfolio-six-theta-gpq4no7ad9.vercel.app",
+  // TODO(confirm): exact current job title at Bandgi Technologies. Used for
+  // the JSON-LD Person `jobTitle`.
+  jobTitle: "Software Engineer",
+  experience: "4.5 years",
+  location: "Based in India (IST) · 4+ hours overlap with UK/EU",
+  proofLine:
+    "4.5 years shipping Rails apps, data pipelines, and AI agents to production.",
   role: "Forward Deployed Engineer",
   tagline: "I deploy into your stack and ship until the metric moves.",
   description:
@@ -7,7 +20,9 @@ export const siteConfig = {
   github: "Pranshu-jain",
   email: "jpranshu36@gmail.com",
   twitter: "https://twitter.com/pranshu_builds",
-  linkedin: "https://www.linkedin.com/in/pranshu-jain-2a492114a/",
+  linkedin: LINKEDIN_URL,
+  /** Visible label, e.g. "/in/pranshu-jain-2a492114a" — derived, never typed. */
+  linkedinLabel: new URL(LINKEDIN_URL).pathname.replace(/\/$/, ""),
   calendly: "https://calendly.com/jpranshu36",
 
   /** Rotating hero subtitles — each one a claim the page then backs up. */
@@ -19,7 +34,7 @@ export const siteConfig = {
   ],
 
   // Headline proof numbers live in `lib/fde.ts` as `proofMetrics`, where they
-  // are derived from real deployments. Deliberately not duplicated here.
+  // are derived from the builds in `lib/projects.ts`. Not duplicated here.
 
   services: [
     {
@@ -53,8 +68,8 @@ export const siteConfig = {
   ],
 
   navLinks: [
-    { href: "/#dimensions", label: "Dimensions" },
-    { href: "/#deployments", label: "Deployments" },
+    { href: "/#builds", label: "Builds" },
+    { href: "/#experience", label: "Experience" },
     { href: "/#loop", label: "The Loop" },
     { href: "/about", label: "About" },
     { href: "/blog", label: "Field Notes" },
@@ -73,7 +88,7 @@ export const siteConfig = {
     "rails",
     "ruby",
     "python",
-    "django",
+    "pyspark",
     "postgres",
     "postgresql",
     "sql",

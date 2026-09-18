@@ -7,7 +7,7 @@ import { engagements, deploymentLoop } from "@/lib/fde";
 import { ArrowRight, CheckCircle2, Crosshair, Gauge, Layers, Users } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Deploy Me — Pranshu, Forward Deployed Engineer",
+  title: "Deploy Me",
   description:
     "Engagement models for forward deployment: a two-week strike, a multi-month embed, or ongoing systems and AI integration. Same loop, different depth.",
 };

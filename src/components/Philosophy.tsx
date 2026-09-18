@@ -7,7 +7,7 @@ import SectionHeading from "@/components/motion/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 
 /**
- * Operating doctrine. Six rules that decide what I do when the engagement gets
+ * Operating doctrine. Four rules that decide what I do when the work gets
  * ambiguous — which, on a forward deployment, is most days.
  */
 export default function Philosophy() {
@@ -31,7 +31,7 @@ export default function Philosophy() {
               <span className="gradient-text">when it gets fuzzy</span>
             </>
           }
-          description="Nobody hires a forward deployed engineer for a well-specified problem. These are the defaults that decide what I do when the brief runs out."
+          description="The defaults that decide what I do when the brief runs out."
           className="mb-14"
         />
 
@@ -61,7 +61,7 @@ export default function Philosophy() {
         </Reveal>
 
         {/* Doctrine grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {doctrine.map((rule, i) => (
             <Reveal key={rule.n} delay={i * 0.07} className="h-full">
               <motion.div

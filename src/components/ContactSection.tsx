@@ -295,7 +295,7 @@ export default function ContactSection() {
                       icon: LinkedinIcon,
                       label: "LinkedIn",
                       href: siteConfig.linkedin,
-                      value: "/in/pranshu-jain",
+                      value: siteConfig.linkedinLabel,
                     },
                   ].map(({ icon: Icon, label, href, value }) => (
                     <motion.a
@@ -317,7 +317,7 @@ export default function ContactSection() {
                         <div className="mono text-[9px] text-[#94a3b8] uppercase tracking-wider">
                           {label}
                         </div>
-                        <div className="text-xs text-[#475569] group-hover:text-[#0f172a] transition-colors truncate max-w-[150px]">
+                        <div className="text-xs text-[#475569] group-hover:text-[#0f172a] transition-colors truncate max-w-[190px]">
                           {value}
                         </div>
                       </div>

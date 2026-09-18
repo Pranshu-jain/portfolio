@@ -19,8 +19,8 @@ const AFTER_OUT_MS = 620;
 type Rendered = { cmd: string; out: string | null; tone: string };
 
 /**
- * Replays one real deployment as terminal output, typed line by line. It shows
- * the shape of the work — land, observe, map constraints, integrate, verify,
+ * Replays one build as terminal output, typed line by line. It shows
+ * the shape of the work — scope, observe, map constraints, integrate, verify,
  * hand off — in the medium the work actually happens in. Lines come from
  * `fieldLog`, which is held to the no-invented-figures rule in `lib/fde.ts`.
  */
@@ -102,7 +102,7 @@ function Terminal() {
           <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
         </div>
         <span className="mono text-[10px] text-[#64748b] ml-2 truncate">
-          ~/deployments/iterable — field log
+          ~/builds/iterable — field log
         </span>
         <span className="ml-auto flex items-center gap-1.5 shrink-0">
           <span
@@ -186,7 +186,7 @@ export default function FieldLog() {
                   <span className="gradient-text">from the inside</span>
                 </>
               }
-              description="One real deployment, compressed: the Iterable integration. Land in a live Rails codebase I didn't write, find the constraint that actually binds — fail-open, no matter what — and leave behind a pattern the resident team could reuse without me."
+              description="One build, compressed: the Iterable integration. Design for a Rails app that has to keep working no matter what, find the constraint that actually binds — fail-open — and leave behind a service pattern that's reusable for the next vendor."
               className="mb-8"
             />
 
@@ -196,7 +196,7 @@ export default function FieldLog() {
                   { k: "Campaign triggers", v: "behaviour-driven", c: "#10b981" },
                   { k: "Event sync", v: "real-time", c: "#0284c7" },
                   { k: "App behaviour changed", v: "none", c: "#7c3aed" },
-                  { k: "Pattern reuse", v: "later vendors", c: "#f97316" },
+                  { k: "Service pattern", v: "reusable", c: "#f97316" },
                 ].map((item) => (
                   <div
                     key={item.k}

@@ -267,7 +267,7 @@ export default function FDEDimensions() {
               <span className="gradient-text">eight axes</span>, not one.
             </>
           }
-          description="A product engineer can be excellent on three of these. Forward deployment fails on any one you're missing — because the customer's problem doesn't respect your job description. Here's where I sit on each, with the evidence."
+          description="A product engineer can be excellent on three of these. Forward deployment fails on any one you're missing. Here's the evidence for each."
           className="mb-14"
         />
 

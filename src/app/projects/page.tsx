@@ -3,9 +3,9 @@ import ProjectsSection from "@/components/ProjectsSection";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Deployments — Pranshu",
+  title: "Builds",
   description:
-    "Engagement dossiers: the situation I landed in, the binding constraint, what shipped, and the number that moved.",
+    "Build dossiers: the problem, the binding constraint, what shipped, and numbers you can check.",
 };
 
 export default function ProjectsPage() {
