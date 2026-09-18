@@ -1,4 +1,5 @@
 import { experience } from "@/lib/experience";
+import { siteConfig } from "@/lib/config";
 import SectionHeading from "@/components/motion/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 
@@ -27,7 +28,7 @@ export default function Experience() {
               Where I&apos;ve <span className="gradient-text">shipped</span>
             </>
           }
-          description="4.5 years on product teams. Company work is described in text only — no client names, no screenshots, no internal data."
+          description={`${siteConfig.experience} on product teams. Company work is described in text only — no client names, no screenshots, no internal data.`}
           className="mb-14"
         />
 
